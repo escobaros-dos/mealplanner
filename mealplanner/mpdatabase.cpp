@@ -20,3 +20,17 @@ MpDatabase::MpDatabase()
   }
 
 }
+
+void MpDatabase::addIngredientIntoDatabase(QString){
+    //query to insert into ingredients table?
+}
+
+void MpDatabase::addRecipeIntoDatabase(QString){
+     //query to insert into ingredients table?
+}
+
+void MpDatabase::lookUpDatabase(){
+    /*still pretty generalized here, but given what the user is trying to look for
+    do a query on that item and return the item to the user?
+    */
+}

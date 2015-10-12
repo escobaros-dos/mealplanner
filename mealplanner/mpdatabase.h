@@ -10,6 +10,12 @@ class MpDatabase
 public:
     MpDatabase();
 
+protected:
+    void addRecipeIntoDatabase(QString);
+    void addIngredientIntoDatabase(QString);
+    void lookUpDatabase(); //kind of want to make this as a template
+    //more to come
+
 private:
     QSqlDatabase db;
 
