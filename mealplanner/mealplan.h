@@ -1,8 +1,9 @@
 #ifndef MEALPLAN_H
 #define MEALPLAN_H
 
+#include <QObject>
 
-class MealPlan : public Meal
+class MealPlan
 {
 public:
     MealPlan();
@@ -10,6 +11,7 @@ public:
 signals:
 
 public slots:
+
 };
 
 #endif // MEALPLAN_H

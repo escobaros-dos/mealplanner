@@ -1,7 +1,9 @@
 #ifndef MPDATABASE_H
 #define MPDATABASE_H
 
+#include <QObject>
 #include <QtSql>
+
 
 class MpDatabase
 {

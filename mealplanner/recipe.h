@@ -1,23 +1,26 @@
 #ifndef RECIPE_H
 #define RECIPE_H
 
+#include <QObject>
+#include <QVector>
+#include <string>
 
 class Recipe
 {
 public:
            Recipe();
-    String serializeIngredients();
-    void   deSerializeIngredients(String);
-    String serializeSteps();
-    void   deSerializeSteps(String);
+    std::string serializeIngredients();
+    void   deSerializeIngredients(std::string);
+    std::string serializeSteps();
+    void   deSerializeSteps(std::string);
 
 
 private:
-    QVector<String> ingredients;
-    QVector<String> steps;
+    QVector<std::string> ingredients;
+    QVector<std::string> steps;
     float calories;
     float protein;
-    String date;
+    std::string date;
 
 signals:
 
