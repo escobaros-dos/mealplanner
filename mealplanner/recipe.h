@@ -5,7 +5,19 @@
 class Recipe
 {
 public:
-    Recipe();
+           Recipe();
+    String serializeIngredients();
+    void   deSerializeIngredients(String);
+    String serializeSteps();
+    void   deSerializeSteps(String);
+
+
+private:
+    QVector<String> ingredients;
+    QVector<String> steps;
+    float calories;
+    float protein;
+    String date;
 
 signals:
 
