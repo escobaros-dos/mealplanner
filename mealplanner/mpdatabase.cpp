@@ -7,16 +7,22 @@ MpDatabase::MpDatabase()
   QStringList tables;
   QSqlQuery q;
   db = QSqlDatabase::addDatabase("QSQLITE");
-  db.setDatabaseName("recipes.db");
+  db.setDatabaseName("food.db");
   if(!db.open()) {
     //throw something
   }
 
   tables = db.tables();
   q = QSqlQuery(db);
+  if(!tables.contains("meals",Qt::CaseInsensitive)) {
+    q.exec("create table meals(date VARCHAR,recipe VARCHAR);");
+  }
   if(!tables.contains("recipes",Qt::CaseInsensitive)) {
-    q.exec("create table recipes(name VARCHAR,date TEXT,calories FLOAT,\
-      protein FLOAT,ingredients TEXT,steps TEXT");
+    q.exec("create table recipes(name VARCHAR,calories FLOAT,\
+      protein FLOAT,ingredients TEXT,steps TEXT);");
+  }
+  if(!tables.contains("ingredients",Qt::CaseInsensitive)) {
+    q.exec("create table ingredients(name VARCHAR,);");
   }
 
 }
