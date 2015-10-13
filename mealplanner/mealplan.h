@@ -2,14 +2,14 @@
 #define MEALPLAN_H
 
 
-class MealPlan : public Meal
+class MealPlan// : public Meal
 {
 public:
     MealPlan();
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 };
 
 #endif // MEALPLAN_H

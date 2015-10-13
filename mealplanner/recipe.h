@@ -1,6 +1,8 @@
 #ifndef RECIPE_H
 #define RECIPE_H
-
+#include <iostream>
+#include <vector>
+using namespace std;
 
 class Recipe
 {
@@ -13,9 +15,9 @@ public:
     // the find ingredients function will use the select from
 
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 };
 /*
 class Ingredients

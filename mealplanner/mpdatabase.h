@@ -7,9 +7,9 @@ class MpDatabase
 public:
     MpDatabase();
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 };
 
 #endif // MPDATABASE_H

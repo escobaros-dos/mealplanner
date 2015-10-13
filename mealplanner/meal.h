@@ -7,9 +7,9 @@ class Meal
 public:
     Meal();
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 };
 
 #endif // MEAL_H
