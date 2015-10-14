@@ -1,5 +1,3 @@
-
-
 #include "mpdatabase.h"
 
 MpDatabase::MpDatabase()
@@ -27,16 +25,35 @@ MpDatabase::MpDatabase()
 
 }
 
-void MpDatabase::addIngredientIntoDatabase(QString){
-    //query to insert into ingredients table?
+MpDatabase::~MpDatabase() {
+  db.close();
 }
 
-void MpDatabase::addRecipeIntoDatabase(QString){
-     //query to insert into ingredients table?
+Ingredient MpDatabase::getIngredientByName(QString) {
+  return Ingredient();
 }
 
-void MpDatabase::lookUpDatabase(){
-    /*still pretty generalized here, but given what the user is trying to look for
-    do a query on that item and return the item to the user?
-    */
+Recipe MpDatabase::getRecipeByName(QString) {
+  return Recipe();
 }
+
+QVector<QString> MpDatabase::getRecipeNames() {
+  QVector<QString> names;
+  QSqlQuery q = QSqlQuery(db);
+  q.exec("SELECT name FROM recipes;");
+  while(q.next()) {
+    names.append(q.value(0).toString());
+  }
+  return names;
+}
+
+QVector<QString> MpDatabase::getIngredientNames() {
+  QVector<QStrings> names;
+  QSqlQuery q = QSqlQuery(db);
+  q.exec("SELECT name FROM ingredients;");
+  while(q.next()) {
+    names.append(q.value(0).toString());
+  }
+  return names;
+}
+

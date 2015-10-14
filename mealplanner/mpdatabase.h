@@ -4,17 +4,28 @@
 #include <QObject>
 #include <QtSql>
 
+#include "recipe.h"
+#include "ingredient.h"
 
 class MpDatabase
 {
+
 public:
+    //constructors
     MpDatabase();
+    ~MpDatabase();
+    
+    //data retrieval
+    Ingredient &getIngredientByName(String);
+    Recipe &getRecipeByName(String);
+    std::vector<std::string> &getRecipeNames();
+    std::vector<std::string> &getIngredientNames();
+    
+    //data insertion
+    void addRecipeToDatabase(const Recipe &);
+    void addIngredientToDatabase(const Ingredient &);
 
 protected:
-    void addRecipeIntoDatabase(QString);
-    void addIngredientIntoDatabase(QString);
-    void lookUpDatabase(); //kind of want to make this as a template
-    //more to come
 
 private:
     QSqlDatabase db;
@@ -22,6 +33,7 @@ private:
 signals:
 
 public slots:
+
 };
 
 #endif // MPDATABASE_H
