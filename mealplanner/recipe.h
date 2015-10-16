@@ -9,18 +9,19 @@ class Recipe
 {
 public:
            Recipe();
-    std::string serializeIngredients();
-    void   deSerializeIngredients(std::string);
-    std::string serializeSteps();
-    void   deSerializeSteps(std::string);
+    QString serializeIngredients();
+    void   deSerializeIngredients(QString);
+    QString serializeSteps();
+    void   deSerializeSteps(QString);
 
+    //may need getters and setters?? although this violates encapsulations
 
 private:
-    QVector<std::string> ingredients;
-    QVector<std::string> steps;
-    float calories;
-    float protein;
-    std::string date;
+    QVector<QString> ingredients;
+    QVector<QString> steps; //do we need steps be a vector or could we have this as one long string?
+    QString name;
+    QString catSteps; //concatenated string for the
+
 
 signals:
 

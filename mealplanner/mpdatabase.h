@@ -16,14 +16,23 @@ public:
     ~MpDatabase();
     
     //data retrieval
-    Ingredient &getIngredientByName(String);
-    Recipe &getRecipeByName(String);
-    std::vector<std::string> &getRecipeNames();
-    std::vector<std::string> &getIngredientNames();
+    //adding meal and meal plan???
+    Ingredient &getIngredientByName(QString);
+    Recipe &getRecipeByName(QString);
+
+    //maybe template the function
+    QVector<QString> &getRecipeNames();
+    QVector<QString> &getIngredientNames();
+
+    QVector<QString> recipeByIngredient(QString &);
     
     //data insertion
+    //maybe create a template out of these two functions
+
     void addRecipeToDatabase(const Recipe &);
     void addIngredientToDatabase(const Ingredient &);
+
+
 
 protected:
 

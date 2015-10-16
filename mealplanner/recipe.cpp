@@ -7,6 +7,6 @@ Recipe::Recipe()
 
 
 
-std::string Recipe::serializeIngredients() {
+QString Recipe::serializeIngredients() {
   
 }
