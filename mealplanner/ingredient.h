@@ -8,8 +8,20 @@ class Ingredient
 {
 public:
     Ingredient();
+
+    QString getName() const;
+    int getProtein() const;
+    int getFat() const;
+    int getCarbs() const;
+    int getCalories() const;
+
+protected:
     QString name;
-    QString
+    int id;
+    int protein;
+    int fat;
+    int carbs;
+    int calories;
 
 signals:
 

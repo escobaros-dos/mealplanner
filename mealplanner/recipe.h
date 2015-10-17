@@ -14,6 +14,8 @@ public:
     QString serializeSteps();
     void   deSerializeSteps(QString);
 
+    QString getName() const;
+
     //may need getters and setters?? although this violates encapsulations
 
 private:

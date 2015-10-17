@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtSql>
 
+#include "meal.h"
 #include "recipe.h"
 #include "ingredient.h"
 
@@ -15,26 +16,48 @@ public:
     MpDatabase();
     ~MpDatabase();
     
-    //data retrieval
-    //adding meal and meal plan???
-    Ingredient &getIngredientByName(QString);
-    Recipe &getRecipeByName(QString);
+    /*
+     * data retrieval
+     */
+    //meal functions
+    Meal getMealByDate(QString);
+    Meal getMealByID(int);
 
-    //maybe template the function
-    QVector<QString> &getRecipeNames();
-    QVector<QString> &getIngredientNames();
+    //ingredient functions
+    Ingredient getIngredientByName(QString);
+    Ingredient getIngredientByID(int);
+    QVector<QString> getIngredientNames();
+    QVector<int> getIngredientIDs();
 
-    QVector<QString> recipeByIngredient(QString &);
-    
-    //data insertion
-    //maybe create a template out of these two functions
+    //recipe functions
+    Recipe getRecipeByName(QString);
+    Recipe getRecipeByID(int);
+    QVector<QString> getRecipeNames();
+    QVector<int> getRecipeIDs();
+    QVector<QString> getRecipesByIngredient(QString &);
 
-    void addRecipeToDatabase(const Recipe &);
-    void addIngredientToDatabase(const Ingredient &);
+
+
+
+    /*
+     * data insertion
+     */
+    //meal functions
+    void addMeal(const Meal &);
+
+    //ingredient functions
+    void addIngredient(const Ingredient &);
+
+    //recipe functions
+    void addRecipe(const Recipe &);
+
+
 
 
 
 protected:
+    int getIngredientIDByName(QString);
+    int getRecipeIDByName(QString);
 
 private:
     QSqlDatabase db;

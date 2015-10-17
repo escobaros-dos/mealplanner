@@ -36,13 +36,13 @@ MpDatabase::~MpDatabase() {
   db.close();
 }
 
-Ingredient& MpDatabase::getIngredientByName(QString) {
+Ingredient MpDatabase::getIngredientByName(QString) {
 
 
     //return Ingredient;
 }
 
-Recipe& MpDatabase::getRecipeByName(QString) {
+Recipe MpDatabase::getRecipeByName(QString) {
 
 
    // Recipe rec = new Recipe;
@@ -53,7 +53,7 @@ Recipe& MpDatabase::getRecipeByName(QString) {
 
 //use a template??
 
-QVector<QString>& MpDatabase::getRecipeNames() {
+QVector<QString> MpDatabase::getRecipeNames() {
   QVector<QString> names;
   QSqlQuery q = QSqlQuery(db);
   q.exec("SELECT rname FROM recipes;");
@@ -63,7 +63,7 @@ QVector<QString>& MpDatabase::getRecipeNames() {
   return names;
 }
 
-QVector<QString>& MpDatabase::getIngredientNames() {
+QVector<QString> MpDatabase::getIngredientNames() {
   QVector<QString> names;
   QSqlQuery q = QSqlQuery(db);
   q.exec("SELECT iname FROM ingredients;");
@@ -73,17 +73,18 @@ QVector<QString>& MpDatabase::getIngredientNames() {
   return names;
 }
 
-void MpDatabase::addRecipeToDatabase(const Recipe &recipe){
+void MpDatabase::addRecipe(const Recipe &recipe){
     QSqlQuery q = QSqlQuery(db);
 
     q.prepare("insert into recipes "
               "values (:name, :steps)");
 
-    q.bindValue(":name", recipe.name); //name is private
+    q.bindValue(":name", recipe.getName()); //name is private
 
 
     //concatenate vector before tossing into the database
-    q.bindValue(":steps", recipe.catSteps);
+    //fix later ;)
+    //q.bindValue(":steps", recipe.catSteps);
 
 
     q.exec();
@@ -93,19 +94,19 @@ void MpDatabase::addRecipeToDatabase(const Recipe &recipe){
 
 }
 
-void MpDatabase::addIngredientToDatabase(const Ingredient &ingredient){
+void MpDatabase::addIngredient(const Ingredient &ingredient){
     QSqlQuery q = QSqlQuery(db);
     q.prepare("insert into ingredients "
               "values (:name, :cal, :carbs, :fat, :pro)");
-    q.bindValue(":name", ingredient.name);
-    q.bindValue(":cal", );
-    q.bindValue(":carbs",);
-    q.bindValue(":fat",);
-    q.bindValue(":pro",);
+    q.bindValue(":name", ingredient.getName());
+    q.bindValue(":cal", ingredient.getCalories());
+    q.bindValue(":carbs", ingredient.getCarbs());
+    q.bindValue(":fat", ingredient.getFat());
+    q.bindValue(":pro", ingredient.getProtein());
     q.exec();
 }
 
-QVector<String> MpDatabase::recipeByIngredient(QString &ing){
+QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
 
     QSqlQuery q = QSqlQuery(db); //this seems kind of reptitive us a macro?
 
