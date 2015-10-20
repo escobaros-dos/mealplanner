@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtSql>
+#include <QDebug>
 
 #include "meal.h"
 #include "recipe.h"
@@ -51,6 +52,7 @@ public:
     //recipe functions
     void addRecipe(const Recipe &);
 
+    void updateRelationTable(const QString &, const QString &s);
 
 
 

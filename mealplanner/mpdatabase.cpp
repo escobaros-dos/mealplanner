@@ -6,29 +6,31 @@ MpDatabase::MpDatabase()
   QSqlQuery q;
   db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName("food.db");
+
   if(!db.open()) {
     //throw something
+      qDebug() << db.lastError();
   }
 
   tables = db.tables();
   q = QSqlQuery(db);
 
-  q.exec("PRAGMA foreign_keys = ON");
+  q.exec("PRAGMA foreign_keys = ON"); //just to make sure the foreign key support is on
 
   if(!tables.contains("meals",Qt::CaseInsensitive)) {
-    q.exec("create table meals(mid int primary key, mdate date, prop int);");
+    q.exec("create table meals(mid int primary key, mdate text, prop int);");
   }
   if(!tables.contains("recipes",Qt::CaseInsensitive)) {
-    q.exec("create table recipes(recid int primary key, rname text, steps text);");
+    q.exec("create table recipes(recid int primary key, rname text unique, steps text);");
   }
   if(!tables.contains("ingredients",Qt::CaseInsensitive)) {
-    q.exec("create table ingredients(ingid int primary key, iname text,"
+    q.exec("create table ingredients(ingid int primary key, iname text unique,"
            "cal int, carbs int, fat int, protein int);");
   }
 /*
-  q.exec("create table recing (recidf int, ingidf int, "
-         "foreign key (recidf) reference recipes(recid)), "
-         "foreign key (ingid) reference ingredients(ingid));");
+  q.exec("create table relate (rIdRelate int, iIdRelate int, "
+         "foreign key (rIdRelate) reference recipes(recid)), "
+         "foreign key (iIdRelate) reference ingredients(ingid));");
 */
 }
 
@@ -74,7 +76,14 @@ QVector<QString> MpDatabase::getIngredientNames() {
 }
 
 void MpDatabase::addRecipe(const Recipe &recipe){
+
+    //add recipe name into the query
+    //call addIngredient and pass in recipe.ingredient[x]
+    //loop through until the vector is finished
+    //update the relations table?
+
     QSqlQuery q = QSqlQuery(db);
+    QString tempRecipeId;
 
     q.prepare("insert into recipes "
               "values (:name, :steps)");
@@ -86,15 +95,24 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     //fix later ;)
     //q.bindValue(":steps", recipe.catSteps);
 
-
     q.exec();
 
-    //when adding recipes check for ingredients in the database for repetitions
-    //update the relations table if a recipe uses any ingredients that does in the relations table
+
+   for(int i = 0; i < recipe.ingredients.size(); i--){
+       addIngredient(recipe.ingredients[i]);
+
+       updateRelationTable(recipe.getName(), recipe.ingredients[i].getName()); //pairs the recipe id with the ingredients id
+                                                                               //there has to be a better way of doing this function
+   }
+
+
 
 }
 
 void MpDatabase::addIngredient(const Ingredient &ingredient){
+
+    //unique constraint has been added to the name column of the ingredient, to prevent duplication
+
     QSqlQuery q = QSqlQuery(db);
     q.prepare("insert into ingredients "
               "values (:name, :cal, :carbs, :fat, :pro)");
@@ -114,9 +132,9 @@ QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
 
     //maybe considering on using joins
 
-    q.prepare("select rname from recipes where recid = "
-              "(select recidf from recing where ingidf = "
-              "(select ingid from ingredients where iname = :ing"); //needs testing
+    q.prepare("select rname from recipes where recid in "
+              "(select recidf from relate where ingidf in "
+              "(select ingid from ingredients where iname = :ing));"); //rewrite the query using IN
 
     q.bindValue(":ing", ing);
     q.exec();
@@ -129,7 +147,36 @@ QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
 
     return tempQueryResult;
 
+}
+
+void MpDatabase::updateRelationTable(const QString &recipeName, const QString &ingredientName){
+
+    //for each ingredient id associated with the new recipe, relate those ingredients with the newly inserted recipe id
+
+    //can we use one QSqlQuery object to do multiple queries or should we use multiple QSqlQuery
+
+    QSqlQuery q = QSqlQuery(db);
+
+    QString rId;
+    QString iId;
+
+    q.prepare("select recid from recipes where rname = :recipeName");
+    q.bindValue(":recipeName", recipeName);
+    q.exec();
+    q.next();
+    rId = q.value(0).toString();
+
+
+    q.prepare("select ingid from ingredients where iname = :ingredientName");
+    q.bindValue(":ingredientName", ingredientName);
+    q.exec();
+    q.next();
+    iId = q.value(0).toString();
+
+    q.prepare("insert into relate (rIdRelate, iIdRelate) values (:rId, :iId);");
+    q.bindValue(":rId", rId);
+    q.bindValue(":iId", iId);
+    q.exec();
 
 
 }
-
