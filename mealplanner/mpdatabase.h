@@ -27,17 +27,17 @@ public:
     //ingredient functions
     Ingredient getIngredientByName(QString);
     Ingredient getIngredientByID(int);
-    QVector<QString> getIngredientNames();
+    //QVector<QString> getIngredientNames();
     QVector<int> getIngredientIDs();
 
     //recipe functions
     Recipe getRecipeByName(QString);
     Recipe getRecipeByID(int);
-    QVector<QString> getRecipeNames();
+    //QVector<QString> getRecipeNames();
     QVector<int> getRecipeIDs();
     QVector<QString> getRecipesByIngredient(QString &);
 
-
+    QVector<QString> getNameFromDatabase(const QString &, const QString &);
 
 
     /*

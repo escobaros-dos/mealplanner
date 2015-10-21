@@ -55,6 +55,7 @@ Recipe MpDatabase::getRecipeByName(QString) {
 
 //use a template??
 
+/*
 QVector<QString> MpDatabase::getRecipeNames() {
   QVector<QString> names;
   QSqlQuery q = QSqlQuery(db);
@@ -73,6 +74,22 @@ QVector<QString> MpDatabase::getIngredientNames() {
     names.append(q.value(0).toString());
   }
   return names;
+}
+*/
+
+QVector<QString> MpDatabase::getNameFromDatabase(const QString &column, const QString &table)
+{
+    QVector<QString> names;
+    QSqlQuery q = QSqlQuery(db);
+    q.prepare("SELECT :column FROM :table;");
+    q.bindValue(":column", column);
+    q.bindValue(":table", table);
+    q.exec();
+
+    while(q.next()) {
+      names.append(q.value(0).toString());
+    }
+    return names;
 }
 
 void MpDatabase::addRecipe(const Recipe &recipe){
