@@ -13,9 +13,8 @@ MealPlan::MealPlan()
 
 bool MealPlan::AddMeal(Meal NewMeal)
 {
-
     //checks
-    MealList.Add(NewMeal);
+    MealList.push_back(NewMeal);
     return true;
 
 }
@@ -23,33 +22,32 @@ bool MealPlan::AddMeal(Meal NewMeal)
 
 bool MealPlan::RemoveMeal(Meal TargetMeal)
 {
-    MealList.Remove(TargetMeal);
+    //think about hasing
+    //MealList.Remove(TargetMeal);
     return true;
 }
 
-bool MealPlan::RemoveMeal(string TargetDate)
-{
-    MealList.Remove(TargetDate);
-    return true;
-}
 
-float MealPlan::GetTotalCalories()
+void MealPlan::UpdateNutrition()
 {
-    float Total;
-    for(int i = 0; i<MealList.Size(); i++)
-    {
-        Total += MealList[i].CalorieCount;
-    }
-    return Total;
-}
+    TotalCarbs = 0;
+    TotalFatContent = 0;
+    TotalProtien = 0;
+    CalorieCount = 0;
 
-void MealPlan::ViewMealPlan()
-{
-    for(int i = 0; i<MealList.Size(); i++)
+    for(int i = 0; i<MealList.size(); i++)
     {
-        MealList[i].MealRecipe.Display(); //retruns a string or something for the combo box/ widget field w/e
+        //TotalCarbs += MealList[i].MealRecipe.GetTotalCarbs();
+        //TotalFatContent += MealList[i].MealRecipe.GetTotalFat();
+        //TotalProtien += MealList[i].MealRecipe.GetTotalProtien();
+        //CalorieCount += MealList[i].MealRecipe.GetTotalCalories();
     }
     return;
+}
+
+void MealPlan::ListMealNames()
+{
+
 }
 
 Meal MealPlan::SelectMeal(int index) // maybe the address...or just open up the MealList to public....or the widget

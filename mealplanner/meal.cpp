@@ -4,8 +4,12 @@ Meal::Meal()
 {
     MealName = " ";
     Date = " ";
-    Recipe = NULL;
+    MealRecipe = new Recipe();
     CalorieCount = 0;
+    TotalCarbs = 0;
+    TotalFatContent = 0;
+    TotalProtien = 0;
+
 }
 
 Meal::Meal(string name, string date, Recipe Mealrecipe)
@@ -14,46 +18,61 @@ Meal::Meal(string name, string date, Recipe Mealrecipe)
     Date = date;
     MealRecipe = Mealrecipe;
 
+    UpdateNutrition();
+}
+
+void Meal::ChangeDate(string newDate)
+{
+    Date = newDate;
+    return;
+}
+
+void Meal::ChangeName(string newName)
+{
+    MealName = newName;
+    return;
+}
+
+//template idea here too......
+bool Meal::AddIngrediant(QString NewIngrediant) // string or class?
+{
+    //MealRecipe.IngrediantsList.Add(NewIngrediant);
+    UpdateNutrition();
+    return true;
+}
+
+bool Meal::RemoveIngrediant(QString TargetIngrediant)
+{
+
+    // need a database function that returns bool if found or not
+    //if(!Found(TargetIngrediant) return DisplayError(IngrediantErr);
+    //else
+
+    //MealRecipe.IngrediantsList.Remove(TargetIngrediant);
+    UpdateNutrition();
+
+    //calling this database function with change the meals recipe so it will reflect in
+    //any recipe functions in this class and others.
+
+    return true;
+}
+
+//return a vector of q strings?????
+
+QVector<QString>& Meal::ListRecipe()
+{
+    // return DataBaseManager.getRecipe(MealRecipe.RecipeName);
+}
+
+
+float Meal::UpdateNutrition()
+{
     //CalorieCount = Mealrecipe.GetTotalCalories();
     //TotalProtien = Mealrecipe.GetTotalProtien();
-}
-
-bool Meal::ChangeDate(string newDate)
-{
-    if(!Valid(newDate)) return false;
-    Date = newDate;
-    return true;
-}
-
-bool Meal::ChangeName(string newName)
-{
-    if(!Valid(newName)) return false;
-    MealName = newName;
-    return true;
+    //TotalFatContent = Mealrecipe.GetTotalFat();
+    //TotalCarbs = Mealrecipe.GetTotalCarbs();
 }
 
 
-//NOTE: C# SUPIRIORITY HERE, DELAGATES OWN HERE.  Meal::PerformIngrediantOperation(string ingredinant, delagate operation)
-bool Meal::AddIngrediant(string NewIngrediant)
-{
-    if(!Valid(NewIngrediant)) return false; // the valid checks might not be in the meal class at final build
-
-    this->MealRecipe.Add(NewIngrediant);
-    return true;
-
-}
-
-bool Meal::RemoveIngrediant(string TargetIngrediant)
-{
-    if(!Valid(TargetIngrediant)) return false;
-
-    this->MealRecipe.Remove(TargetIngrediant);
-    return true;
-}
-
-void Meal::ListRecipe()
-{
-    this->MealRecipe.Display();
-}
 
 
