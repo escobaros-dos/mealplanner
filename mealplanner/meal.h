@@ -8,6 +8,8 @@ class Meal
 
 protected:
 
+
+    //think about psudo hashing a vector with enums....
     enum Nutriant
     {
         Protien,  // 0
@@ -15,7 +17,6 @@ protected:
         Calorie, // 2
         Fat, // 3
     };
-
 
     // probably not protected in final
     float CalorieCount;
@@ -29,7 +30,12 @@ protected:
 
     Recipe MealRecipe;
     QString Date;
-    //QString MealName;
+    QString MealName;
+
+    float GetCarbs();
+    float GetFat();
+    float GetProtien();
+    float GetCarbs();
 
 
 public:
@@ -46,6 +52,8 @@ public:
     //float GetProtien();  in recipe class
 
     virtual void UpdateNutrition();
+
+    float GetNutrients(Nutriant n);
 
 
 signals:

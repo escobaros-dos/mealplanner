@@ -16,7 +16,6 @@ bool MealPlan::AddMeal(Meal NewMeal)
     //checks
     MealList.push_back(NewMeal);
     return true;
-
 }
 
 
@@ -28,7 +27,7 @@ bool MealPlan::RemoveMeal(Meal TargetMeal)
 }
 
 
-void MealPlan::UpdateNutrition()
+void MealPlan::UpdateNutrition() // reflect proportions
 {
     TotalCarbs = 0;
     TotalFatContent = 0;
@@ -37,10 +36,10 @@ void MealPlan::UpdateNutrition()
 
     for(int i = 0; i<MealList.size(); i++)
     {
-        //TotalCarbs += MealList[i].MealRecipe.GetTotalCarbs();
-        //TotalFatContent += MealList[i].MealRecipe.GetTotalFat();
-        //TotalProtien += MealList[i].MealRecipe.GetTotalProtien();
-        //CalorieCount += MealList[i].MealRecipe.GetTotalCalories();
+        //TotalCarbs += MealList[i].GetCarbs();
+        //TotalFatContent += MealList[i].GetFat();
+        //TotalProtien += MealList[i].GetProtien();
+        //CalorieCount += MealList[i].GetCalories();
     }
     return;
 }

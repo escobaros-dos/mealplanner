@@ -10,7 +10,6 @@ protected:
     QVector<QString> WeekRange; //or date range w/e
 
 
-
 public:
     MealPlan();
     MealPlan(QVector<string>& dates, QVector<Meal>& meals);
@@ -25,8 +24,6 @@ public:
     Meal SelectMeal(int index);// just returns the meal at the specified location....hash map might be better
 
     //the above function is usefull....for editing in the meal plan widget
-
-
 
 
 signals:

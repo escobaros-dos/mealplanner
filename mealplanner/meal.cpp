@@ -9,14 +9,15 @@ Meal::Meal()
     TotalCarbs = 0;
     TotalFatContent = 0;
     TotalProtien = 0;
-
+    Proportions = 0;
 }
 
-Meal::Meal(string name, string date, Recipe Mealrecipe)
+Meal::Meal(string name, string date, int proportion, Recipe Mealrecipe)
 {
     MealName = name;
     Date = date;
     MealRecipe = Mealrecipe;
+    Proportions = proportion;
 
     UpdateNutrition();
 }
@@ -27,7 +28,7 @@ void Meal::ChangeDate(string newDate)
     return;
 }
 
-void Meal::ChangeName(string newName)
+void Meal::ChangeName(string newName) // maybe change these names to update names
 {
     MealName = newName;
     return;
@@ -44,7 +45,7 @@ bool Meal::AddIngrediant(QString NewIngrediant) // string or class?
 bool Meal::RemoveIngrediant(QString TargetIngrediant)
 {
 
-    // need a database function that returns bool if found or not
+    // need a database function that returns bool if found or not....maybe
     //if(!Found(TargetIngrediant) return DisplayError(IngrediantErr);
     //else
 
@@ -72,6 +73,47 @@ float Meal::UpdateNutrition()
     //TotalFatContent = Mealrecipe.GetTotalFat();
     //TotalCarbs = Mealrecipe.GetTotalCarbs();
 }
+
+float Meal::GetCalories()
+{
+    return CalorieCount*Proportions;
+}
+float Meal::GetProtien()
+{
+    return TotalProtien*Proportions;
+}
+float Meal::GetFat()
+{
+    return TotalFatContent*Proportions;
+}
+float Meal::GetCarbs()
+{
+    return TotalCarbs*Proportions;
+}
+
+float Meal::GetNutrients(Nutriant n)
+{
+    float result = 0;
+    UpdateNutrition();
+    switch(n)
+    {
+    case Protien: result = GetProtien();
+        break;
+    case Carbs: result = GetCarbs();
+        break;
+    case Calorie: result = GetCalories();
+        break;
+    case Fat: result = GetFat();
+        break;
+    default: //uh oh.....
+
+    }
+    return result;
+}
+
+
+
+// function to return the nutriant values with the proportion in mind
 
 
 
