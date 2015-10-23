@@ -7,6 +7,8 @@
 QT       += core gui
 QT       += sql
 
+INCLUDEPATH += /usr/include/c++/4.3
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = mealplanner
