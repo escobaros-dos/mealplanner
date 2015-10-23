@@ -64,7 +64,7 @@ protected:
 private:
     QSqlDatabase db;
 
-signals:
+//signals:
 
 public slots:
 

@@ -56,7 +56,7 @@ public:
     float GetNutrients(Nutriant n);
 
 
-signals:
+//signals:
 
 
 

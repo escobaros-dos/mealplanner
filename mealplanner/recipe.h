@@ -5,6 +5,10 @@
 #include <QVector>
 #include <string>
 #include "ingredient.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
 
 class Recipe
 {
@@ -27,8 +31,7 @@ private:
 
 
 
-
-signals:
+//signals:
 
 
 

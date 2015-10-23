@@ -26,10 +26,7 @@ public:
     //the above function is usefull....for editing in the meal plan widget
 
 
-signals:
-
-
-
+//signals:
 
 public slots:
 
