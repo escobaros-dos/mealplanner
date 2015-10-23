@@ -4,56 +4,117 @@ Meal::Meal()
 {
     MealName = " ";
     Date = " ";
-    Recipe = NULL;
+    MealRecipe = new Recipe();
     CalorieCount = 0;
+    TotalCarbs = 0;
+    TotalFatContent = 0;
+    TotalProtien = 0;
+    Proportions = 0;
 }
 
-Meal::Meal(string name, string date, Recipe Mealrecipe)
+Meal::Meal(string name, string date, int proportion, Recipe Mealrecipe)
 {
     MealName = name;
     Date = date;
     MealRecipe = Mealrecipe;
+    Proportions = proportion;
 
+    UpdateNutrition();
+}
+
+void Meal::ChangeDate(string newDate)
+{
+    Date = newDate;
+    return;
+}
+
+void Meal::ChangeName(string newName) // maybe change these names to update names
+{
+    MealName = newName;
+    return;
+}
+
+//template idea here too......
+bool Meal::AddIngrediant(QString NewIngrediant) // string or class?
+{
+    //MealRecipe.IngrediantsList.Add(NewIngrediant);
+    UpdateNutrition();
+    return true;
+}
+
+bool Meal::RemoveIngrediant(QString TargetIngrediant)
+{
+
+    // need a database function that returns bool if found or not....maybe
+    //if(!Found(TargetIngrediant) return DisplayError(IngrediantErr);
+    //else
+
+    //MealRecipe.IngrediantsList.Remove(TargetIngrediant);
+    UpdateNutrition();
+
+    //calling this database function with change the meals recipe so it will reflect in
+    //any recipe functions in this class and others.
+
+    return true;
+}
+
+//return a vector of q strings?????
+
+QVector<QString>& Meal::ListRecipe()
+{
+    // return DataBaseManager.getRecipe(MealRecipe.RecipeName);
+}
+
+
+float Meal::UpdateNutrition()
+{
     //CalorieCount = Mealrecipe.GetTotalCalories();
     //TotalProtien = Mealrecipe.GetTotalProtien();
+    //TotalFatContent = Mealrecipe.GetTotalFat();
+    //TotalCarbs = Mealrecipe.GetTotalCarbs();
 }
 
-bool Meal::ChangeDate(string newDate)
+float Meal::GetCalories()
 {
-    if(!Valid(newDate)) return false;
-    Date = newDate;
-    return true;
+    return CalorieCount*Proportions;
 }
-
-bool Meal::ChangeName(string newName)
+float Meal::GetProtien()
 {
-    if(!Valid(newName)) return false;
-    MealName = newName;
-    return true;
+    return TotalProtien*Proportions;
 }
-
-
-//NOTE: C# SUPIRIORITY HERE, DELAGATES OWN HERE.  Meal::PerformIngrediantOperation(string ingredinant, delagate operation)
-bool Meal::AddIngrediant(string NewIngrediant)
+float Meal::GetFat()
 {
-    if(!Valid(NewIngrediant)) return false; // the valid checks might not be in the meal class at final build
-
-    this->MealRecipe.Add(NewIngrediant);
-    return true;
-
+    return TotalFatContent*Proportions;
 }
-
-bool Meal::RemoveIngrediant(string TargetIngrediant)
+float Meal::GetCarbs()
 {
-    if(!Valid(TargetIngrediant)) return false;
-
-    this->MealRecipe.Remove(TargetIngrediant);
-    return true;
+    return TotalCarbs*Proportions;
 }
 
-void Meal::ListRecipe()
+float Meal::GetNutrients(Nutriant n)
 {
-    this->MealRecipe.Display();
+    float result = 0;
+    UpdateNutrition();
+    switch(n)
+    {
+    case Protien: result = GetProtien();
+        break;
+    case Carbs: result = GetCarbs();
+        break;
+    case Calorie: result = GetCalories();
+        break;
+    case Fat: result = GetFat();
+        break;
+    default: //uh oh.....
+
+    }
+    return result;
 }
+
+
+
+// function to return the nutriant values with the proportion in mind
+
+
 
 

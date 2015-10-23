@@ -21,13 +21,18 @@ SOURCES += main.cpp\
     meal.cpp \
     mealplan.cpp \
     mpdatabase.cpp \
-    ingredient.cpp
+    ingredient.cpp \
+    createmealwindow.cpp
 
 HEADERS  += mainwindow.h \
     recipe.h \
     meal.h \
     mealplan.h \
     mpdatabase.h \
-    ingredient.h
+    ingredient.h \
+    createmealwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    createmealtest.ui \
+    mainwindow.ui \
+    createmealwindow.ui

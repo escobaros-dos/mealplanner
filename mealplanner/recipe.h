@@ -26,9 +26,20 @@ private:
     QString catSteps; //concatenated string for the
 
 
+
+
 signals:
 
+
+
+
+
 public slots:
+
+
+
+
+
 };
 
 #endif // RECIPE_H
