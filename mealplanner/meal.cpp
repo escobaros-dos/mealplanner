@@ -4,7 +4,7 @@ Meal::Meal()
 {
     MealName = " ";
     Date = " ";
-    MealRecipe = new Recipe();
+    MealRecipe = Recipe();
     CalorieCount = 0;
     TotalCarbs = 0;
     TotalFatContent = 0;
@@ -12,7 +12,7 @@ Meal::Meal()
     Proportions = 0;
 }
 
-Meal::Meal(string name, string date, int proportion, Recipe Mealrecipe)
+Meal::Meal(QString name, QString date, int proportion, Recipe Mealrecipe)
 {
     MealName = name;
     Date = date;
@@ -22,20 +22,20 @@ Meal::Meal(string name, string date, int proportion, Recipe Mealrecipe)
     UpdateNutrition();
 }
 
-void Meal::ChangeDate(string newDate)
+void Meal::ChangeDate(QString newDate)
 {
     Date = newDate;
     return;
 }
 
-void Meal::ChangeName(string newName) // maybe change these names to update names
+void Meal::ChangeName(QString newName) // maybe change these names to update names
 {
     MealName = newName;
     return;
 }
 
 //template idea here too......
-bool Meal::AddIngrediant(QString NewIngrediant) // string or class?
+bool Meal::AddIngrediant(QString NewIngrediant) // QString or class?
 {
     //MealRecipe.IngrediantsList.Add(NewIngrediant);
     UpdateNutrition();

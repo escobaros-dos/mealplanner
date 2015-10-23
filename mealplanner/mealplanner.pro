@@ -33,6 +33,6 @@ HEADERS  += mainwindow.h \
     createmealwindow.h
 
 FORMS    += \
-    createmealtest.ui \
+    #createmealtest.ui \
     mainwindow.ui \
     createmealwindow.ui
