@@ -37,6 +37,12 @@ private slots:
 
     void on_actionCreate_Recipe_triggered();
 
+    void on_pushButton_4_clicked();
+
+    void on_CreateMealButton_clicked();
+
+    void on_textBrowser_textChanged();
+
 private:
     Ui::MainWindow *ui;
 };

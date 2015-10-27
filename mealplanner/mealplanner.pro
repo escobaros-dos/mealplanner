@@ -22,7 +22,10 @@ SOURCES += main.cpp\
     mealplan.cpp \
     mpdatabase.cpp \
     ingredient.cpp \
-    createmealwindow.cpp
+    createmealwindow.cpp \
+    createrecipewindow.cpp \
+    recipebook.cpp \
+    viewmealdetails.cpp
 
 HEADERS  += mainwindow.h \
     recipe.h \
@@ -30,9 +33,15 @@ HEADERS  += mainwindow.h \
     mealplan.h \
     mpdatabase.h \
     ingredient.h \
-    createmealwindow.h
+    createmealwindow.h \
+    createrecipewindow.h \
+    recipebook.h \
+    viewmealdetails.h
 
 FORMS    += \
     #createmealtest.ui \
     mainwindow.ui \
-    createmealwindow.ui
+    createmealwindow.ui \
+    createrecipewindow.ui \
+    recipebook.ui \
+    viewmealdetails.ui

@@ -8,12 +8,14 @@ class Ingredient
 {
 public:
     Ingredient();
+    Ingredient(int protn, int ft, int crbs, int cals, int id, QString n);
 
     QString getName() const;
     int getProtein() const;
     int getFat() const;
     int getCarbs() const;
     int getCalories() const;
+
 
 protected:
     QString name;
@@ -23,9 +25,16 @@ protected:
     int carbs;
     int calories;
 
+
+
 signals:
 
+
+
 public slots:
+
+
+
 };
 
 #endif // INGREDIENT_H

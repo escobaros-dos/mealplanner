@@ -12,9 +12,9 @@ Meal::Meal()
     Proportions = 0;
 }
 
-Meal::Meal(QString name, QString date, int proportion, Recipe Mealrecipe)
+Meal::Meal(QString date, int proportion, Recipe Mealrecipe)
 {
-    MealName = name;
+    MealName = Mealrecipe.getName();
     Date = date;
     MealRecipe = Mealrecipe;
     Proportions = proportion;
@@ -66,7 +66,7 @@ QVector<QString>& Meal::ListRecipe()
 }
 
 
-float Meal::UpdateNutrition()
+void Meal::UpdateNutrition()
 {
     //CalorieCount = Mealrecipe.GetTotalCalories();
     //TotalProtien = Mealrecipe.GetTotalProtien();
@@ -74,38 +74,39 @@ float Meal::UpdateNutrition()
     //TotalCarbs = Mealrecipe.GetTotalCarbs();
 }
 
-float Meal::GetCalories()
+int Meal::GetMealCalories()
 {
     return CalorieCount*Proportions;
 }
-float Meal::GetProtien()
+int Meal::GetMealProtien()
 {
     return TotalProtien*Proportions;
 }
-float Meal::GetFat()
+int Meal::GetMealFat()
 {
     return TotalFatContent*Proportions;
 }
-float Meal::GetCarbs()
+int Meal::GetMealCarbs()
 {
     return TotalCarbs*Proportions;
 }
 
-float Meal::GetNutrients(Nutriant n)
+int Meal::GetNutrients(Nutriant n)
 {
-    float result = 0;
+    int result = 0;
     UpdateNutrition();
     switch(n)
     {
-    case Protien: result = GetProtien();
+    case Protien: result = GetMealProtien();
         break;
-    case Carbs: result = GetCarbs();
+    case Carbs: result = GetMealCarbs();
         break;
-    case Calorie: result = GetCalories();
+    case Calorie: result = GetMealCalories();
         break;
-    case Fat: result = GetFat();
+    case Fat: result = GetMealFat();
         break;
     default: //uh oh.....
+        break;
 
     }
     return result;

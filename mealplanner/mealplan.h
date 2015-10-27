@@ -9,6 +9,7 @@ protected:
     QVector<Meal> MealList; //hash map might be better....
     QVector<QString> WeekRange; //or date range w/e
 
+    void UpdateNutrition();
 
 public:
     MealPlan();

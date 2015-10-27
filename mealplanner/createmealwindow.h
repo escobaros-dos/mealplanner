@@ -15,6 +15,15 @@ public:
     explicit CreateMealWindow(QWidget *parent = 0);
     ~CreateMealWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_CreateRecipeButton_clicked();
+
+    void on_buttonBox_accepted();
+
+    void on_lineEdit_2_textChanged(const QString &arg1);
+
 private:
     Ui::CreateMealWindow *ui;
 };

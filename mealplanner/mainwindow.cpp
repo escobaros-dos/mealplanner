@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "createmealwindow.h"
+#include "recipebook.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -23,7 +24,11 @@ void MainWindow::on_pushButton_2_clicked()
 //-------------------------------------------------------------------
 void MainWindow::on_pushButton_3_clicked()//opens recipe book
 {
-    ui -> stackedWidget -> setCurrentIndex(2);
+
+    RecipeBook RB;
+    RB.setModal(false);
+    RB.exec();
+    //ui -> stackedWidget -> setCurrentIndex(2);
     qDebug("index change");//error check
 }
 
@@ -43,8 +48,8 @@ void MainWindow::on_pushButton_8_clicked()//StackedWidget(2)
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    ui -> stackedWidget -> setCurrentIndex(1);
-    qDebug("index change");//error check
+   // ui -> stackedWidget -> setCurrentIndex(1);
+    //qDebug("index change");//error check
 }
 //----------------------------------------------MainWidget Menu Bar
 //--------------------------------------------------------
@@ -56,12 +61,35 @@ void MainWindow::on_actionFna_triggered()// this is the Home button
 //------------------------------------------------------
 void MainWindow::on_actionRecipe_Book_2_triggered()//menu tab button "Recipe book" opens recipe book
 {
-    ui -> stackedWidget -> setCurrentIndex(2);
-    qDebug("index change");//error check
+
+    RecipeBook RB;
+    RB.setModal(false);
+    RB.exec();
+    //ui -> stackedWidget -> setCurrentIndex(2);
+    //qDebug("index change");//error check
 }
 //------------------------------------------------------
 void MainWindow::on_actionCreate_Recipe_triggered()//menu tab button "Create recipe" opens CREATE RECIPS
 {
+
     //ui -> stackedWidget -> setCurrentIndex(1);
     //qDebug("index change");//error check
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
+}
+
+void MainWindow::on_CreateMealButton_clicked()
+{
+    CreateMealWindow MealWin;
+    MealWin.setModal(false);
+    MealWin.exec();
+}
+
+void MainWindow::on_textBrowser_textChanged()
+{
+
+
 }
