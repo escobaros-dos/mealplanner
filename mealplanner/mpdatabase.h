@@ -9,6 +9,10 @@
 #include "recipe.h"
 #include "ingredient.h"
 
+//NOTE: This might be a really good place for forward class declarations*********
+//That way we don't need to include all those .h's
+
+
 class MpDatabase
 {
 

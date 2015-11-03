@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+class MpDatabase;
+
 namespace Ui {
 class CreateMealWindow;
 }
@@ -12,11 +14,10 @@ class CreateMealWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateMealWindow(QWidget *parent = 0);
+    explicit CreateMealWindow(MpDatabase* db, QWidget *parent = 0);
     ~CreateMealWindow();
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_CreateRecipeButton_clicked();
 
@@ -25,6 +26,7 @@ private slots:
     void on_lineEdit_2_textChanged(const QString &arg1);
 
 private:
+    MpDatabase* MealWinDB;
     Ui::CreateMealWindow *ui;
 };
 

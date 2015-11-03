@@ -13,7 +13,7 @@ protected:
 
 public:
     MealPlan();
-    MealPlan(QVector<string>& dates, QVector<Meal>& meals);
+    MealPlan(QVector<QString>& dates, QVector<Meal>& meals);
 
     bool AddMeal(Meal NewMeal); // add a new meal to the meal plan, NOTE: this may increase/extend the range of dates
 

@@ -4,11 +4,12 @@
 #include "recipebook.h"
 
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(MpDatabase* db, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    MainDB = db;
 }
 
 MainWindow::~MainWindow()
@@ -83,7 +84,7 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_CreateMealButton_clicked()
 {
-    CreateMealWindow MealWin;
+    CreateMealWindow MealWin = CreateMealWindow(MainDB);
     MealWin.setModal(false);
     MealWin.exec();
 }

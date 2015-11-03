@@ -5,7 +5,6 @@
 #include <QVector>
 #include "ingredient.h"
 
-using namespace std; //<-----lololololo
 
 class Recipe
 {

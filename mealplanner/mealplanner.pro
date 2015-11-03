@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     createmealwindow.cpp \
     createrecipewindow.cpp \
     recipebook.cpp \
-    viewmealdetails.cpp
+    viewmealdetails.cpp \
+    createingridientwindow.cpp
 
 HEADERS  += mainwindow.h \
     recipe.h \
@@ -36,7 +37,8 @@ HEADERS  += mainwindow.h \
     createmealwindow.h \
     createrecipewindow.h \
     recipebook.h \
-    viewmealdetails.h
+    viewmealdetails.h \
+    createingridientwindow.h
 
 FORMS    += \
     #createmealtest.ui \
@@ -44,4 +46,5 @@ FORMS    += \
     createmealwindow.ui \
     createrecipewindow.ui \
     recipebook.ui \
-    viewmealdetails.ui
+    viewmealdetails.ui \
+    createingridientwindow.ui

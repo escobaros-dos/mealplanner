@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "mpdatabase.h"
+//class MpDatabase;
 
 namespace Ui {
 class MainWindow;
@@ -13,7 +15,7 @@ class MainWindow : public QMainWindow
 
 public:
 
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(MpDatabase* db, QWidget *parent = 0);
 
     ~MainWindow();
 
@@ -44,6 +46,7 @@ private slots:
     void on_textBrowser_textChanged();
 
 private:
+    MpDatabase* MainDB;
     Ui::MainWindow *ui;
 };
 
