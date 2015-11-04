@@ -84,7 +84,7 @@ void MainWindow::on_pushButton_4_clicked()
 
 void MainWindow::on_CreateMealButton_clicked()
 {
-    CreateMealWindow MealWin = CreateMealWindow(MainDB);
+    CreateMealWindow MealWin(MainDB);
     MealWin.setModal(false);
     MealWin.exec();
 }

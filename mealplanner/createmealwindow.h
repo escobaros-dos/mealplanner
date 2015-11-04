@@ -14,7 +14,7 @@ class CreateMealWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateMealWindow(MpDatabase* db, QWidget *parent = 0);
+    explicit CreateMealWindow(MpDatabase* db = 0, QWidget *parent = 0);
     ~CreateMealWindow();
 
 private slots:

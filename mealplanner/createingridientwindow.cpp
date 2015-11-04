@@ -8,6 +8,7 @@ CreateIngridientWindow::CreateIngridientWindow(MpDatabase* db, QWidget *parent) 
 {
     ui->setupUi(this);
     IngredientWinDB = db;
+
 }
 
 

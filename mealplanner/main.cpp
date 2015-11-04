@@ -8,7 +8,9 @@ int main(int argc, char *argv[])
     MpDatabase* DatabaseRef = new MpDatabase();
 
     QApplication a(argc, argv);
-    MainWindow w = MainWindow(DatabaseRef);
+
+
+    MainWindow w(DatabaseRef);
     w.show();
 
 

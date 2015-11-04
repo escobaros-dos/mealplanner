@@ -15,7 +15,7 @@ class CreateIngridientWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateIngridientWindow(MpDatabase* db, QWidget *parent = 0);
+    explicit CreateIngridientWindow(MpDatabase* db = 0, QWidget *parent = 0);
    // CreateIngridientWindow(MpDatabase* db);
     ~CreateIngridientWindow();
 
