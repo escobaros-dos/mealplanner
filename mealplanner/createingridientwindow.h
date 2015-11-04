@@ -16,27 +16,16 @@ class CreateIngridientWindow : public QDialog
 
 public:
     explicit CreateIngridientWindow(MpDatabase* db = 0, QWidget *parent = 0);
-   // CreateIngridientWindow(MpDatabase* db);
     ~CreateIngridientWindow();
 
 private slots:
-    void on_lineEdit_textEdited(const QString &arg1);
 
-    void on_protienEdit_textEdited(const QString &arg1);
+    void on_SaveIngtoDbButton_clicked();
 
-    void on_CalorieEdit_textEdited(const QString &arg1);
-
-    void on_CarbEdit_textEdited(const QString &arg1);
-
-    void on_FatEdit_textEdited(const QString &arg1);
-
-    void on_buttonBox_accepted();
-
-    void on_pushButton_clicked();
+    void on_IngBackButton_clicked();
 
 private:
 
-    Ingredient NewIngredient;
 
     MpDatabase* IngredientWinDB;
     Ui::CreateIngridientWindow *ui;

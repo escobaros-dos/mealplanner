@@ -22,14 +22,19 @@ private slots:
 
     void on_CreateIngridientButton_clicked();
 
-    void on_listWidget_itemClicked(QListWidgetItem *item);
+    void on_RecipeSaveToDbButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_RemoveFromSelected_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_AddFromDatabase_clicked();
+
+    void on_RecipeBackButton_clicked();
 
 private:
-    Recipe NewRecipe;
+
+    void UpdateNutrition(int sign, Ingredient& in);
+    QVector<Ingredient> CurrentIngridients;
+
     MpDatabase* RecipeDB;
     Ui::CreateRecipeWindow *ui;
 };

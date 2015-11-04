@@ -10,24 +10,19 @@ CreateRecipeWindow::CreateRecipeWindow(MpDatabase* db, QWidget *parent) :
     ui->setupUi(this);
     RecipeDB = db;
 
-
-    //foreach(QString s, RecipeDB->getIngredientNames())
-    //{
-    //ui->listWidget->addItem(s);
-    //}
-
     QVector<QString> names = RecipeDB->getIngredientNames();
-    for(int i = 0; i<names.size(); i++)
+    for(int i = 0; i<names.size(); ++i)
     {
         ui->listWidget->addItem(names[i]);
     }
+
+    QVector<Ingredient> Ings;
 
 }
 
 CreateRecipeWindow::~CreateRecipeWindow()
 {
     delete ui;
-    qDebug() << "recipe window destoried";
 }
 
 void CreateRecipeWindow::on_CreateIngridientButton_clicked()
@@ -37,34 +32,68 @@ void CreateRecipeWindow::on_CreateIngridientButton_clicked()
     IngridientWin.exec();
 }
 
-void CreateRecipeWindow::on_listWidget_itemClicked(QListWidgetItem *item)
+
+void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
 {
-    //test for list widget for selection...
+    QVector<QString> RecipeSteps;
 
-   //item->setText("test");
+    //for(int i = 0; i<ui->listWidget_2->count(); ++i)
+    //{
+        //Ingredient In = RecipeDB->getIngredientByName(ui->listWidget_2->item(i)->text());
+        //Ingredients.push_back(In);
+        //qDebug() << ui->listWidget_2->item(i)->text();
+    //}
 
-    //QString selected = item->text();
+    QString RecipeName = ui->RecipeNameEdit->text();
+    //QString CatSteps = Catstepsfunction();
+
+    //Recipe NewRecipe(CurrentIngredients, RecipeSteps, RecipeName, CatSteps)
+
+    //RecipeDB->addRecipe(NewRecipe);
+
+    RecipeSteps.clear();
+    CurrentIngridients.clear();
+    ui->listWidget_2->clear();
+    ui->StepsEdit->clear();
+}
+
+void CreateRecipeWindow::on_RemoveFromSelected_clicked()
+{
+     foreach(QListWidgetItem *i, ui->listWidget_2->selectedItems())
+     {
+         //Ingredient In = CurrentIngridients[ui->listWidget_2->currentRow()]; this might not work
+         //CurrentIngrideints.removeat(ui->listWidget_2->currentRow());
+         ui->listWidget_2->removeItemWidget(i);
+         delete i;
+
+        //UpdateNutrition(-1, In);
+     }
 
 }
 
-void CreateRecipeWindow::on_pushButton_2_clicked()
+void CreateRecipeWindow::on_AddFromDatabase_clicked()
 {
     foreach(QListWidgetItem *i, ui->listWidget->selectedItems())
     {
-        qDebug() << "selceted." << i->text();
         ui->listWidget_2->addItem(i->text());
+        //Ingredient In = RecipeDB->getIngredientByName(ui->listWidget_2->item(i)->text();
+        //CurrentIngredients.push_back(In);
+        //UpdateNutrition(1, In);
     }
 
 }
 
-void CreateRecipeWindow::on_pushButton_3_clicked()
+void CreateRecipeWindow::UpdateNutrition(int s, Ingredient& I)
 {
-    foreach(QListWidgetItem *i, ui->listWidget_2->selectedItems())
-    {
-        qDebug() << "selceted." << i->text();
-        //ui->listWidget_2->removeItemWidget(i);
-        delete i;
-    }
 
+    ui->ProtienLabel_2 += I.protein*s;
+    ui->CalorieLabel_2 += I.calories*s;
+    ui->CarbLabel_2 += I.carbs*s;
+    ui->FatLabel_2 += I.fat*s;
 
+}
+
+void CreateRecipeWindow::on_RecipeBackButton_clicked()
+{
+    this->close();
 }

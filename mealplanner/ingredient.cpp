@@ -5,6 +5,15 @@ Ingredient::Ingredient()
 
 }
 
+Ingredient::Ingredient(int protn, int ft, int crbs, int cals, QString n)
+{
+    name = n;
+    calories = cals;
+    carbs = crbs;
+    fat = ft;
+    protein = protn;
+}
+
 QString Ingredient::getName() const {
     return name;
 }

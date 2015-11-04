@@ -5,12 +5,18 @@ Recipe::Recipe()
 
 }
 
+Recipe::Recipe(QVector<Ingredient> ings, QVector<QString> step, QString n, QString catstepz)
+{
 
 
-QString Recipe::serializeIngredients() {
+}
+
+QString Recipe::serializeIngredients()
+{
   
 }
 
-QString Recipe::getName() const {
+QString Recipe::getName() const
+{
     return name;
 }

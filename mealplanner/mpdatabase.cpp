@@ -123,7 +123,7 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
     q.prepare("INSERT INTO ingredients(iname, cal, carbs, fat, protein) "
               "VALUES (:iname, :cal, :carbs, :fat, :protein)");
 
-    qDebug() << "finished prepairing " << ingredient.name <<" with id: "<< ingredient.id;
+    qDebug() << "finished prepairing " << ingredient.name;
     //q.bindValue(":ingid", ingredient.id);
     q.bindValue(":iname", ingredient.name);
     q.bindValue(":cal", ingredient.getCalories());
@@ -132,7 +132,7 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
     q.bindValue(":protein", ingredient.getProtein());
     q.exec();
 
-    qDebug() << "finished inserting: " << ingredient.name <<" with id: "<< ingredient.id;
+    qDebug() << "finished inserting: " << ingredient.name;
 
 }
 

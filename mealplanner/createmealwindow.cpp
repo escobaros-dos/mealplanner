@@ -8,6 +8,18 @@ CreateMealWindow::CreateMealWindow(MpDatabase* db, QWidget *parent) :
 {
     ui->setupUi(this);
     MealWinDB = db;
+
+
+    QVector<QString> RecNames = MealWinDB->getRecipeNames();
+
+    ui->SelectRecipeComboBox->addItems(RecNames.toList()); // prolly works, but no recipes so can't test
+
+    ui->SelectRecipeComboBox->addItem("hi");
+    ui->SelectRecipeComboBox->addItem("hi1");
+    ui->SelectRecipeComboBox->addItem("hi2");
+
+
+
 }
 
 CreateMealWindow::~CreateMealWindow()
@@ -18,22 +30,27 @@ CreateMealWindow::~CreateMealWindow()
 void CreateMealWindow::on_CreateRecipeButton_clicked()
 {
     CreateRecipeWindow RecipeWin(MealWinDB);
-   //CreateRecipeWindow RW = CreateRecipeWindow(MealWinDB);
     RecipeWin.setModal(false);
     RecipeWin.exec();
 
 }
 
-void CreateMealWindow::on_buttonBox_accepted()
+
+
+
+
+void CreateMealWindow::on_MealBackButton_clicked()
 {
-    //send save signal to database manager
-
-
-
-
+    this->close();
 }
 
-void CreateMealWindow::on_lineEdit_2_textChanged(const QString &arg1)
-{
 
+void CreateMealWindow::on_SelectRecipeComboBox_activated(const QString &arg1)
+{
+    //Recipe R = MealWinDB->getRecipeByName(arg1);
+
+    //for(int i = 0; i,R.ingredients.size(); ++i)
+    //{
+    //    ui->IngList->addItems(R.ingredients[i].name);
+    //}
 }

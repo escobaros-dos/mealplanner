@@ -21,9 +21,10 @@ private slots:
 
     void on_CreateRecipeButton_clicked();
 
-    void on_buttonBox_accepted();
 
-    void on_lineEdit_2_textChanged(const QString &arg1);
+    void on_MealBackButton_clicked();
+
+    void on_SelectRecipeComboBox_activated(const QString &arg1);
 
 private:
     MpDatabase* MealWinDB;

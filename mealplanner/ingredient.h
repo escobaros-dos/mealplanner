@@ -8,7 +8,7 @@ class Ingredient
 {
 public:
     Ingredient();
-    Ingredient(int protn, int ft, int crbs, int cals, int id, QString n);
+    Ingredient(int protn, int ft, int crbs, int cals, QString n);
 
     QString getName() const;
     int getProtein() const;
@@ -18,7 +18,6 @@ public:
 
 
     QString name;
-    int id;
     int protein;
     int fat;
     int carbs;
