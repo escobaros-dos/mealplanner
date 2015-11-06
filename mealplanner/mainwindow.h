@@ -23,7 +23,7 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_RecipeBookButton_clicked();
 
 
 
@@ -33,7 +33,7 @@ private slots:
 
     void on_pushButton_8_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_ViewDetailsButton_clicked();
 
     void on_actionRecipe_Book_2_triggered();
 
@@ -44,6 +44,10 @@ private slots:
     void on_CreateMealButton_clicked();
 
     void on_textBrowser_textChanged();
+
+    void on_pushButton_6_clicked();
+
+    void on_CreateMealPlanButton_clicked();
 
 private:
     MpDatabase* MainDB;

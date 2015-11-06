@@ -6,288 +6,177 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>797</width>
-    <height>314</height>
+    <width>857</width>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="CreateIngridientButton">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>280</y>
-     <width>131</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Create New Ingrediant</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="RecipeNameEdit">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>10</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>91</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Recipe Name</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>50</y>
-     <width>131</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Ingrediants in Database</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>50</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Selected Ingrediants</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="AddFromDatabase">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>80</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Add -&gt;</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="RemoveFromSelected">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>200</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;- Remove</string>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>230</y>
-     <width>118</width>
-     <height>3</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>90</y>
-     <width>118</width>
-     <height>3</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="listWidget">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>80</y>
-     <width>111</width>
-     <height>161</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="listWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>80</y>
-     <width>111</width>
-     <height>161</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="RecipeSaveToDbButton">
-   <property name="geometry">
-    <rect>
-     <x>540</x>
-     <y>280</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Save</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="RecipeBackButton">
-   <property name="geometry">
-    <rect>
-     <x>650</x>
-     <y>280</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Back</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="StepsEdit">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
-     <y>80</y>
-     <width>211</width>
-     <height>161</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>420</x>
-     <y>53</y>
-     <width>91</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Compose Steps:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="FatLabel_2">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>158</y>
-     <width>69</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>0</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="CarbLabel_2">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>177</y>
-     <width>69</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>0</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="CalorieLabel_2">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>139</y>
-     <width>69</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>0</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="ProtienLabel_2">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>120</y>
-     <width>69</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>0</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>120</y>
-     <width>71</width>
-     <height>72</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="ProtienLabel">
-      <property name="text">
-       <string>Total Protien:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="CalorieLabel">
-      <property name="text">
-       <string>Total Calories:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="FatLabel">
-      <property name="text">
-       <string>Total Carbs:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="CarbLabel">
-      <property name="text">
-       <string>Total Fat:</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="CreateIngridientButton">
+       <property name="text">
+        <string>Create New Ingrediant</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="RecipeSaveToDbButton">
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="RecipeBackButton">
+       <property name="text">
+        <string>Back</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="2" colspan="2">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="0">
+      <widget class="QLabel" name="CarbsLabel">
+       <property name="text">
+        <string>Total Carbs:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="FatLabel">
+       <property name="text">
+        <string>Total Fat:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="ProtienInputLabel">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLabel" name="FatInputLabel">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QLabel" name="CarbsInputLabel">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="CaloriesInputLabel">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="CalorieLabel">
+       <property name="text">
+        <string>Total Calories:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="ProtienLabel">
+       <property name="text">
+        <string>Total Protien:</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Ingredients in Database:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Selected Ingredients:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Compose Steps:</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QListWidget" name="listWidget"/>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="AddFromDatabase">
+         <property name="text">
+          <string>Add -&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="RemoveFromSelected">
+         <property name="text">
+          <string>&lt;- Remove</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QListWidget" name="listWidget_2"/>
+     </item>
+     <item>
+      <widget class="QPlainTextEdit" name="StepsEdit"/>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Recipe Name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="RecipeNameEdit"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
+  <zorder>layoutWidget</zorder>
+  <zorder>FatLabel</zorder>
+  <zorder>horizontalLayoutWidget</zorder>
+  <zorder>horizontalLayoutWidget_2</zorder>
+  <zorder>listWidget_2</zorder>
+  <zorder>verticalLayoutWidget_2</zorder>
+  <zorder>verticalLayoutWidget_3</zorder>
  </widget>
  <resources/>
  <connections/>

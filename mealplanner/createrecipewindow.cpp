@@ -61,12 +61,10 @@ void CreateRecipeWindow::on_RemoveFromSelected_clicked()
 {
      foreach(QListWidgetItem *i, ui->listWidget_2->selectedItems())
      {
-         //Ingredient In = CurrentIngridients[ui->listWidget_2->currentRow()]; this might not work
-         //CurrentIngrideints.removeat(ui->listWidget_2->currentRow());
+
          ui->listWidget_2->removeItemWidget(i);
          delete i;
 
-        //UpdateNutrition(-1, In);
      }
 
 }
@@ -86,10 +84,10 @@ void CreateRecipeWindow::on_AddFromDatabase_clicked()
 void CreateRecipeWindow::UpdateNutrition(int s, Ingredient& I)
 {
 
-    ui->ProtienLabel_2 += I.protein*s;
-    ui->CalorieLabel_2 += I.calories*s;
-    ui->CarbLabel_2 += I.carbs*s;
-    ui->FatLabel_2 += I.fat*s;
+    ui->ProtienInputLabel += I.protein*s;
+    ui->CaloriesInputLabel += I.calories*s;
+    ui->CarbsInputLabel += I.carbs*s;
+    ui->FatInputLabel += I.fat*s;
 
 }
 

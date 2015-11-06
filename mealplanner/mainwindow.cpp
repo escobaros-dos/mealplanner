@@ -23,7 +23,7 @@ void MainWindow::on_pushButton_2_clicked()
     //qDebug("index change");//error check
 }
 //-------------------------------------------------------------------
-void MainWindow::on_pushButton_3_clicked()//opens recipe book
+void MainWindow::on_RecipeBookButton_clicked()//opens recipe book
 {
 
     RecipeBook RB;
@@ -34,7 +34,7 @@ void MainWindow::on_pushButton_3_clicked()//opens recipe book
 }
 
 //----------------------------------------Stacked Widget Back Buttons----------------------------------
-void MainWindow::on_pushButton_7_clicked()//StackedWidget(1)
+/*void MainWindow::on_pushButton_7_clicked()//StackedWidget(1)
 {
     ui -> stackedWidget -> setCurrentIndex(0);
     qDebug("index change");//error check
@@ -44,10 +44,10 @@ void MainWindow::on_pushButton_8_clicked()//StackedWidget(2)
 {
     ui -> stackedWidget -> setCurrentIndex(0);
     qDebug("index change");//error check
-}
+}*/
 //--------------------------------------------------------
 
-void MainWindow::on_pushButton_6_clicked()
+void MainWindow::on_ViewDetailsButton_clicked()
 {
    // ui -> stackedWidget -> setCurrentIndex(1);
     //qDebug("index change");//error check
@@ -56,7 +56,7 @@ void MainWindow::on_pushButton_6_clicked()
 //--------------------------------------------------------
 void MainWindow::on_actionFna_triggered()// this is the Home button
 {
-    ui -> stackedWidget -> setCurrentIndex(0);
+    //ui -> stackedWidget -> setCurrentIndex(0);
     qDebug("index change");//error check
 }
 //------------------------------------------------------
@@ -92,5 +92,15 @@ void MainWindow::on_CreateMealButton_clicked()
 void MainWindow::on_textBrowser_textChanged()
 {
 
+
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+
+}
+//--------------------------------------------------------------------------
+void MainWindow::on_CreateMealPlanButton_clicked()
+{
 
 }
