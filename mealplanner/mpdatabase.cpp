@@ -5,7 +5,7 @@ MpDatabase::MpDatabase()
   QStringList tables;
   QSqlQuery q;
   db = QSqlDatabase::addDatabase("QSQLITE");
-  db.setDatabaseName("food.db");
+  db.setDatabaseName("SQLiteMpDatabase.db");
 
   if(!db.open()) {
     //throw something
@@ -18,13 +18,13 @@ MpDatabase::MpDatabase()
   q.exec("PRAGMA foreign_keys = ON"); //just to make sure the foreign key support is on
 
   if(!tables.contains("meals",Qt::CaseInsensitive)) {
-    q.exec("create table meals(mid int primary key, mdate text, prop int);");
+    q.exec("create table meals(mid integer primary key, mdate text, prop int);");
   }
   if(!tables.contains("recipes",Qt::CaseInsensitive)) {
-    q.exec("create table recipes(recid int primary key, rname text unique, steps text);");
+    q.exec("create table recipes(recid integer primary key, rname text unique, steps text);");
   }
   if(!tables.contains("ingredients",Qt::CaseInsensitive)) {
-    q.exec("create table ingredients(ingid int primary key, iname text unique,"
+    q.exec("create table ingredients(ingid integer primary key, iname text unique,"
            "cal int, carbs int, fat int, protein int);");
   }
 /*
@@ -126,19 +126,31 @@ void MpDatabase::addRecipe(const Recipe &recipe){
 
 }
 
-void MpDatabase::addIngredient(const Ingredient &ingredient){
+void MpDatabase::addIngredient(const Ingredient &ingredient)
+{
 
     //unique constraint has been added to the name column of the ingredient, to prevent duplication
 
-    QSqlQuery q = QSqlQuery(db);
-    q.prepare("insert into ingredients "
-              "values (:name, :cal, :carbs, :fat, :pro)");
-    q.bindValue(":name", ingredient.getName());
+    qDebug() << "inserting: " << ingredient.name <<" with calories: "<< ingredient.calories;
+
+   // QSqlQuery q = QSqlQuery(db);
+    QSqlQuery q;
+
+    qDebug() << "query created";
+    q.prepare("INSERT INTO ingredients(iname, cal, carbs, fat, protein) "
+              "VALUES (:iname, :cal, :carbs, :fat, :protein)");
+
+    qDebug() << "finished prepairing " << ingredient.name;
+    //q.bindValue(":ingid", ingredient.id);
+    q.bindValue(":iname", ingredient.name);
     q.bindValue(":cal", ingredient.getCalories());
     q.bindValue(":carbs", ingredient.getCarbs());
     q.bindValue(":fat", ingredient.getFat());
-    q.bindValue(":pro", ingredient.getProtein());
+    q.bindValue(":protein", ingredient.getProtein());
     q.exec();
+
+    qDebug() << "finished inserting: " << ingredient.name;
+
 }
 
 QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
