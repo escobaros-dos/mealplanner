@@ -27,35 +27,45 @@ MpDatabase::MpDatabase()
     q.exec("create table ingredients(ingid integer primary key, iname text unique,"
            "cal int, carbs int, fat int, protein int);");
   }
-/*
+
   q.exec("create table relate (rIdRelate int, iIdRelate int, "
          "foreign key (rIdRelate) reference recipes(recid)), "
          "foreign key (iIdRelate) reference ingredients(ingid));");
-*/
+
 }
 
 MpDatabase::~MpDatabase() {
   db.close();
 }
 
-Ingredient MpDatabase::getIngredientByName(QString) {
+Ingredient MpDatabase::getIngredientByName(QString name) {
 
-
-    //return Ingredient;
+    Ingredient i;
+    QSqlQuery q;
+    q.prepare("SELECT * FROM ingredients WHERE iname = :n");
+    q.bindValue(":n",name);
+    q.exec();
+    q.next();
+    i = Ingredient(q.value(5).toInt(),q.value(4).toInt(),q.value(3).toInt(),q.value(2).toInt(),q.value(1).toString());
+    return i;
 }
 
-Recipe MpDatabase::getRecipeByName(QString) {
-
-
-   // Recipe rec = new Recipe;
-
-   //return Recipe();
+Recipe MpDatabase::getRecipeByName(QString name) {
+    //incomplete (no relational table?)
+    Recipe r;
+    QSqlQuery q;
+    q.prepare("SELECT * FROM recipes WHERE rname = :n");
+    q.bindValue(":n",name);
+    q.exec();
+    q.next();
+    r = Recipe();
+    return r;
 }
 
 
 //use a template??
 
-/*
+
 QVector<QString> MpDatabase::getRecipeNames() {
   QVector<QString> names;
   QSqlQuery q = QSqlQuery(db);
@@ -75,7 +85,7 @@ QVector<QString> MpDatabase::getIngredientNames() {
   }
   return names;
 }
-*/
+
 
 QVector<QString> MpDatabase::getNameFromDatabase(const QString &column, const QString &table)
 {
@@ -101,26 +111,31 @@ void MpDatabase::addRecipe(const Recipe &recipe){
 
     QSqlQuery q = QSqlQuery(db);
     QString tempRecipeId;
-
-    q.prepare("insert into recipes "
-              "values (:name, :steps)");
+    q.prepare("INSERT INTO recipes(rname, steps)"
+              "VALUES (:name, :steps)");
 
     q.bindValue(":name", recipe.getName()); //name is private
 
 
     //concatenate vector before tossing into the database
     //fix later ;)
-    //q.bindValue(":steps", recipe.catSteps);
+    q.bindValue(":steps", "NOT IMPLEMENTED");
 
     q.exec();
 
+    foreach(Ingredient i,recipe.ingredients.toList()) {
+        addIngredient(i);
+        updateRelationTable(recipe.getName(),i.getName());
+    }
 
-   for(int i = 0; i < recipe.ingredients.size(); i--){
-       addIngredient(recipe.ingredients[i]);
-
-       updateRelationTable(recipe.getName(), recipe.ingredients[i].getName()); //pairs the recipe id with the ingredients id
+   //for(int i = 0; i < recipe.ingredients.size(); i++){
+       //qDebug() << QString(i);
+       //qDebug() << recipe.ingredients[i];
+       //addIngredient(recipe.ingredients[i]);
+       //qDebug() << recipe.ingredients[i].getName();
+       //updateRelationTable(recipe.getName(), recipe.ingredients[i].getName()); //pairs the recipe id with the ingredients id
                                                                                //there has to be a better way of doing this function
-   }
+   //}
 
 
 

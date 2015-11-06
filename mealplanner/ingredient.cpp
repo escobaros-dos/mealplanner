@@ -1,8 +1,9 @@
 #include "ingredient.h"
+#include <QDebug>
 
 Ingredient::Ingredient()
 {
-
+    name="FOOBAR";
 }
 
 Ingredient::Ingredient(int protn, int ft, int crbs, int cals, QString n)
@@ -15,6 +16,7 @@ Ingredient::Ingredient(int protn, int ft, int crbs, int cals, QString n)
 }
 
 QString Ingredient::getName() const {
+    qDebug() << "Ingredient get name " << name;
     return name;
 }
 

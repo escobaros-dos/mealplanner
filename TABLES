@@ -1,0 +1,20 @@
+MEALS
+mid integer primary key
+mdate text
+prop int
+
+RECIPES
+recid integer primary key
+rname text unique
+steps text
+
+INGREDIENTS
+ingid integer primary key
+iname text uniqe
+cal int
+carbs int
+fat int
+protein int
+
+RELATION
+/*TBD I GUESS*/

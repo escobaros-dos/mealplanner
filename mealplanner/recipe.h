@@ -10,7 +10,7 @@ class Recipe
 {
 public:
     Recipe();
-    Recipe(QVector<Ingredient> ingredients, QVector<QString> steps, QString name, QString catstep);
+    Recipe(QVector<Ingredient> ingredients, QVector<QString> steps, QString name);
 
     QString serializeIngredients();
     void   deSerializeIngredients(QString);
