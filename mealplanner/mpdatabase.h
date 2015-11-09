@@ -62,8 +62,8 @@ public:
 
 
 protected:
-    int getIngredientIDByName(QString);
-    int getRecipeIDByName(QString);
+    int getIngredientIDByName(const QString &);
+    int getRecipeIDByName(const QString &);
 
 private:
     QSqlDatabase db;

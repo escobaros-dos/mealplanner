@@ -29,8 +29,8 @@ MpDatabase::MpDatabase()
   }
 
   q.exec("create table relate (rIdRelate int, iIdRelate int, "
-         "foreign key (rIdRelate) reference recipes(recid)), "
-         "foreign key (iIdRelate) reference ingredients(ingid));");
+         "foreign key (rIdRelate) references recipes(recid)), "
+         "foreign key (iIdRelate) references ingredients(ingid));");
 
 }
 
@@ -199,28 +199,32 @@ void MpDatabase::updateRelationTable(const QString &recipeName, const QString &i
 
     //can we use one QSqlQuery object to do multiple queries or should we use multiple QSqlQuery
 
-    QSqlQuery q = QSqlQuery(db);
-
-    QString rId;
-    QString iId;
-
-    q.prepare("select recid from recipes where rname = :recipeName");
-    q.bindValue(":recipeName", recipeName);
-    q.exec();
-    q.next();
-    rId = q.value(0).toString();
-
-
-    q.prepare("select ingid from ingredients where iname = :ingredientName");
-    q.bindValue(":ingredientName", ingredientName);
-    q.exec();
-    q.next();
-    iId = q.value(0).toString();
+    QSqlQuery q;
+    int recid = getRecipeIDByName(recipeName);
+    int ingid = getIngredientIDByName(ingredientName);
 
     q.prepare("insert into relate (rIdRelate, iIdRelate) values (:rId, :iId);");
-    q.bindValue(":rId", rId);
-    q.bindValue(":iId", iId);
+    q.bindValue(":rId", recid);
+    q.bindValue(":iId", ingid);
     q.exec();
 
 
+}
+
+int MpDatabase::getIngredientIDByName(const QString &ingredient) {
+    QSqlQuery q;
+    q.prepare("SELECT ingid FROM ingredients WHERE iname = :name;");
+    q.bindValue(":name",ingredient);
+    q.exec();
+    q.next();
+    return q.value(0).toInt();
+}
+
+int MpDatabase::getRecipeIDByName(const QString &recipe) {
+    QSqlQuery q;
+    q.prepare("SELECT recid FROM recipes WHERE rname = :name;");
+    q.bindValue(":name",recipe);
+    q.exec();
+    q.next();
+    return q.value(0).toInt();
 }
