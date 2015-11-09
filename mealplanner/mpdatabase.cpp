@@ -29,8 +29,11 @@ MpDatabase::MpDatabase()
   }
 
   q.exec("create table relate (rIdRelate int, iIdRelate int, "
-         "foreign key (rIdRelate) references recipes(recid)), "
+         "foreign key (rIdRelate) references recipes(recid), "
          "foreign key (iIdRelate) references ingredients(ingid));");
+
+  q.exec("create table steps (rId int, step text, "
+         "foreign key (rId) references recipes(recid));");
 
 }
 
@@ -108,7 +111,7 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     //call addIngredient and pass in recipe.ingredient[x]
     //loop through until the vector is finished
     //update the relations table?
-
+    qDebug() << "Add recipe " << recipe.name;
     QSqlQuery q = QSqlQuery(db);
     QString tempRecipeId;
     q.prepare("INSERT INTO recipes(rname, steps)"
@@ -123,9 +126,26 @@ void MpDatabase::addRecipe(const Recipe &recipe){
 
     q.exec();
 
+    q.prepare("SELECT recid FROM recipes where rname = :name;");
+    q.bindValue(":name",recipe.name);
+    q.exec();
+    q.next();
+    tempRecipeId=q.value(0).toString();
+
     foreach(Ingredient i,recipe.ingredients.toList()) {
-        addIngredient(i);
+        //addIngredient(i); //I don't think we need this
         updateRelationTable(recipe.getName(),i.getName());
+    }
+
+    foreach(QString step, recipe.steps) {
+        q.prepare("INSERT INTO steps(rId, step) "
+                  "VALUES (:id, :step);");
+        qDebug() << "Add step " << step;
+        q.bindValue(":id",tempRecipeId.toInt());
+        q.bindValue(":step",step);
+        q.exec();
+        qDebug() << q.lastError();
+        qDebug() << q.lastQuery();
     }
 
    //for(int i = 0; i < recipe.ingredients.size(); i++){
@@ -146,16 +166,14 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
 
     //unique constraint has been added to the name column of the ingredient, to prevent duplication
 
-    qDebug() << "inserting: " << ingredient.name <<" with calories: "<< ingredient.calories;
+    qDebug() << "inserting: " << ingredient.name;
 
    // QSqlQuery q = QSqlQuery(db);
     QSqlQuery q;
 
-    qDebug() << "query created";
     q.prepare("INSERT INTO ingredients(iname, cal, carbs, fat, protein) "
               "VALUES (:iname, :cal, :carbs, :fat, :protein)");
 
-    qDebug() << "finished prepairing " << ingredient.name;
     //q.bindValue(":ingid", ingredient.id);
     q.bindValue(":iname", ingredient.name);
     q.bindValue(":cal", ingredient.getCalories());
@@ -163,8 +181,6 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
     q.bindValue(":fat", ingredient.getFat());
     q.bindValue(":protein", ingredient.getProtein());
     q.exec();
-
-    qDebug() << "finished inserting: " << ingredient.name;
 
 }
 
