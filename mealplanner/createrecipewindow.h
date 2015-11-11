@@ -32,7 +32,8 @@ private slots:
 
 private:
 
-    void UpdateNutrition(int sign, Ingredient& in);
+    void UpdateNutrition(int sign, Ingredient in);
+    void UpdateRecipeList();
     QVector<Ingredient> CurrentIngridients;
 
     MpDatabase* RecipeDB;

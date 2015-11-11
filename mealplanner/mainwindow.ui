@@ -19,17 +19,10 @@
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
-        <widget class="QWidget" name="stackedWidgetPage1" native="true">
+        <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QPushButton" name="CreateMealPlanButton">
-              <property name="text">
-               <string>Create Meal Plan</string>
-              </property>
-             </widget>
-            </item>
             <item>
              <widget class="QPushButton" name="pushButton_3">
               <property name="text">
@@ -102,7 +95,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage2" native="true">
+        <widget class="QWidget" name="stackedWidgetPage2">
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0">
            <widget class="QPushButton" name="pushButton_11">

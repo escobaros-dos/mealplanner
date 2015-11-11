@@ -45,7 +45,7 @@ bool Meal::AddIngrediant(QString NewIngrediant) // QString or class?
 bool Meal::RemoveIngrediant(QString TargetIngrediant)
 {
 
-    // need a database function that returns bool if found or not....maybe
+    //need a database function that returns bool if found or not....maybe
     //if(!Found(TargetIngrediant) return DisplayError(IngrediantErr);
     //else
 

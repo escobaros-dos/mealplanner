@@ -82,7 +82,8 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     //loop through until the vector is finished
     //update the relations table?
 
-    QSqlQuery q = QSqlQuery(db);
+    //QSqlQuery q = QSqlQuery(db);
+    QSqlQuery q;
     QString tempRecipeId;
 
     q.prepare("insert into recipes "
@@ -98,7 +99,8 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     q.exec();
 
 
-   for(int i = 0; i < recipe.ingredients.size(); i--){
+   for(int i = 0; i < recipe.ingredients.size(); i++)
+   {
        addIngredient(recipe.ingredients[i]);
 
        updateRelationTable(recipe.getName(), recipe.ingredients[i].getName()); //pairs the recipe id with the ingredients id
@@ -167,7 +169,7 @@ void MpDatabase::updateRelationTable(const QString &recipeName, const QString &i
 
     //can we use one QSqlQuery object to do multiple queries or should we use multiple QSqlQuery
 
-    QSqlQuery q = QSqlQuery(db);
+    QSqlQuery q = QSqlQuery(db); // uhhh check this declaration maybe....
 
     QString rId;
     QString iId;
