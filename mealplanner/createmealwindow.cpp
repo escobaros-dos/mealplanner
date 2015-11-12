@@ -18,8 +18,6 @@ CreateMealWindow::CreateMealWindow(MpDatabase* db, QWidget *parent) :
     ui->SelectRecipeComboBox->addItem("hi1");
     ui->SelectRecipeComboBox->addItem("hi2");
 
-
-
 }
 
 CreateMealWindow::~CreateMealWindow()
@@ -35,17 +33,12 @@ void CreateMealWindow::on_CreateRecipeButton_clicked()
 
 }
 
-
-
-
-
 void CreateMealWindow::on_MealBackButton_clicked()
 {
     this->close();
 }
 
-
-void CreateMealWindow::on_SelectRecipeComboBox_activated(const QString &arg1)
+void CreateMealWindow::on_SelectRecipeComboBox_activated(const QString &arg1) // need update for this...coming soon
 {
     //Recipe R = MealWinDB->getRecipeByName(arg1);
 
@@ -53,4 +46,7 @@ void CreateMealWindow::on_SelectRecipeComboBox_activated(const QString &arg1)
     //{
     //    ui->IngList->addItems(R.ingredients[i].name);
     //}
+
+    ui->IngList->addItem(arg1);
+
 }

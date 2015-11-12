@@ -18,6 +18,7 @@
     <item row="1" column="0">
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
+<<<<<<< HEAD
        <widget class="QWidget" name="MainWindowWidget" native="true">
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
@@ -80,10 +81,69 @@
              </property>
              <property name="html">
               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+=======
+       <widget class="QStackedWidget" name="stackedWidget">
+        <widget class="QWidget" name="stackedWidgetPage1">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="text">
+               <string>Recipe Book</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="text">
+               <string>Calculate BMI</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="CreateMealButton">
+              <property name="text">
+               <string>CreateMeal</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Help</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCalendarWidget" name="calendarWidget"/>
+          </item>
+          <item row="0" column="2">
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetDefaultConstraint</enum>
+            </property>
+            <item alignment="Qt::AlignLeft">
+             <widget class="QTextBrowser" name="textBrowser_4">
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="documentTitle">
+               <string/>
+              </property>
+              <property name="html">
+               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+>>>>>>> 1224cbd9ba6b4b17b55f826d7c3b7987e19a65c5
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:5.5pt;&quot;&gt;This will display all the meals for the day you selected, you need to set the calander slots&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+<<<<<<< HEAD
              </property>
              <property name="tabStopWidth">
               <number>50</number>
@@ -100,6 +160,68 @@ p, li { white-space: pre-wrap; }
           </layout>
          </item>
         </layout>
+=======
+              </property>
+              <property name="tabStopWidth">
+               <number>50</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="text">
+               <string>View Details</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="stackedWidgetPage2">
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="text">
+             <string>Add recipe</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="pushButton_12">
+            <property name="text">
+             <string>Search Recipe</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="4">
+           <widget class="QTextBrowser" name="textBrowser_3">
+            <property name="html">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;this is the list of all meals or recipies&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1" alignment="Qt::AlignRight">
+           <widget class="QPushButton" name="pushButton_8">
+            <property name="text">
+             <string>Back</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="pushButton_13">
+            <property name="text">
+             <string>Search Ingredient</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+>>>>>>> 1224cbd9ba6b4b17b55f826d7c3b7987e19a65c5
        </widget>
       </item>
      </layout>

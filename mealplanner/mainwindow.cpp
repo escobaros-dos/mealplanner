@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "createmealwindow.h"
 #include "recipebook.h"
+#include "viewmealdetails.h"
 
 
 MainWindow::MainWindow(MpDatabase* db, QWidget *parent) :
@@ -47,8 +48,12 @@ void MainWindow::on_pushButton_8_clicked()//StackedWidget(2)
 }*/
 //--------------------------------------------------------
 
+
 void MainWindow::on_ViewDetailsButton_clicked()
 {
+    ViewMealDetails MealDetailsWindow;
+    MealDetailsWindow.setModal(false);
+    MealDetailsWindow.exec();
    // ui -> stackedWidget -> setCurrentIndex(1);
     //qDebug("index change");//error check
 }
