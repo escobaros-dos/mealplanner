@@ -18,6 +18,8 @@ MpDatabase::MpDatabase()
   q.exec("PRAGMA foreign_keys = ON"); //just to make sure the foreign key support is on
 
   if(!tables.contains("meals",Qt::CaseInsensitive)) {
+
+    //may need to change the meals to just the date
     q.exec("create table meals(mid integer primary key, mdate text, prop int);");
   }
   if(!tables.contains("recipes",Qt::CaseInsensitive)) {
@@ -28,9 +30,18 @@ MpDatabase::MpDatabase()
            "cal int, carbs int, fat int, protein int);");
   }
 
+  //create relation table for recipe and ingredient
+
   q.exec("create table relate (rIdRelate int, iIdRelate int, "
          "foreign key (rIdRelate) references recipes(recid), "
          "foreign key (iIdRelate) references ingredients(ingid));");
+
+  //create relation table for recipe and date
+  //may need to change the meals relation if meals table is modified or removed
+
+  q.exec("create table dateRecipeRelate(dnrmid int, dnrrid int, "
+         "foreign key (dnrmid) references meals(mid),"
+         "foreign key (dnrrid) references recipes(recid))");
 
   q.exec("create table steps (rId int, step text, "
          "foreign key (rId) references recipes(recid));");
@@ -44,7 +55,7 @@ MpDatabase::~MpDatabase() {
 Ingredient MpDatabase::getIngredientByName(QString name) {
 
     Ingredient i;
-    QSqlQuery q;
+    //QSqlQuery q;
     q.prepare("SELECT * FROM ingredients WHERE iname = :n");
     q.bindValue(":n",name);
     q.exec();
@@ -56,7 +67,7 @@ Ingredient MpDatabase::getIngredientByName(QString name) {
 Recipe MpDatabase::getRecipeByName(QString name) {
     //incomplete (no relational table?)
     Recipe r;
-    QSqlQuery q;
+    //QSqlQuery q;
     q.prepare("SELECT * FROM recipes WHERE rname = :n");
     q.bindValue(":n",name);
     q.exec();
@@ -65,13 +76,9 @@ Recipe MpDatabase::getRecipeByName(QString name) {
     return r;
 }
 
-
-//use a template??
-
-
 QVector<QString> MpDatabase::getRecipeNames() {
   QVector<QString> names;
-  QSqlQuery q = QSqlQuery(db);
+  //QSqlQuery q = QSqlQuery(db);
   q.exec("SELECT rname FROM recipes;");
   while(q.next()) {
     names.append(q.value(0).toString());
@@ -81,7 +88,7 @@ QVector<QString> MpDatabase::getRecipeNames() {
 
 QVector<QString> MpDatabase::getIngredientNames() {
   QVector<QString> names;
-  QSqlQuery q = QSqlQuery(db);
+  //QSqlQuery q = QSqlQuery(db);
   q.exec("SELECT iname FROM ingredients;");
   while(q.next()) {
     names.append(q.value(0).toString());
@@ -89,11 +96,11 @@ QVector<QString> MpDatabase::getIngredientNames() {
   return names;
 }
 
-
+/*
 QVector<QString> MpDatabase::getNameFromDatabase(const QString &column, const QString &table)
 {
     QVector<QString> names;
-    QSqlQuery q = QSqlQuery(db);
+    //QSqlQuery q = QSqlQuery(db);
     q.prepare("SELECT :column FROM :table;");
     q.bindValue(":column", column);
     q.bindValue(":table", table);
@@ -104,6 +111,12 @@ QVector<QString> MpDatabase::getNameFromDatabase(const QString &column, const QS
     }
     return names;
 }
+*/
+
+//-----------------------------------------------
+//-------adding into the database
+//-----------------------------------------------
+
 
 void MpDatabase::addRecipe(const Recipe &recipe){
 
@@ -111,8 +124,11 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     //call addIngredient and pass in recipe.ingredient[x]
     //loop through until the vector is finished
     //update the relations table?
+
     qDebug() << "Add recipe " << recipe.name;
-    QSqlQuery q = QSqlQuery(db);
+
+    //QSqlQuery q = QSqlQuery(db);
+
     QString tempRecipeId;
     q.prepare("INSERT INTO recipes(rname, steps)"
               "VALUES (:name, :steps)");
@@ -134,7 +150,7 @@ void MpDatabase::addRecipe(const Recipe &recipe){
 
     foreach(Ingredient i,recipe.ingredients.toList()) {
         //addIngredient(i); //I don't think we need this
-        updateRelationTable(recipe.getName(),i.getName());
+        updateRecipeIngredientRelation(recipe.getName(),i.getName());
     }
 
     foreach(QString step, recipe.steps) {
@@ -169,7 +185,7 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
     qDebug() << "inserting: " << ingredient.name;
 
    // QSqlQuery q = QSqlQuery(db);
-    QSqlQuery q;
+
 
     q.prepare("INSERT INTO ingredients(iname, cal, carbs, fat, protein) "
               "VALUES (:iname, :cal, :carbs, :fat, :protein)");
@@ -184,9 +200,13 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
 
 }
 
+//------------------------------------------------------------
+//---------retriving from database using relational table
+//-------------------------------------------------------------
+
 QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
 
-    QSqlQuery q = QSqlQuery(db); //this seems kind of reptitive us a macro?
+    //QSqlQuery q = QSqlQuery(db); //this seems kind of reptitive us a macro?
 
     QVector<QString> tempQueryResult;
 
@@ -197,38 +217,96 @@ QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
               "(select ingid from ingredients where iname = :ing));"); //rewrite the query using IN
 
     q.bindValue(":ing", ing);
-    q.exec();
+
+    if(!q.exec())
+    {
+        qDebug() << "getRecipesByIngredient: " << q.lastError();
+    }
 
     while(q.next())
     {
         tempQueryResult.append(q.value(0).toString());
     }
 
+    return tempQueryResult;
+
+}
+
+QVector<QString> MpDatabase::getRecipeByDate(const QString &date)
+{
+   // QSqlQuery q = QSqlQuery(db);
+
+    QVector<QString>tempQueryResult;
+
+    q.prepare("select rname from recipes where recid in "
+              "(select dnrrid from dateRecipeRelate where dnrmid in "
+              "(select mid from meals where date = :date));");
+
+    q.bindValue(":date", date);
+
+    if(!q.exec())
+    {
+        qDebug() << "getRecipeByDate: " << q.lastError();
+    }
+
+    while(q.next())
+    {
+        tempQueryResult.append(q.value(0).toString());
+    }
 
     return tempQueryResult;
 
 }
 
-void MpDatabase::updateRelationTable(const QString &recipeName, const QString &ingredientName){
+//---------------------------------------------------------------
+//----------updates for relational table
+//----------------------------------------------------------------
+
+void MpDatabase::updateRecipeIngredientRelation(const QString &recipeName, const QString &ingredientName){
 
     //for each ingredient id associated with the new recipe, relate those ingredients with the newly inserted recipe id
 
     //can we use one QSqlQuery object to do multiple queries or should we use multiple QSqlQuery
 
-    QSqlQuery q;
+    //QSqlQuery q = QSqlQuery(db);
     int recid = getRecipeIDByName(recipeName);
     int ingid = getIngredientIDByName(ingredientName);
 
     q.prepare("insert into relate (rIdRelate, iIdRelate) values (:rId, :iId);");
     q.bindValue(":rId", recid);
     q.bindValue(":iId", ingid);
-    q.exec();
 
+    if(!q.exec())
+    {
+
+        qDebug() << "updateRecipeIngredientRelation: " << q.lastError();
+    }
 
 }
 
+void MpDatabase::updateMealRecipeRelation(const QString &date, const QString &recipeName)
+{
+    int recid = getRecipeIDByName(recipeName);
+    int mid = getMealIDByDate(date);
+
+    q.prepare("insert into dateRecipeRelation (dnrmid, dnrrid) values (:mid, :rid);");
+    q.bindValue(":mid", mid);
+    q.bindValue(":rid", recid);
+
+    if(!q.exec())
+    {
+
+        qDebug() << "updateMealRecipeRelation: " << q.lastError();
+    }
+
+}
+
+//-------------------------------------------------------------------
+//-----------finding id's from names or date
+//-------------------------------------------------------------------
+
 int MpDatabase::getIngredientIDByName(const QString &ingredient) {
-    QSqlQuery q;
+   // QSqlQuery q;
     q.prepare("SELECT ingid FROM ingredients WHERE iname = :name;");
     q.bindValue(":name",ingredient);
     q.exec();
@@ -237,10 +315,28 @@ int MpDatabase::getIngredientIDByName(const QString &ingredient) {
 }
 
 int MpDatabase::getRecipeIDByName(const QString &recipe) {
-    QSqlQuery q;
+   // QSqlQuery q;
     q.prepare("SELECT recid FROM recipes WHERE rname = :name;");
     q.bindValue(":name",recipe);
     q.exec();
     q.next();
+    return q.value(0).toInt();
+}
+
+int MpDatabase::getMealIDByDate(const QString &date)
+{
+
+    q.prepare("select mid from meals where mdate = :date;");
+
+    q.bindValue(":date", date);
+
+    if(!q.exec())
+    {
+
+        qDebug() << "getMealByDate: " << q.lastError();
+    }
+
+    q.next();
+
     return q.value(0).toInt();
 }
