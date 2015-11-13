@@ -74,6 +74,12 @@ void CreateRecipeWindow::on_RemoveFromSelected_clicked()
 {
      foreach(QListWidgetItem *i, ui->listWidget_2->selectedItems())
      {
+<<<<<<< HEAD
+
+         ui->listWidget_2->removeItemWidget(i);
+         delete i;
+
+=======
          Ingredient In = CurrentIngridients[ui->listWidget_2->currentRow()]; // think.....
          //CurrentIngridients.removeat(ui->listWidget_2->currentRow());
          //CurrentIngridients.removeOne(In);
@@ -81,6 +87,7 @@ void CreateRecipeWindow::on_RemoveFromSelected_clicked()
          delete i;
 
         UpdateNutrition(-1, In);
+>>>>>>> 1224cbd9ba6b4b17b55f826d7c3b7987e19a65c5
      }
 
 }
@@ -105,6 +112,12 @@ int fat = 0;
 void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
 {
 
+<<<<<<< HEAD
+    ui->ProtienInputLabel += I.protein*s;
+    ui->CaloriesInputLabel += I.calories*s;
+    ui->CarbsInputLabel += I.carbs*s;
+    ui->FatInputLabel += I.fat*s;
+=======
     prt += I.protein*s;
     cal += I.calories*s;
     car += I.carbs*s;
@@ -114,6 +127,7 @@ void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
     ui->CalorieLabel_2->setText(QString::number(cal));
     ui->CarbLabel_2->setText(QString::number(car));
     ui->FatLabel_2->setText(QString::number(fat));
+>>>>>>> 1224cbd9ba6b4b17b55f826d7c3b7987e19a65c5
 
 }
 
