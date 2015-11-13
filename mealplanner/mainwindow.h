@@ -28,12 +28,7 @@ private slots:
     void on_RecipeBookButton_clicked();
 
 
-
     void on_actionFna_triggered();
-
-    void on_pushButton_7_clicked();
-
-    void on_pushButton_8_clicked();
 
     void on_ViewDetailsButton_clicked();
 
@@ -43,15 +38,12 @@ private slots:
 
     void on_pushButton_4_clicked();
 
-    void on_CreateMealButton_clicked();
-
     void on_calendarWidget_clicked(const QDate &date);
 
     void on_calendarWidget_selectionChanged();
 
-    void on_pushButton_6_clicked();
 
-    void on_CreateMealPlanButton_clicked();
+    void on_CreateRecipeButton_clicked();
 
 private:
     MpDatabase* MainDB;

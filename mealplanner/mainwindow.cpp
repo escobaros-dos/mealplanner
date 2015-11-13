@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "createmealwindow.h"
+//#include "createmealwindow.h"
 #include "recipebook.h"
 #include "viewmealdetails.h"
+#include "createrecipewindow.h"
 
 
 MainWindow::MainWindow(MpDatabase* db, QWidget *parent) :
@@ -31,7 +32,7 @@ void MainWindow::on_RecipeBookButton_clicked()//opens recipe book
     RB.setModal(false);
     RB.exec();
     //ui -> stackedWidget -> setCurrentIndex(2);
-    qDebug("index change");//error check
+    //qDebug("index change");//error check
 }
 
 //----------------------------------------Stacked Widget Back Buttons----------------------------------
@@ -87,12 +88,12 @@ void MainWindow::on_pushButton_4_clicked()
 
 }
 
-void MainWindow::on_CreateMealButton_clicked()
-{
-    CreateMealWindow MealWin(MainDB);
-    MealWin.setModal(false);
-    MealWin.exec();
-}
+//void MainWindow::on_CreateMealButton_clicked()
+//{
+//    CreateMealWindow MealWin(MainDB);
+//    MealWin.setModal(false);
+//    MealWin.exec();
+//}
 
 
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
@@ -104,8 +105,9 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
 
     //update the listOfMeals widget with the name of the meals?? from the database based on the date
 
-    ui->listMealName->addItem("something");
-    ui->listMealName->addItem("something2");
+    //ui->listMealName->addItem("something");
+    //ui->listMealName->addItem("something2");
+    ui->ListMealsTextBrowser->setText("someting");
 
 
     //qDebug() << currentlySelectedDate;
@@ -113,15 +115,17 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
 
 void MainWindow::on_calendarWidget_selectionChanged()
 {
-    ui->listMealName->clear();
+    //ui->listMealName->clear();
+    ui->ListMealsTextBrowser->clear();
 }
 
-void MainWindow::on_pushButton_6_clicked()
-{
 
-}
-//--------------------------------------------------------------------------
-void MainWindow::on_CreateMealPlanButton_clicked()
-{
 
+void MainWindow::on_CreateRecipeButton_clicked()
+{
+    QString testfornow = " ";
+    //CreateRecipeWindow RecipeWin(testfornow, MainDB);
+    CreateRecipeWindow RecipeWin(testfornow, MainDB);
+    RecipeWin.setModal(false);
+    RecipeWin.exec();
 }
