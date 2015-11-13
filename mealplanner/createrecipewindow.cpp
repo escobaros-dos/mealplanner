@@ -2,6 +2,7 @@
 #include "ui_createrecipewindow.h"
 #include "createingridientwindow.h"
 #include <QDebug>
+#include <QTextCursor>
 
 CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *parent) :
     QDialog(parent),
@@ -44,21 +45,25 @@ void CreateRecipeWindow::on_CreateIngridientButton_clicked()
 void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
 {
     QVector<QString> RecipeSteps;
+    QVector<Ingredient> Ingredients;
+    QString steps;
 
-    //for(int i = 0; i<ui->listWidget_2->count(); ++i)
-    //{
-        //Ingredient In = RecipeDB->getIngredientByName(ui->listWidget_2->item(i)->text());
-        //Ingredients.push_back(In);
-        //qDebug() << ui->listWidget_2->item(i)->text();
-    //}
+    for(int i = 0; i<ui->listWidget_2->count(); ++i)
+    {
+        Ingredient In = RecipeDB->getIngredientByName(ui->listWidget_2->item(i)->text());
+        Ingredients.append(In);
+        qDebug() << ui->listWidget_2->item(i)->text();
+    }
+    steps=ui->StepsEdit->document()->toPlainText();
+    foreach(QString step,steps.split("\n")) {
+        RecipeSteps.append(step);
+    }
 
     QString RecipeName = ui->RecipeNameEdit->text();
     //QString CatSteps = Catstepsfunction();
 
-    //Recipe NewRecipe(CurrentIngredients, RecipeSteps, RecipeName, CatSteps)
-
-    //RecipeDB->addRecipe(NewRecipe);
-
+    Recipe NewRecipe(Ingredients, RecipeSteps, RecipeName);
+    RecipeDB->addRecipe(NewRecipe);
     RecipeSteps.clear();
     CurrentIngridients.clear();
     ui->listWidget_2->clear();

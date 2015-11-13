@@ -19,6 +19,8 @@ public:
 
     ~MainWindow();
 
+    QString currentlySelectedDate;
+
 private slots:
 
     void on_pushButton_2_clicked();
@@ -43,7 +45,9 @@ private slots:
 
     void on_CreateMealButton_clicked();
 
-    void on_textBrowser_textChanged();
+    void on_calendarWidget_clicked(const QDate &date);
+
+    void on_calendarWidget_selectionChanged();
 
 private:
     MpDatabase* MainDB;

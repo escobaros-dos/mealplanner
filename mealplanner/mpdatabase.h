@@ -37,18 +37,21 @@ public:
     //recipe functions
     Recipe getRecipeByName(QString);
     Recipe getRecipeByID(int);
+
+    QVector<QString> getRecipeByDate(const QString &); //gets the recipe by date
+
     QVector<QString> getRecipeNames();
     QVector<int> getRecipeIDs();
     QVector<QString> getRecipesByIngredient(QString &);
 
-
+    //QVector<QString> getNameFromDatabase(const QString &, const QString &);
 
 
     /*
      * data insertion
      */
     //meal functions
-    void addMeal(const Meal &);
+    //void addMeal(const Meal &);
 
     //ingredient functions
     void addIngredient(const Ingredient &);
@@ -56,17 +59,21 @@ public:
     //recipe functions
     void addRecipe(const Recipe &);
 
-    void updateRelationTable(const QString &, const QString &s);
+    void updateRecipeIngredientRelation(const QString &, const QString &s);
+
+    void updateMealRecipeRelation(const QString &, const QString &);
 
 
 
 
 protected:
-    int getIngredientIDByName(QString);
-    int getRecipeIDByName(QString);
+    int getIngredientIDByName(const QString &);
+    int getRecipeIDByName(const QString &);
+    int getMealIDByDate(const QString &);
 
 private:
     QSqlDatabase db;
+    QSqlQuery q; //in the constructor assign the database to this
 
 //signals:
 

@@ -5,9 +5,11 @@ Recipe::Recipe()
 
 }
 
-Recipe::Recipe(QVector<Ingredient> ings, QVector<QString> step, QString n, QString catstepz)
+Recipe::Recipe(QVector<Ingredient> ings, QVector<QString> step, QString name)
 {
-
+    this->ingredients=ings;
+    this->steps=step;
+    this->name=name;
 
 }
 

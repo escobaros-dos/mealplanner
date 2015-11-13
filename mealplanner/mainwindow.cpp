@@ -93,8 +93,24 @@ void MainWindow::on_CreateMealButton_clicked()
     MealWin.exec();
 }
 
-void MainWindow::on_textBrowser_textChanged()
+
+void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
 
+    //if the user clicks on the same date multiple times the list will keep adding items onto the widget
 
+    currentlySelectedDate = date.toString();
+
+    //update the listOfMeals widget with the name of the meals?? from the database based on the date
+
+    ui->listMealName->addItem("something");
+    ui->listMealName->addItem("something2");
+
+
+    //qDebug() << currentlySelectedDate;
+}
+
+void MainWindow::on_calendarWidget_selectionChanged()
+{
+    ui->listMealName->clear();
 }
