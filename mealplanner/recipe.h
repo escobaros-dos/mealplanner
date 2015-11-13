@@ -11,6 +11,7 @@ class Recipe
 public:
     Recipe();
     Recipe(QVector<Ingredient> ingredients, QVector<QString> steps, QString name, QString catstep);
+    //for custom constructor this will have a date param cuz its going to serve as the meal now...
 
     QString serializeIngredients();
     void   deSerializeIngredients(QString);

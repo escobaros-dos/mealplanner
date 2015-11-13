@@ -15,7 +15,7 @@ class CreateRecipeWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateRecipeWindow(MpDatabase* db = 0, QWidget *parent = 0);
+    explicit CreateRecipeWindow(QString& d, MpDatabase* db = 0, QWidget *parent = 0);
     ~CreateRecipeWindow();
 
 private slots:

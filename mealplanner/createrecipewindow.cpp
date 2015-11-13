@@ -3,12 +3,14 @@
 #include "createingridientwindow.h"
 #include <QDebug>
 
-CreateRecipeWindow::CreateRecipeWindow(MpDatabase* db, QWidget *parent) :
+CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CreateRecipeWindow)
 {
     ui->setupUi(this);
     RecipeDB = db;
+
+    //ui->date = date;
 
     UpdateRecipeList();
 
