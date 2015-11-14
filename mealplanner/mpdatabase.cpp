@@ -3,7 +3,7 @@
 MpDatabase::MpDatabase()
 {
   QStringList tables;
-  QSqlQuery q;
+  //QSqlQuery q;
   db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName("SQLiteMpDatabase.db");
 
@@ -142,6 +142,7 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     q.bindValue(":name",recipe.name);
     q.exec();
     q.next();
+
     tempRecipeId=q.value(0).toString();
 
     foreach(Ingredient i,recipe.ingredients.toList())
@@ -231,6 +232,7 @@ QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
 
 }
 
+//maybe consider returning an object of recipe
 QVector<QString> MpDatabase::getRecipeByDate(const QString &date)
 {
    // QSqlQuery q = QSqlQuery(db);
@@ -239,7 +241,7 @@ QVector<QString> MpDatabase::getRecipeByDate(const QString &date)
 
     q.prepare("select rname from recipes where recid in "
               "(select dnrrid from dateRecipeRelate where dnrmid in "
-              "(select mid from meals where date = :date));");
+              "(select mid from meals where mdate = :date));");
 
     q.bindValue(":date", date);
 

@@ -11,7 +11,7 @@ CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *p
     ui->setupUi(this);
     RecipeDB = db;
 
-    //ui->date = date;
+    qDebug() << date;
 
     UpdateRecipeList();
 
@@ -54,7 +54,9 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
         Ingredients.append(In);
         qDebug() << ui->listWidget_2->item(i)->text();
     }
+
     steps=ui->StepsEdit->document()->toPlainText();
+
     foreach(QString step,steps.split("\n")) {
         RecipeSteps.append(step);
     }
@@ -65,7 +67,9 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     // using default constructor just so it compiles 11/12/2015 -cj
     //Recipe NewRecipe(Ingredients, steps, RecipeName);
     Recipe NewRecipe;
+
     RecipeDB->addRecipe(NewRecipe);
+
     RecipeSteps.clear();
     CurrentIngridients.clear();
     ui->listWidget_2->clear();
