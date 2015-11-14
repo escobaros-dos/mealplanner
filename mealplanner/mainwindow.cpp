@@ -36,7 +36,7 @@ void MainWindow::on_RecipeBookButton_clicked()//opens recipe book
 
 void MainWindow::on_ViewDetailsButton_clicked()
 {
-    ViewMealDetails MealDetailsWindow(currentlySelectedDate);
+    ViewMealDetails MealDetailsWindow(currentlySelectedDate, MainDB);
     MealDetailsWindow.setModal(false);
     MealDetailsWindow.exec();
    // ui -> stackedWidget -> setCurrentIndex(1);
