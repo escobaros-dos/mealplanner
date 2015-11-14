@@ -5,6 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
+
+INCLUDEPATH += /usr/include/c++/4.3
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,14 +18,26 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     recipe.cpp \
-    meal.cpp \
-    mealplan.cpp \
-    mpdatabase.cpp
+    mpdatabase.cpp \
+    ingredient.cpp \
+    createrecipewindow.cpp \
+    recipebook.cpp \
+    viewmealdetails.cpp \
+    createingridientwindow.cpp
 
 HEADERS  += mainwindow.h \
     recipe.h \
-    meal.h \
-    mealplan.h \
-    mpdatabase.h
+    mpdatabase.h \
+    ingredient.h \
+    createrecipewindow.h \
+    recipebook.h \
+    viewmealdetails.h \
+    createingridientwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    #createmealtest.ui \
+    mainwindow.ui \
+    createrecipewindow.ui \
+    recipebook.ui \
+    viewmealdetails.ui \
+    createingridientwindow.ui
