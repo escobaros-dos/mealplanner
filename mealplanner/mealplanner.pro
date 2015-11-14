@@ -18,8 +18,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     recipe.cpp \
-    meal.cpp \
-    mealplan.cpp \
     mpdatabase.cpp \
     ingredient.cpp \
     createrecipewindow.cpp \
@@ -29,8 +27,6 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     recipe.h \
-    meal.h \
-    mealplan.h \
     mpdatabase.h \
     ingredient.h \
     createrecipewindow.h \

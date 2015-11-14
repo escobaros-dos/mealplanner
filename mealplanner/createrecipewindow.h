@@ -32,6 +32,12 @@ private slots:
 
 private:
 
+    //variable used for updating the nutrition labels
+    int prt = 0;
+    int cal = 0;
+    int car = 0;
+    int fat = 0;
+
     void UpdateNutrition(int sign, Ingredient in);
     void UpdateRecipeList();
     QVector<Ingredient> CurrentIngridients;

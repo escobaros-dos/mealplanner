@@ -23,20 +23,10 @@ public:
 
 private slots:
 
-    void on_pushButton_2_clicked();
-
     void on_RecipeBookButton_clicked();
-
-
-    void on_actionFna_triggered();
 
     void on_ViewDetailsButton_clicked();
 
-    void on_actionRecipe_Book_2_triggered();
-
-    void on_actionCreate_Recipe_triggered();
-
-    void on_pushButton_4_clicked();
 
     void on_calendarWidget_clicked(const QDate &date);
 

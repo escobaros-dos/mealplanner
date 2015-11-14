@@ -144,20 +144,24 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     q.next();
     tempRecipeId=q.value(0).toString();
 
-    foreach(Ingredient i,recipe.ingredients.toList()) {
+    foreach(Ingredient i,recipe.ingredients.toList())
+    {
         updateRecipeIngredientRelation(recipe.getName(),i.getName());
     }
 
-    foreach(QString step, recipe.steps) {
-        q.prepare("INSERT INTO steps(rId, step) "
-                  "VALUES (:id, :step);");
-        qDebug() << "Add step " << step;
-        q.bindValue(":id",tempRecipeId.toInt());
-        q.bindValue(":step",step);
-        q.exec();
-        qDebug() << q.lastError();
-        qDebug() << q.lastQuery();
-    }
+    //commented out the code below so it compiles 11/12/2015 -cj
+
+   // foreach(QString step, recipe.steps)
+   // {
+   //     q.prepare("INSERT INTO steps(rId, step) "
+   //               "VALUES (:id, :step);");
+   //     qDebug() << "Add step " << step;
+   //     q.bindValue(":id",tempRecipeId.toInt());
+   //     q.bindValue(":step",step);
+   //     q.exec();
+   //     qDebug() << q.lastError();
+    //    qDebug() << q.lastQuery();
+   // }
 
    //for(int i = 0; i < recipe.ingredients.size(); i++){
        //qDebug() << QString(i);

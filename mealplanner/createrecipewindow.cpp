@@ -62,7 +62,9 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     QString RecipeName = ui->RecipeNameEdit->text();
     //QString CatSteps = Catstepsfunction();
 
-    Recipe NewRecipe(Ingredients, steps, RecipeName);
+    // using default constructor just so it compiles 11/12/2015 -cj
+    //Recipe NewRecipe(Ingredients, steps, RecipeName);
+    Recipe NewRecipe;
     RecipeDB->addRecipe(NewRecipe);
     RecipeSteps.clear();
     CurrentIngridients.clear();
@@ -97,11 +99,6 @@ void CreateRecipeWindow::on_AddFromDatabase_clicked()
     }
 
 }
-
-int prt = 0;
-int cal = 0;
-int car = 0;
-int fat = 0;
 
 void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
 {
