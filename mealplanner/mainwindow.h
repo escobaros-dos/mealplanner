@@ -21,6 +21,10 @@ public:
 
     QString currentlySelectedDate;
 
+protected:
+
+    void updateMealListWidget();
+
 private slots:
 
     void on_pushButton_2_clicked();

@@ -12,6 +12,10 @@ MainWindow::MainWindow(MpDatabase* db, QWidget *parent) :
 {
     ui->setupUi(this);
     MainDB = db;
+
+    currentlySelectedDate = ui->calendarWidget->selectedDate().toString();
+
+    updateMealListWidget();
 }
 
 MainWindow::~MainWindow()
@@ -52,7 +56,7 @@ void MainWindow::on_pushButton_8_clicked()//StackedWidget(2)
 
 void MainWindow::on_ViewDetailsButton_clicked()
 {
-    ViewMealDetails MealDetailsWindow;
+    ViewMealDetails MealDetailsWindow(currentlySelectedDate);
     MealDetailsWindow.setModal(false);
     MealDetailsWindow.exec();
    // ui -> stackedWidget -> setCurrentIndex(1);
@@ -103,16 +107,12 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
 
     currentlySelectedDate = date.toString();
 
-    //update the listOfMeals widget with the name of the meals?? from the database based on the date
-
-    //ui->listMealName->addItem("something");
-    //ui->listMealName->addItem("something2");
-    ui->ListMealsTextBrowser->setText("someting");
-
+    updateMealListWidget();
 
     //qDebug() << currentlySelectedDate;
 }
 
+//when the user selects a new date the mealListWidget is cleared
 void MainWindow::on_calendarWidget_selectionChanged()
 {
     //ui->listMealName->clear();
@@ -125,7 +125,24 @@ void MainWindow::on_CreateRecipeButton_clicked()
 {
     QString testfornow = " ";
     //CreateRecipeWindow RecipeWin(testfornow, MainDB);
-    CreateRecipeWindow RecipeWin(testfornow, MainDB);
+    //CreateRecipeWindow RecipeWin(testfornow, MainDB);
+    CreateRecipeWindow RecipeWin(currentlySelectedDate, MainDB);
     RecipeWin.setModal(false);
     RecipeWin.exec();
+}
+
+void MainWindow::updateMealListWidget()
+{
+    QVector<QString> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate));
+
+    //update the listOfMeals widget with the name of the meals?? from the database based on the date
+
+    QVectorIterator<QString> tempRecipeNameIterator(tempRecipeName);
+
+    while(tempRecipeNameIterator.hasNext())
+    {
+        ui->ListMealsTextBrowser->setText(tempRecipeNameIterator.next());
+    }
+
+    ui->ListMealsTextBrowser->setText(currentlySelectedDate);
 }
