@@ -18,8 +18,8 @@
     <rect>
      <x>620</x>
      <y>140</y>
-     <width>83</width>
-     <height>72</height>
+     <width>98</width>
+     <height>88</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -87,7 +87,7 @@
      <x>0</x>
      <y>0</y>
      <width>203</width>
-     <height>22</height>
+     <height>29</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -243,7 +243,7 @@
      <x>240</x>
      <y>10</y>
      <width>168</width>
-     <height>22</height>
+     <height>29</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -255,7 +255,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit"/>
+     <widget class="QLabel" name="DateLabel">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

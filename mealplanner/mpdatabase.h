@@ -31,6 +31,7 @@ public:
     //ingredient functions
     Ingredient getIngredientByName(QString);
     Ingredient getIngredientByID(int);
+
     QVector<QString> getIngredientNames();
     QVector<int> getIngredientIDs();
 
@@ -41,8 +42,12 @@ public:
     QVector<QString> getRecipeByDate(const QString &); //gets the recipe by date
 
     QVector<QString> getRecipeNames();
+
     QVector<int> getRecipeIDs();
-    QVector<QString> getRecipesByIngredient(QString &);
+
+    QVector<QString> getRecipesByIngredient(const QString &);
+
+    QVector<QString> getIngredientsByRecipe(const QString &);
 
     //QVector<QString> getNameFromDatabase(const QString &, const QString &);
 

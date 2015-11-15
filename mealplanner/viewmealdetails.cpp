@@ -13,6 +13,12 @@ ViewMealDetails::ViewMealDetails(const QString &currentDate, MpDatabase *db, QWi
 
     qDebug() << currentDate;
 
+    currentlySelectedDate = currentDate;
+
+    recipeName = database->getRecipeByDate(currentDate).toList();
+
+    updateMealComboBox(recipeName);
+
     ui->CurrentDateLabel->setText(currentDate);
 
 }
@@ -22,22 +28,36 @@ ViewMealDetails::~ViewMealDetails()
     delete ui;
 }
 
-void ViewMealDetails::updateIngredientTextBrowser()
+void ViewMealDetails::updateIngredientListWidget(const QString &tempRecipeName)
 {
+    QList<QString> tempIngredientList = database->getIngredientsByRecipe(tempRecipeName).toList();
+
+    ui->listOfIngredients->addItems(tempIngredientList);
+}
+
+void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString &tempRecipeName)
+{
+    ui->DirectionsTextBrowser->setText("need to work on recipe");
+}
+
+void ViewMealDetails::updateMealComboBox(const QList<QString> &tempRecipeList)
+{
+
+    ui->MealsComboBox->addItems(tempRecipeList);
 
 }
 
-void ViewMealDetails::updateRecipeDirecetionTextBrowser()
+void ViewMealDetails::on_MealsComboBox_activated(const QString &arg1)
 {
+    //qDebug() << arg1;
 
-}
+    //ISSUE: when the view detail window is open the ingredients and direction ui are not populated with information
 
-void ViewMealDetails::updateMealComboBox()
-{
+    ui->listOfIngredients->clear();
 
-    QList<QString> tempRecipeName = database->getRecipeByDate(currentDate).toList();
+    ui->DirectionsTextBrowser->clear();
 
-    ui->MealsComboBox->addItems(tempRecipeName);
+    updateRecipeDirecetionTextBrowser(arg1);
 
-
+    updateIngredientListWidget(arg1);
 }

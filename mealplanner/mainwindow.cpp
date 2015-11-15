@@ -32,10 +32,15 @@ void MainWindow::on_RecipeBookButton_clicked()//opens recipe book
     RB.exec();
     //ui -> stackedWidget -> setCurrentIndex(2);
     //qDebug("index change");//error check
+
+
 }
 
 void MainWindow::on_ViewDetailsButton_clicked()
 {
+
+    //maybe have the ViewMealDetail take in a recipe object
+
     ViewMealDetails MealDetailsWindow(currentlySelectedDate, MainDB);
     MealDetailsWindow.setModal(false);
     MealDetailsWindow.exec();
@@ -46,7 +51,7 @@ void MainWindow::on_ViewDetailsButton_clicked()
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
 
-    //if the user clicks on the same date multiple times the list will keep adding items onto the widget
+    //ISSUE: if the user clicks on the same date multiple times the list will keep adding items onto the widget
 
     currentlySelectedDate = date.toString();
 
@@ -59,7 +64,7 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
 void MainWindow::on_calendarWidget_selectionChanged()
 {
     //ui->listMealName->clear();
-    ui->ListMealsTextBrowser->clear();
+    ui->listOfMeals->clear();
 }
 
 
@@ -69,23 +74,36 @@ void MainWindow::on_CreateRecipeButton_clicked()
     QString testfornow = " ";
     //CreateRecipeWindow RecipeWin(testfornow, MainDB);
     //CreateRecipeWindow RecipeWin(testfornow, MainDB);
+
     CreateRecipeWindow RecipeWin(currentlySelectedDate, MainDB);
     RecipeWin.setModal(false);
     RecipeWin.exec();
+
+    updateMealListWidget();
+
 }
 
 void MainWindow::updateMealListWidget()
 {
+
+    //maybe use an object of recipe
+
     QVector<QString> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate));
 
     //update the listOfMeals widget with the name of the meals?? from the database based on the date
 
+    /*
     QVectorIterator<QString> tempRecipeNameIterator(tempRecipeName);
 
     while(tempRecipeNameIterator.hasNext())
     {
-        ui->ListMealsTextBrowser->setText(tempRecipeNameIterator.next());
+        qDebug() << "list of meals";
     }
+    */
 
-    ui->ListMealsTextBrowser->setText(currentlySelectedDate);
+    ui->listOfMeals->clear();
+
+    ui->listOfMeals->addItems(tempRecipeName.toList());
+
+    //ui->ListMealsTextBrowser->setText(currentlySelectedDate);
 }

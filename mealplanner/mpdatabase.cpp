@@ -228,7 +228,7 @@ void MpDatabase::addMeal(const QString &date)
 //---------retriving from database using relational table
 //-------------------------------------------------------------
 
-QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
+QVector<QString> MpDatabase::getRecipesByIngredient(const QString &ing){
 
     //QSqlQuery q = QSqlQuery(db); //this seems kind of reptitive us a macro?
 
@@ -237,7 +237,7 @@ QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
     //maybe considering on using joins
 
     q.prepare("select rname from recipes where recid in "
-              "(select recidf from relate where ingidf in "
+              "(select rIdRelate from relate where iIdRelate in "
               "(select ingid from ingredients where iname = :ing));"); //rewrite the query using IN
 
     q.bindValue(":ing", ing);
@@ -254,6 +254,31 @@ QVector<QString> MpDatabase::getRecipesByIngredient(QString &ing){
 
     return tempQueryResult;
 
+}
+
+
+//gets a list of ingredient name based on the recipe name
+QVector<QString> MpDatabase::getIngredientsByRecipe(const QString &tempRecipeName)
+{
+    QVector<QString> tempQueryResult;
+
+    q.prepare("select iname from ingredients where ingid in "
+              "(select iIdRelate from relate where rIdRelate in "
+              "(select recid from recipes where rname = :name));"); //rewrite the query using IN
+
+    q.bindValue(":name", tempRecipeName);
+
+    if(!q.exec())
+    {
+        qDebug() << "getIngredientsByRecipe: " << q.lastError();
+    }
+
+    while(q.next())
+    {
+        tempQueryResult.append(q.value(0).toString());
+    }
+
+    return tempQueryResult;
 }
 
 //maybe consider returning an object of recipe

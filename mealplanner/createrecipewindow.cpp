@@ -12,6 +12,9 @@ CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *p
     RecipeDB = db;
 
     currentDate = date;
+
+    ui->DateLabel->setText(currentDate);
+
     qDebug() << date;
 
     UpdateRecipeList();

@@ -16,16 +16,21 @@ public:
     explicit ViewMealDetails(const QString &, MpDatabase *db, QWidget *parent = 0);
     ~ViewMealDetails();
 
+     QList<QString> recipeName;
+
+private slots:
+     void on_MealsComboBox_activated(const QString &arg1);
+
 private:
     Ui::ViewMealDetails *ui;
 
     MpDatabase *database;
 
-    QString currentDate;
+    QString currentlySelectedDate;
 
-    void updateIngredientTextBrowser();
-    void updateRecipeDirecetionTextBrowser();
-    void updateMealComboBox();
+    void updateIngredientListWidget(const QString &);
+    void updateRecipeDirecetionTextBrowser(const QString &);
+    void updateMealComboBox(const QList<QString> &);
 
 };
 
