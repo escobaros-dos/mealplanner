@@ -11,6 +11,7 @@ CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *p
     ui->setupUi(this);
     RecipeDB = db;
 
+    currentDate = date;
     qDebug() << date;
 
     UpdateRecipeList();
@@ -62,11 +63,13 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     }
 
     QString RecipeName = ui->RecipeNameEdit->text();
+
+    qDebug() << "recipe name: " << RecipeName;
     //QString CatSteps = Catstepsfunction();
 
     // using default constructor just so it compiles 11/12/2015 -cj
-    //Recipe NewRecipe(Ingredients, steps, RecipeName);
-    Recipe NewRecipe;
+    Recipe NewRecipe(Ingredients, steps, RecipeName, currentDate);
+    //Recipe NewRecipe;
 
     RecipeDB->addRecipe(NewRecipe);
 

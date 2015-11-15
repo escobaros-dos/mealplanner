@@ -50,8 +50,9 @@ public:
     /*
      * data insertion
      */
+
     //meal functions
-    //void addMeal(const Meal &);
+    void addMeal(const QString &);
 
     //ingredient functions
     void addIngredient(const Ingredient &);

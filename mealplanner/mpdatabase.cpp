@@ -20,7 +20,7 @@ MpDatabase::MpDatabase()
   if(!tables.contains("meals",Qt::CaseInsensitive)) {
 
     //may need to change the meals to just the date
-    q.exec("create table meals(mid integer primary key, mdate text, prop int);");
+    q.exec("create table meals(mid integer primary key, mdate text unique);");
   }
   if(!tables.contains("recipes",Qt::CaseInsensitive)) {
     q.exec("create table recipes(recid integer primary key, rname text unique, steps text);");
@@ -39,9 +39,9 @@ MpDatabase::MpDatabase()
   //create relation table for recipe and date
   //may need to change the meals relation if meals table is modified or removed
 
-  q.exec("create table dateRecipeRelate(dnrmid int, dnrrid int, "
+  q.exec("create table dateRecipeRelate (dnrmid int, dnrrid int, "
          "foreign key (dnrmid) references meals(mid),"
-         "foreign key (dnrrid) references recipes(recid))");
+         "foreign key (dnrrid) references recipes(recid));");
 
   q.exec("create table steps (rId int, step text, "
          "foreign key (rId) references recipes(recid));");
@@ -126,6 +126,7 @@ void MpDatabase::addRecipe(const Recipe &recipe){
     //update the relations table?
 
     QString tempRecipeId;
+
     q.prepare("INSERT INTO recipes(rname, steps)"
               "VALUES (:name, :steps)");
 
@@ -138,12 +139,20 @@ void MpDatabase::addRecipe(const Recipe &recipe){
 
     q.exec();
 
+    //need to update the date and recipe relations
+
+    //updateMealRecipeRelation();
+
     q.prepare("SELECT recid FROM recipes where rname = :name;");
-    q.bindValue(":name",recipe.name);
+    q.bindValue(":name",recipe.rname);
     q.exec();
     q.next();
 
     tempRecipeId=q.value(0).toString();
+
+    addMeal(recipe.Date);
+
+    updateMealRecipeRelation(recipe.Date, recipe.rname);
 
     foreach(Ingredient i,recipe.ingredients.toList())
     {
@@ -197,6 +206,21 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
     q.bindValue(":fat", ingredient.getFat());
     q.bindValue(":protein", ingredient.getProtein());
     q.exec();
+
+}
+
+void MpDatabase::addMeal(const QString &date)
+{
+    q.prepare("insert into meals (mdate) values (:date);");
+
+    q.bindValue(":date", date);
+
+    if(!q.exec())
+    {
+
+        qDebug() << q.lastError();
+
+    }
 
 }
 
@@ -289,15 +313,21 @@ void MpDatabase::updateMealRecipeRelation(const QString &date, const QString &re
     int recid = getRecipeIDByName(recipeName);
     int mid = getMealIDByDate(date);
 
-    q.prepare("insert into dateRecipeRelation (dnrmid, dnrrid) values (:mid, :rid);");
+    qDebug() << recipeName << " " << date;
+    qDebug() << recid << " " << mid;
+
+
+    q.prepare("insert into dateRecipeRelate (dnrmid, dnrrid) values (:mid, :rid);");
     q.bindValue(":mid", mid);
     q.bindValue(":rid", recid);
 
+
     if(!q.exec())
     {
-
         qDebug() << "updateMealRecipeRelation: " << q.lastError();
     }
+
+
 
 }
 
@@ -332,11 +362,12 @@ int MpDatabase::getMealIDByDate(const QString &date)
 
     if(!q.exec())
     {
-
         qDebug() << "getMealByDate: " << q.lastError();
     }
 
     q.next();
+
+    qDebug() << "meal id: " << q.value(0).toInt();
 
     return q.value(0).toInt();
 }

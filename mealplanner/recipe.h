@@ -20,7 +20,7 @@ public:
 
     QVector<Ingredient> ingredients; //should this be a vector of Ingredients.
     //QVector<QString> steps; //do we need steps be a vector or could we have this as one long string?
-    QString name;
+    QString rname;
     QString catSteps; //concatenated string for the
     QString Date;
 

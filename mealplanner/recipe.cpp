@@ -2,7 +2,7 @@
 
 Recipe::Recipe()
 {
-    name = " ";
+    rname = " ";
     Date = " ";
     CalorieCount = 0;
     TotalCarbs = 0;
@@ -29,7 +29,7 @@ Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name, QString dat
 {
     ingredients=ings;
     catSteps = step;
-    name=name;
+    rname = name;
     Date = date;
 
 
@@ -51,7 +51,7 @@ Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name, QString dat
 
 QString Recipe::getName() const
 {
-    return name;
+    return rname;
 }
 
 QString Recipe::getDate() const
@@ -67,7 +67,7 @@ void Recipe::ChangeDate(QString newDate)
 
 void Recipe::ChangeName(QString newName) // maybe change these names to update names
 {
-    name = newName;
+    rname = newName;
     return;
 }
 

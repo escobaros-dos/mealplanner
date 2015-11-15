@@ -18,6 +18,8 @@ public:
     explicit CreateRecipeWindow(QString& d, MpDatabase* db = 0, QWidget *parent = 0);
     ~CreateRecipeWindow();
 
+    QString currentDate;
+
 private slots:
 
     void on_CreateIngridientButton_clicked();
