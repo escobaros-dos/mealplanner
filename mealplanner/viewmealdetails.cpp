@@ -35,9 +35,12 @@ void ViewMealDetails::updateIngredientListWidget(const QString &tempRecipeName)
     ui->listOfIngredients->addItems(tempIngredientList);
 }
 
-void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString &tempRecipeName)
+void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString& RecipeDirections)
 {
-    ui->DirectionsTextBrowser->setText("need to work on recipe");
+    qDebug() << "directions:::" << RecipeDirections;
+    ui->DirectionsTextBrowser->clear();
+    ui->DirectionsTextBrowser->setText(RecipeDirections);
+    //ui->DirectionsTextBrowser->setText("need to work on recipe");
 }
 
 void ViewMealDetails::updateMealComboBox(const QList<QString> &tempRecipeList)
@@ -51,13 +54,18 @@ void ViewMealDetails::on_MealsComboBox_activated(const QString &arg1)
 {
     //qDebug() << arg1;
 
-    //ISSUE: when the view detail window is open the ingredients and direction ui are not populated with information
+    //ISSUE: when the view detail window is open the ingredients and direction ui are not populated with information    
 
     ui->listOfIngredients->clear();
 
     ui->DirectionsTextBrowser->clear();
 
-    updateRecipeDirecetionTextBrowser(arg1);
+    ui->DirectionsTextBrowser->setText(database->getRecipeByName(arg1).GetDirections());
+
+    Recipe R = database->getRecipeByName(arg1);
+    qDebug() << "rrrrrr" << R.getName();
+
+    //updateRecipeDirecetionTextBrowser(database->getRecipeByName(arg1).GetDirections());
 
     updateIngredientListWidget(arg1);
 }

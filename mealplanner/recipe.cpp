@@ -33,7 +33,6 @@ Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name, QString dat
     Date = date;
 
 
-
     // this code probably is not neccesary becuase of the create recipe window its already calculated
     // depends on if I want to add a vector of ints as a param to the recipe constructor
 
@@ -89,6 +88,13 @@ bool Recipe::RemoveIngrediant(int index) // this function might only need an ind
 }
 
 //for viewing
+
+
+QString Recipe::GetDirections()
+{
+    return catSteps;
+}
+
 int Recipe::GetCalories()
 {
     return CalorieCount*Proportions;

@@ -40,7 +40,7 @@ public:
 
 
     // for viewing
-    QVector<QString>& ListRecipe();
+    QString GetDirections();
 
     int GetCarbs();
     int GetFat();

@@ -107,3 +107,8 @@ void MainWindow::updateMealListWidget()
 
     //ui->ListMealsTextBrowser->setText(currentlySelectedDate);
 }
+
+void MainWindow::on_HelpButton_clicked()
+{
+
+}

@@ -29,7 +29,7 @@ private:
     QString currentlySelectedDate;
 
     void updateIngredientListWidget(const QString &);
-    void updateRecipeDirecetionTextBrowser(const QString &);
+    void updateRecipeDirecetionTextBrowser(const QString&);
     void updateMealComboBox(const QList<QString> &);
 
 };

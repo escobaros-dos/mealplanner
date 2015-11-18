@@ -39,6 +39,8 @@ private slots:
 
     void on_CreateRecipeButton_clicked();
 
+    void on_HelpButton_clicked();
+
 private:
     MpDatabase* MainDB;
     Ui::MainWindow *ui;

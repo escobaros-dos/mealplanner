@@ -18,8 +18,14 @@ class MpDatabase
 
 public:
     //constructors
-    MpDatabase();
-    ~MpDatabase();
+
+    static MpDatabase& GetDBInstance();
+
+
+
+
+     //MpDatabase();
+    //~MpDatabase();
     
     /*
      * data retrieval
@@ -78,6 +84,12 @@ protected:
     int getMealIDByDate(const QString &);
 
 private:
+    //singleton
+    MpDatabase();
+    MpDatabase(MpDatabase const&); // dont implement
+    //void operator = (MpDatabase const&); // dont implement
+
+
     QSqlDatabase db;
     QSqlQuery q; //in the constructor assign the database to this
 

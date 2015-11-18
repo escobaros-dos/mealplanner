@@ -21,7 +21,7 @@ CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *p
 
 }
 
-void CreateRecipeWindow::UpdateRecipeList() // use this same method for the.....meal recipe combo box
+void CreateRecipeWindow::UpdateRecipeList()
 {
 
         QVector<QString> names = RecipeDB->getIngredientNames();
@@ -49,7 +49,7 @@ void CreateRecipeWindow::on_CreateIngridientButton_clicked()
 void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
 {
     QVector<QString> RecipeSteps;
-    QVector<Ingredient> Ingredients;
+    QVector<Ingredient> Ingredients; // have  current ingredients
     QString steps;
 
     for(int i = 0; i<ui->listWidget_2->count(); ++i)
@@ -59,7 +59,7 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
         qDebug() << ui->listWidget_2->item(i)->text();
     }
 
-    steps=ui->StepsEdit->document()->toPlainText();
+    steps = ui->StepsEdit->document()->toPlainText();
 
     foreach(QString step,steps.split("\n")) {
         RecipeSteps.append(step);
@@ -68,18 +68,21 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     QString RecipeName = ui->RecipeNameEdit->text();
 
     qDebug() << "recipe name: " << RecipeName;
-    //QString CatSteps = Catstepsfunction();
 
-    // using default constructor just so it compiles 11/12/2015 -cj
     Recipe NewRecipe(Ingredients, steps, RecipeName, currentDate);
-    //Recipe NewRecipe;
+
+    //qDebug() << "....." << NewRecipe.GetDirections();
 
     RecipeDB->addRecipe(NewRecipe);
 
+    ui->RecipeNameEdit->clear();
     RecipeSteps.clear();
     CurrentIngridients.clear();
     ui->listWidget_2->clear();
     ui->StepsEdit->clear();
+
+    ui->RecipeStatusLabel->setText(NewRecipe.getName() + " was successfuly added to the database");
+
 }
 
 void CreateRecipeWindow::on_RemoveFromSelected_clicked()
@@ -88,8 +91,7 @@ void CreateRecipeWindow::on_RemoveFromSelected_clicked()
      {
 
          Ingredient In = CurrentIngridients[ui->listWidget_2->currentRow()]; // think.....
-         //CurrentIngridients.removeat(ui->listWidget_2->currentRow());
-         //CurrentIngridients.removeOne(In);
+         CurrentIngridients.removeAt(ui->listWidget_2->currentRow());
          ui->listWidget_2->removeItemWidget(i);
          delete i;
 
@@ -117,10 +119,9 @@ void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
     car += I.carbs*s;
     fat += I.fat*s;
 
-
     ui->ProtienInputLabel->setText(QString::number(prt));
     ui->CaloriesInputLabel->setText(QString::number(cal));
-    ui->CaloriesInputLabel->setText(QString::number(car));
+    ui->CarbsInputLabel->setText(QString::number(car));
     ui->FatInputLabel->setText(QString::number(fat));
 
 }

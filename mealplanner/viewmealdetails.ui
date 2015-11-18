@@ -6,24 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
+    <width>559</width>
     <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Meal Details</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="2">
     <widget class="QComboBox" name="MealsComboBox">
      <item>
       <property name="text">
-       <string>Meal Name 1</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Meal Name 2</string>
+       <string/>
       </property>
      </item>
     </widget>

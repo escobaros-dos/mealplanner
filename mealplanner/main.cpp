@@ -3,10 +3,8 @@
 
 int main(int argc, char *argv[])
 {
-    //MpDatabase TheDatabase;
 
-    MpDatabase* DatabaseRef = new MpDatabase();
-
+    MpDatabase* DatabaseRef = &MpDatabase::GetDBInstance();
     QApplication a(argc, argv);
 
 

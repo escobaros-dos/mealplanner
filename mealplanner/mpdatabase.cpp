@@ -1,5 +1,7 @@
 #include "mpdatabase.h"
 
+
+
 MpDatabase::MpDatabase()
 {
   QStringList tables;
@@ -48,31 +50,50 @@ MpDatabase::MpDatabase()
 
 }
 
-MpDatabase::~MpDatabase() {
-  db.close();
+MpDatabase& MpDatabase::GetDBInstance()
+{
+    static MpDatabase DB;
+    return DB;
 }
+
+//MpDatabase::~MpDatabase() {
+//  db.close();
+//}
 
 Ingredient MpDatabase::getIngredientByName(QString name) {
 
-    Ingredient i;
+    //Ingredient i;
     //QSqlQuery q;
     q.prepare("SELECT * FROM ingredients WHERE iname = :n");
     q.bindValue(":n",name);
     q.exec();
     q.next();
-    i = Ingredient(q.value(5).toInt(),q.value(4).toInt(),q.value(3).toInt(),q.value(2).toInt(),q.value(1).toString());
+    //Ingredient i = Ingredient(q.value(5).toInt(),q.value(4).toInt(),q.value(3).toInt(),q.value(2).toInt(),q.value(1).toString());
+        //do this vvvvvvv,   not this ^^^^^^^^^
+    Ingredient i(q.value(5).toInt(),q.value(4).toInt(),q.value(3).toInt(),q.value(2).toInt(),q.value(1).toString());
     return i;
 }
 
 Recipe MpDatabase::getRecipeByName(QString name) {
     //incomplete (no relational table?)
-    Recipe r;
+    //Recipe r;
     //QSqlQuery q;
     q.prepare("SELECT * FROM recipes WHERE rname = :n");
     q.bindValue(":n",name);
     q.exec();
     q.next();
-    r = Recipe();
+    //r = Recipe(); // ISSUE: This is not finished....it returns a
+
+    QVector<QString> IngNames = getIngredientsByRecipe(name);
+    QVector<Ingredient> Ings;
+
+    foreach(QString s, IngNames.toList())
+    {
+        Ings.push_back(getIngredientByName(s));
+    }
+
+    Recipe r;
+    //Recipe r(Ings, q.value(3).toString(), q.value(2).toString(), q.value(1).toString());
     return r;
 }
 

@@ -286,6 +286,19 @@
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="RecipeStatusLabel">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>10</y>
+     <width>321</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Status</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
