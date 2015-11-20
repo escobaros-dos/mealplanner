@@ -10,11 +10,11 @@ class Recipe
 {
 public:
     Recipe();
-    Recipe(QVector<Ingredient> ingredients, QString steps, QString name, QString date);
+    Recipe(QVector<Ingredient> ingredients, QString steps, QString name);
     //for custom constructor this will have a date param cuz its going to serve as the meal now...
+    // Note: 11/19/2015 Think about a vector of ints for constructor....
 
     QString getName() const;
-    QString getDate() const;
 
     //may need getters and setters?? although this violates encapsulations
 
@@ -24,6 +24,7 @@ public:
     QString catSteps; //concatenated string for the
     QString Date;
 
+    //these values need to be stored in db
     int CalorieCount;
     int TotalProtien;
     int TotalCarbs;
@@ -37,10 +38,11 @@ public:
     bool RemoveIngrediant(int index);
     void ChangeDate(QString newDate);
     void ChangeName(QString newName);
+    void SetTotalNutrition(int, int, int, int);
 
 
     // for viewing
-    QString GetDirections();
+    QString GetDirections() const;
 
     int GetCarbs();
     int GetFat();

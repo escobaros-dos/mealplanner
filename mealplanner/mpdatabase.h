@@ -69,7 +69,7 @@ public:
     void addIngredient(const Ingredient &);
 
     //recipe functions
-    void addRecipe(const Recipe &);
+    void addRecipe(const Recipe &, const QString);
 
     void updateRecipeIngredientRelation(const QString &, const QString &s);
 

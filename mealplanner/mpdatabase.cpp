@@ -74,7 +74,8 @@ Ingredient MpDatabase::getIngredientByName(QString name) {
     return i;
 }
 
-Recipe MpDatabase::getRecipeByName(QString name) {
+Recipe MpDatabase::getRecipeByName(QString name)
+{
     //incomplete (no relational table?)
     //Recipe r;
     //QSqlQuery q;
@@ -92,8 +93,10 @@ Recipe MpDatabase::getRecipeByName(QString name) {
         Ings.push_back(getIngredientByName(s));
     }
 
-    Recipe r;
-    //Recipe r(Ings, q.value(3).toString(), q.value(2).toString(), q.value(1).toString());
+    //BUG
+    Recipe r(Ings, q.value(2).toString(), q.value(1).toString());
+    //qDebug() << "string q vualue 2...." << q.value(0).toString();
+    //qDebug() << "to int q value 2...." << q.value(0).toInt();
     return r;
 }
 
@@ -139,7 +142,8 @@ QVector<QString> MpDatabase::getNameFromDatabase(const QString &column, const QS
 //-----------------------------------------------
 
 
-void MpDatabase::addRecipe(const Recipe &recipe){
+void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
+{
 
     //add recipe name into the query
     //call addIngredient and pass in recipe.ingredient[x]
@@ -153,10 +157,10 @@ void MpDatabase::addRecipe(const Recipe &recipe){
 
     q.bindValue(":name", recipe.getName()); //name is private
 
-
     //concatenate vector before tossing into the database
     //fix later ;)
-    q.bindValue(":steps", "NOT IMPLEMENTED");
+
+    q.bindValue(":steps", recipe.GetDirections());
 
     q.exec();
 
@@ -171,9 +175,9 @@ void MpDatabase::addRecipe(const Recipe &recipe){
 
     tempRecipeId=q.value(0).toString();
 
-    addMeal(recipe.Date);
+    addMeal(Date);
 
-    updateMealRecipeRelation(recipe.Date, recipe.rname);
+    updateMealRecipeRelation(Date, recipe.rname);
 
     foreach(Ingredient i,recipe.ingredients.toList())
     {
@@ -348,7 +352,6 @@ void MpDatabase::updateRecipeIngredientRelation(const QString &recipeName, const
 
     if(!q.exec())
     {
-
         qDebug() << "updateRecipeIngredientRelation: " << q.lastError();
     }
 
@@ -372,7 +375,6 @@ void MpDatabase::updateMealRecipeRelation(const QString &date, const QString &re
     {
         qDebug() << "updateMealRecipeRelation: " << q.lastError();
     }
-
 
 
 }

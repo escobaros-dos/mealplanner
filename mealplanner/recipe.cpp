@@ -25,12 +25,11 @@ void Recipe::UpdateNutrition() // WANT THIS AS AN INTERFACE OR MAIN WINDOW INHER
 
 }
 
-Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name, QString date)
+Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name)
 {
     ingredients=ings;
     catSteps = step;
     rname = name;
-    Date = date;
 
 
     // this code probably is not neccesary becuase of the create recipe window its already calculated
@@ -53,14 +52,18 @@ QString Recipe::getName() const
     return rname;
 }
 
-QString Recipe::getDate() const
-{
-    return Date;
-}
-
 void Recipe::ChangeDate(QString newDate)
 {
     Date = newDate;
+    return;
+}
+
+void Recipe::SetTotalNutrition(int prt, int cal, int car, int fat)
+{
+    TotalProtien = prt;
+    CalorieCount = cal;
+    TotalCarbs = car;
+    TotalFatContent = fat;
     return;
 }
 
@@ -84,13 +87,12 @@ bool Recipe::RemoveIngrediant(int index) // this function might only need an ind
     ingredients.removeAt(index);
     UpdateNutrition();
     return true;
-
 }
 
 //for viewing
 
 
-QString Recipe::GetDirections()
+QString Recipe::GetDirections() const
 {
     return catSteps;
 }

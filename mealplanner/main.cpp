@@ -5,6 +5,9 @@ int main(int argc, char *argv[])
 {
 
     MpDatabase* DatabaseRef = &MpDatabase::GetDBInstance();
+
+
+
     QApplication a(argc, argv);
 
 

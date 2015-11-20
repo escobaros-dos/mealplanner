@@ -6,9 +6,7 @@ ViewMealDetails::ViewMealDetails(const QString &currentDate, MpDatabase *db, QWi
     QDialog(parent),
     ui(new Ui::ViewMealDetails)
 {
-
     database = db;
-
     ui->setupUi(this);
 
     qDebug() << currentDate;
@@ -20,7 +18,6 @@ ViewMealDetails::ViewMealDetails(const QString &currentDate, MpDatabase *db, QWi
     updateMealComboBox(recipeName);
 
     ui->CurrentDateLabel->setText(currentDate);
-
 }
 
 ViewMealDetails::~ViewMealDetails()
@@ -45,9 +42,7 @@ void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString& RecipeDir
 
 void ViewMealDetails::updateMealComboBox(const QList<QString> &tempRecipeList)
 {
-
     ui->MealsComboBox->addItems(tempRecipeList);
-
 }
 
 void ViewMealDetails::on_MealsComboBox_activated(const QString &arg1)
@@ -60,12 +55,12 @@ void ViewMealDetails::on_MealsComboBox_activated(const QString &arg1)
 
     ui->DirectionsTextBrowser->clear();
 
-    ui->DirectionsTextBrowser->setText(database->getRecipeByName(arg1).GetDirections());
+    //ui->DirectionsTextBrowser->setText(database->getRecipeByName(arg1).GetDirections());
 
     Recipe R = database->getRecipeByName(arg1);
-    qDebug() << "rrrrrr" << R.getName();
 
-    //updateRecipeDirecetionTextBrowser(database->getRecipeByName(arg1).GetDirections());
+    qDebug() << "LOOK HERE:" << R.getName();
+    updateRecipeDirecetionTextBrowser(database->getRecipeByName(arg1).GetDirections());
 
     updateIngredientListWidget(arg1);
 }

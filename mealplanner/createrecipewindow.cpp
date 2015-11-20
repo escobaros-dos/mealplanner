@@ -18,16 +18,13 @@ CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *p
     qDebug() << date;
 
     UpdateRecipeList();
-
 }
 
 void CreateRecipeWindow::UpdateRecipeList()
 {
-
-        QVector<QString> names = RecipeDB->getIngredientNames();
-        ui->listWidget->clear();
-        ui->listWidget->addItems(names.toList());
-
+    QVector<QString> names = RecipeDB->getIngredientNames();
+    ui->listWidget->clear();
+    ui->listWidget->addItems(names.toList());
 }
 
 CreateRecipeWindow::~CreateRecipeWindow()
@@ -42,62 +39,57 @@ void CreateRecipeWindow::on_CreateIngridientButton_clicked()
     IngridientWin.exec();
 
     UpdateRecipeList();
-
 }
-
 
 void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
 {
     QVector<QString> RecipeSteps;
-    QVector<Ingredient> Ingredients; // have  current ingredients
+    //QVector<Ingredient> Ingredients; // have  current ingredients
     QString steps;
 
-    for(int i = 0; i<ui->listWidget_2->count(); ++i)
-    {
-        Ingredient In = RecipeDB->getIngredientByName(ui->listWidget_2->item(i)->text());
-        Ingredients.append(In);
-        qDebug() << ui->listWidget_2->item(i)->text();
-    }
+    //for(int i = 0; i<ui->listWidget_2->count(); ++i)
+    //{
+    //    Ingredient In = RecipeDB->getIngredientByName(ui->listWidget_2->item(i)->text());
+    //    Ingredients.append(In);
+    //    qDebug() << ui->listWidget_2->item(i)->text();
+    //}
 
     steps = ui->StepsEdit->document()->toPlainText();
 
-    foreach(QString step,steps.split("\n")) {
-        RecipeSteps.append(step);
-    }
+   // foreach(QString step,steps.split("\n"))
+   // {
+   //    RecipeSteps.append(step);
+   // }
 
     QString RecipeName = ui->RecipeNameEdit->text();
 
-    qDebug() << "recipe name: " << RecipeName;
+    Recipe NewRecipe(CurrentIngridients, steps, RecipeName);
+    NewRecipe.SetTotalNutrition(prt, cal, car, fat);
 
-    Recipe NewRecipe(Ingredients, steps, RecipeName, currentDate);
+    qDebug() << "....." << NewRecipe.GetDirections();
 
-    //qDebug() << "....." << NewRecipe.GetDirections();
-
-    RecipeDB->addRecipe(NewRecipe);
+    RecipeDB->addRecipe(NewRecipe, currentDate);
 
     ui->RecipeNameEdit->clear();
     RecipeSteps.clear();
     CurrentIngridients.clear();
     ui->listWidget_2->clear();
     ui->StepsEdit->clear();
+    //*****
 
     ui->RecipeStatusLabel->setText(NewRecipe.getName() + " was successfuly added to the database");
-
 }
 
 void CreateRecipeWindow::on_RemoveFromSelected_clicked()
 {
      foreach(QListWidgetItem *i, ui->listWidget_2->selectedItems())
      {
-
          Ingredient In = CurrentIngridients[ui->listWidget_2->currentRow()]; // think.....
          CurrentIngridients.removeAt(ui->listWidget_2->currentRow());
          ui->listWidget_2->removeItemWidget(i);
          delete i;
-
-        UpdateNutrition(-1, In);
+         UpdateNutrition(-1, In);
      }
-
 }
 
 void CreateRecipeWindow::on_AddFromDatabase_clicked()
@@ -109,9 +101,10 @@ void CreateRecipeWindow::on_AddFromDatabase_clicked()
         CurrentIngridients.push_back(In);
         UpdateNutrition(1, In);
     }
-
 }
 
+
+//*****
 void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
 {
     prt += I.protein*s;
@@ -123,7 +116,6 @@ void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
     ui->CaloriesInputLabel->setText(QString::number(cal));
     ui->CarbsInputLabel->setText(QString::number(car));
     ui->FatInputLabel->setText(QString::number(fat));
-
 }
 
 void CreateRecipeWindow::on_RecipeBackButton_clicked()
