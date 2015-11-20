@@ -4,15 +4,17 @@
 #include <QDialog>
 #include "ingredient.h"
 #include "mpdatabase.h"
-
+#include "iupdatable.h"
 
 namespace Ui {
 class CreateIngridientWindow;
 }
 
-class CreateIngridientWindow : public QDialog
+class CreateIngridientWindow : public QDialog, IUpdatable
 {
     Q_OBJECT
+
+    Q_INTERFACES(IUpdatable)
 
 public:
     explicit CreateIngridientWindow(MpDatabase* db = 0, QWidget *parent = 0);
@@ -26,7 +28,7 @@ private slots:
 
 private:
 
-
+    void UpdateMethod();
     MpDatabase* IngredientWinDB;
     Ui::CreateIngridientWindow *ui;
 };

@@ -22,7 +22,6 @@ public:
     //QVector<QString> steps; //do we need steps be a vector or could we have this as one long string?
     QString rname;
     QString catSteps; //concatenated string for the
-    QString Date;
 
     //these values need to be stored in db
     int CalorieCount;

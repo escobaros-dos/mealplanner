@@ -3,7 +3,6 @@
 Recipe::Recipe()
 {
     rname = " ";
-    Date = " ";
     CalorieCount = 0;
     TotalCarbs = 0;
     TotalFatContent = 0;
@@ -54,7 +53,7 @@ QString Recipe::getName() const
 
 void Recipe::ChangeDate(QString newDate)
 {
-    Date = newDate;
+    //Date = newDate;
     return;
 }
 

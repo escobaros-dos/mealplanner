@@ -1,7 +1,6 @@
 #include "createingridientwindow.h"
 #include "ui_createingridientwindow.h"
 
-
 CreateIngridientWindow::CreateIngridientWindow(MpDatabase* db, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CreateIngridientWindow)
@@ -13,6 +12,10 @@ CreateIngridientWindow::CreateIngridientWindow(MpDatabase* db, QWidget *parent) 
 CreateIngridientWindow::~CreateIngridientWindow()
 {
     delete ui;
+}
+
+void CreateIngridientWindow::UpdateMethod()
+{
 }
 
 void CreateIngridientWindow::on_SaveIngtoDbButton_clicked()
@@ -33,11 +36,12 @@ void CreateIngridientWindow::on_SaveIngtoDbButton_clicked()
     ui->CarbEdit->clear();
     ui->FatEdit->clear();
 
-    ui->AddIngStatus->setText(NewIngredient.name + " was succesfully added to the database.");
+    UpdateStatus(ui->AddIngStatus, Name);
+    //ui->AddIngStatus->setText(NewIngredient.name + " was succesfully added to the database.");
 
 }
 
 void CreateIngridientWindow::on_IngBackButton_clicked()
 {
-    this->close();
+    CloseWindow(this);
 }

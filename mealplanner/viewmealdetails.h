@@ -3,14 +3,17 @@
 
 #include <QDialog>
 #include "mpdatabase.h"
+#include "iupdatable.h"
 
 namespace Ui {
 class ViewMealDetails;
 }
 
-class ViewMealDetails : public QDialog
+class ViewMealDetails : public QDialog, IUpdatable
 {
     Q_OBJECT
+
+    Q_INTERFACES(IUpdatable)
 
 public:
     explicit ViewMealDetails(const QString &, MpDatabase *db, QWidget *parent = 0);
@@ -24,13 +27,18 @@ private slots:
 private:
     Ui::ViewMealDetails *ui;
 
+
+    void UpdateMethod();
+
     MpDatabase *database;
 
+    QVector<QLabel*> VMDwinLabels;
+    Recipe* CurrentRecipe;
     QString currentlySelectedDate;
 
     void updateIngredientListWidget(const QString &);
     void updateRecipeDirecetionTextBrowser(const QString&);
-    void updateMealComboBox(const QList<QString> &);
+    void updateRecipeComboBox(const QList<QString> &);
 
 };
 

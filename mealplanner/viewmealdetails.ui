@@ -6,61 +6,171 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>559</width>
-    <height>340</height>
+    <width>635</width>
+    <height>355</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Meal Details</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="2">
-    <widget class="QComboBox" name="MealsComboBox">
-     <item>
+  <widget class="QComboBox" name="MealsComboBox">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>9</y>
+     <width>181</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string/>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="IngredientsLabel">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>35</y>
+     <width>59</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ingredients:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="DirectionsLabel">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>35</y>
+     <width>51</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Directions:</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="DirectionsTextBrowser">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>54</y>
+     <width>235</width>
+     <height>248</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>249</x>
+     <y>308</y>
+     <width>156</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CurrentDateLabel">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>9</y>
+     <width>63</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Current Date</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listOfIngredients">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>54</y>
+     <width>234</width>
+     <height>248</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>150</y>
+     <width>98</width>
+     <height>88</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0">
+     <widget class="QLabel" name="CarbsLabel">
       <property name="text">
-       <string/>
+       <string>Total Carbs:</string>
       </property>
-     </item>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="IngredientsLabel">
-     <property name="text">
-      <string>Ingredients:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QLabel" name="DirectionsLabel">
-     <property name="text">
-      <string>Directions:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="QTextBrowser" name="DirectionsTextBrowser"/>
-   </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="CurrentDateLabel">
-     <property name="text">
-      <string>Current Date</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QListWidget" name="listOfIngredients"/>
-   </item>
-  </layout>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="FatLabel">
+      <property name="text">
+       <string>Total Fat:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="ProtienInputLabel">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLabel" name="FatInputLabel">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLabel" name="CarbsInputLabel">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLabel" name="CaloriesInputLabel">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="CalorieLabel">
+      <property name="text">
+       <string>Total Calories:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="ProtienLabel">
+      <property name="text">
+       <string>Total Protien:</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <resources/>
  <connections>

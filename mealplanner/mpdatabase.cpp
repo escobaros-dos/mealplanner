@@ -79,11 +79,14 @@ Recipe MpDatabase::getRecipeByName(QString name)
     //incomplete (no relational table?)
     //Recipe r;
     //QSqlQuery q;
-    q.prepare("SELECT * FROM recipes WHERE rname = :n");
+    q.prepare("SELECT recid, rname, steps FROM recipes WHERE rname = :n");
     q.bindValue(":n",name);
     q.exec();
     q.next();
     //r = Recipe(); // ISSUE: This is not finished....it returns a
+
+    QString tempSteps = q.value(2).toString();
+    QString tempName = q.value(1).toString();
 
     QVector<QString> IngNames = getIngredientsByRecipe(name);
     QVector<Ingredient> Ings;
@@ -94,8 +97,8 @@ Recipe MpDatabase::getRecipeByName(QString name)
     }
 
     //BUG
-    Recipe r(Ings, q.value(2).toString(), q.value(1).toString());
-    //qDebug() << "string q vualue 2...." << q.value(0).toString();
+    Recipe r(Ings, tempSteps, tempName);
+    qDebug() << "string q vualue 2...." << q.value(2);
     //qDebug() << "to int q value 2...." << q.value(0).toInt();
     return r;
 }
@@ -156,9 +159,6 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
               "VALUES (:name, :steps)");
 
     q.bindValue(":name", recipe.getName()); //name is private
-
-    //concatenate vector before tossing into the database
-    //fix later ;)
 
     q.bindValue(":steps", recipe.GetDirections());
 

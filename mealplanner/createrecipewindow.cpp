@@ -17,6 +17,11 @@ CreateRecipeWindow::CreateRecipeWindow(QString& date, MpDatabase* db, QWidget *p
 
     qDebug() << date;
 
+    RWinLabels.push_back(ui->ProtienInputLabel);
+    RWinLabels.push_back(ui->CaloriesInputLabel);
+    RWinLabels.push_back(ui->CarbsInputLabel);
+    RWinLabels.push_back(ui->FatInputLabel);
+
     UpdateRecipeList();
 }
 
@@ -44,32 +49,19 @@ void CreateRecipeWindow::on_CreateIngridientButton_clicked()
 void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
 {
     QVector<QString> RecipeSteps;
-    //QVector<Ingredient> Ingredients; // have  current ingredients
     QString steps;
 
-    //for(int i = 0; i<ui->listWidget_2->count(); ++i)
-    //{
-    //    Ingredient In = RecipeDB->getIngredientByName(ui->listWidget_2->item(i)->text());
-    //    Ingredients.append(In);
-    //    qDebug() << ui->listWidget_2->item(i)->text();
-    //}
-
-    steps = ui->StepsEdit->document()->toPlainText();
-
-   // foreach(QString step,steps.split("\n"))
-   // {
-   //    RecipeSteps.append(step);
-   // }
+    steps = ui->StepsEdit->toPlainText();
 
     QString RecipeName = ui->RecipeNameEdit->text();
 
     Recipe NewRecipe(CurrentIngridients, steps, RecipeName);
     NewRecipe.SetTotalNutrition(prt, cal, car, fat);
 
-    qDebug() << "....." << NewRecipe.GetDirections();
-
     RecipeDB->addRecipe(NewRecipe, currentDate);
 
+
+    SetLabels(RWinLabels, 0);
     ui->RecipeNameEdit->clear();
     RecipeSteps.clear();
     CurrentIngridients.clear();
@@ -77,7 +69,8 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     ui->StepsEdit->clear();
     //*****
 
-    ui->RecipeStatusLabel->setText(NewRecipe.getName() + " was successfuly added to the database");
+    UpdateStatus(ui->RecipeStatusLabel, NewRecipe.getName());
+
 }
 
 void CreateRecipeWindow::on_RemoveFromSelected_clicked()
@@ -88,7 +81,11 @@ void CreateRecipeWindow::on_RemoveFromSelected_clicked()
          CurrentIngridients.removeAt(ui->listWidget_2->currentRow());
          ui->listWidget_2->removeItemWidget(i);
          delete i;
-         UpdateNutrition(-1, In);
+         //UpdateNutrition(-1, In);
+
+         UpdateSign = -1;
+         ChangedIngredient = &In;
+         UpdateNutrition(RWinLabels);
      }
 }
 
@@ -99,26 +96,40 @@ void CreateRecipeWindow::on_AddFromDatabase_clicked()
         ui->listWidget_2->addItem(i->text());
         Ingredient In = RecipeDB->getIngredientByName(i->text());
         CurrentIngridients.push_back(In);
-        UpdateNutrition(1, In);
+        //UpdateNutrition(1, In);
+
+        UpdateSign = 1;
+        ChangedIngredient = &In;
+        UpdateNutrition(RWinLabels);
     }
 }
 
 
 //*****
-void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
-{
-    prt += I.protein*s;
-    cal += I.calories*s;
-    car += I.carbs*s;
-    fat += I.fat*s;
+//void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
+//{
+    //prt += I.protein*s;
+    //cal += I.calories*s;
+    //car += I.carbs*s;
+    //fat += I.fat*s;
 
-    ui->ProtienInputLabel->setText(QString::number(prt));
-    ui->CaloriesInputLabel->setText(QString::number(cal));
-    ui->CarbsInputLabel->setText(QString::number(car));
-    ui->FatInputLabel->setText(QString::number(fat));
+//    ui->ProtienInputLabel->setText(QString::number(prt));
+//    ui->CaloriesInputLabel->setText(QString::number(cal));
+//    ui->CarbsInputLabel->setText(QString::number(car));
+//    ui->FatInputLabel->setText(QString::number(fat));
+//}
+
+void CreateRecipeWindow::UpdateMethod()
+{
+
+    prt += ChangedIngredient->getProtein()*UpdateSign;
+    cal += ChangedIngredient->getCalories()*UpdateSign;
+    car += ChangedIngredient->getCarbs()*UpdateSign;
+    fat += ChangedIngredient->getFat()*UpdateSign;
+
 }
 
 void CreateRecipeWindow::on_RecipeBackButton_clicked()
 {
-    this->close();
+    CloseWindow(this);
 }

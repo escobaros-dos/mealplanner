@@ -15,6 +15,7 @@ Ingredient::Ingredient(int protn, int ft, int crbs, int cals, QString n)
     protein = protn;
 }
 
+
 QString Ingredient::getName() const {
     return name;
 }

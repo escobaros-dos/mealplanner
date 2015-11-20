@@ -5,14 +5,17 @@
 #include "mpdatabase.h"
 #include <QWidgetItem>
 #include <QListWidgetItem>
+#include "iupdatable.h"
 
 namespace Ui {
 class CreateRecipeWindow;
 }
 
-class CreateRecipeWindow : public QDialog
+class CreateRecipeWindow : public QDialog, IUpdatable
 {
     Q_OBJECT
+
+    Q_INTERFACES(IUpdatable)
 
 public:
     explicit CreateRecipeWindow(QString& d, MpDatabase* db = 0, QWidget *parent = 0);
@@ -35,14 +38,21 @@ private slots:
 private:
 
     //variable used for updating the nutrition labels
-    int prt = 0;
-    int cal = 0;
-    int car = 0;
-    int fat = 0;
+    //int prt = 0;
+    //int cal = 0;
+    //int car = 0;
+    //int fat = 0;
 
-    void UpdateNutrition(int sign, Ingredient in);
+    QVector<QLabel*> RWinLabels;
+    int UpdateSign = 0;
+
+    //void UpdateNutrition(int sign, Ingredient in);
     void UpdateRecipeList();
+    void UpdateMethod();
     QVector<Ingredient> CurrentIngridients;
+
+    Ingredient* ChangedIngredient;
+
 
     MpDatabase* RecipeDB;
     Ui::CreateRecipeWindow *ui;

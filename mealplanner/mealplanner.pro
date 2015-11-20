@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     createrecipewindow.cpp \
     recipebook.cpp \
     viewmealdetails.cpp \
-    createingridientwindow.cpp
+    createingridientwindow.cpp \
+    iupdatable.cpp
 
 HEADERS  += mainwindow.h \
     recipe.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     createrecipewindow.h \
     recipebook.h \
     viewmealdetails.h \
-    createingridientwindow.h
+    createingridientwindow.h \
+    iupdatable.h
 
 FORMS    += \
     #createmealtest.ui \

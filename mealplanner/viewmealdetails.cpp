@@ -15,7 +15,7 @@ ViewMealDetails::ViewMealDetails(const QString &currentDate, MpDatabase *db, QWi
 
     recipeName = database->getRecipeByDate(currentDate).toList();
 
-    updateMealComboBox(recipeName);
+    updateRecipeComboBox(recipeName);
 
     ui->CurrentDateLabel->setText(currentDate);
 }
@@ -40,7 +40,7 @@ void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString& RecipeDir
     //ui->DirectionsTextBrowser->setText("need to work on recipe");
 }
 
-void ViewMealDetails::updateMealComboBox(const QList<QString> &tempRecipeList)
+void ViewMealDetails::updateRecipeComboBox(const QList<QString> &tempRecipeList)
 {
     ui->MealsComboBox->addItems(tempRecipeList);
 }
@@ -63,4 +63,10 @@ void ViewMealDetails::on_MealsComboBox_activated(const QString &arg1)
     updateRecipeDirecetionTextBrowser(database->getRecipeByName(arg1).GetDirections());
 
     updateIngredientListWidget(arg1);
+}
+
+void ViewMealDetails::UpdateMethod()
+{
+    //prt = CurrentRecipe->GetTotalProtien();
+
 }
