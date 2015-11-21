@@ -13,11 +13,16 @@ ViewMealDetails::ViewMealDetails(const QString &currentDate, MpDatabase *db, QWi
 
     currentlySelectedDate = currentDate;
 
-    recipeName = database->getRecipeByDate(currentDate).toList();
+    recipeList = database->getRecipeByDate(currentDate).toList();
 
-    updateRecipeComboBox(recipeName);
+    updateRecipeComboBox(recipeList);
 
     ui->CurrentDateLabel->setText(currentDate);
+
+    VMDwinLabels.push_back(ui->ProtienInputLabel);
+    VMDwinLabels.push_back(ui->CaloriesInputLabel);
+    VMDwinLabels.push_back(ui->CarbsInputLabel);
+    VMDwinLabels.push_back(ui->FatInputLabel);
 }
 
 ViewMealDetails::~ViewMealDetails()
@@ -25,11 +30,12 @@ ViewMealDetails::~ViewMealDetails()
     delete ui;
 }
 
-void ViewMealDetails::updateIngredientListWidget(const QString &tempRecipeName)
+void ViewMealDetails::updateIngredientListWidget(const Recipe& R)
 {
-    QList<QString> tempIngredientList = database->getIngredientsByRecipe(tempRecipeName).toList();
-
-    ui->listOfIngredients->addItems(tempIngredientList);
+    foreach(Ingredient I, R.ingredients)
+    {
+        ui->listOfIngredients->addItem(I.getName());
+    }
 }
 
 void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString& RecipeDirections)
@@ -40,33 +46,51 @@ void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString& RecipeDir
     //ui->DirectionsTextBrowser->setText("need to work on recipe");
 }
 
-void ViewMealDetails::updateRecipeComboBox(const QList<QString> &tempRecipeList)
+void ViewMealDetails::updateRecipeComboBox(const QList<Recipe> &tempRecipeList)
 {
-    ui->MealsComboBox->addItems(tempRecipeList);
+    //bug is here too...
+    foreach(Recipe r, tempRecipeList)
+    {
+        qDebug() << "IN UPDATE R COMBO, ADDING: " << r.getName();
+        ui->MealsComboBox->addItem(r.getName());
+    }
+
+
 }
 
 void ViewMealDetails::on_MealsComboBox_activated(const QString &arg1)
 {
-    //qDebug() << arg1;
-
-    //ISSUE: when the view detail window is open the ingredients and direction ui are not populated with information    
-
-    ui->listOfIngredients->clear();
-
-    ui->DirectionsTextBrowser->clear();
-
-    //ui->DirectionsTextBrowser->setText(database->getRecipeByName(arg1).GetDirections());
-
-    Recipe R = database->getRecipeByName(arg1);
-
-    qDebug() << "LOOK HERE:" << R.getName();
-    updateRecipeDirecetionTextBrowser(database->getRecipeByName(arg1).GetDirections());
-
-    updateIngredientListWidget(arg1);
+    // dont need this any more
 }
 
 void ViewMealDetails::UpdateMethod()
 {
-    //prt = CurrentRecipe->GetTotalProtien();
+    prt = CurrentRecipe->GetProtien();
+    cal = CurrentRecipe->GetCalories();
+    car = CurrentRecipe->GetCarbs();
+    fat = CurrentRecipe->GetFat();
+}
 
+void ViewMealDetails::on_MealsComboBox_activated(int index)
+{
+
+    // need to qdebug index values to make sure that vector is in sync with combo box index
+    //BUG, the index's DON'T synce up properly......gota debug n shit
+    qDebug() << "DISPLAYING: " << recipeList[index].getName();
+    qDebug() << "WITH VALUES: " << recipeList[index].GetProtien();
+    ui->listOfIngredients->clear();
+    ui->DirectionsTextBrowser->clear();
+
+    CurrentRecipe = &recipeList[index];
+    updateRecipeDirecetionTextBrowser(recipeList[index].GetDirections());
+
+    updateIngredientListWidget(recipeList[index]);
+
+    UpdateNutrition(VMDwinLabels);
+
+}
+
+void ViewMealDetails::on_VMD_Okay_clicked()
+{
+    CloseWindow(this);
 }

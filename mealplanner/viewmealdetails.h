@@ -2,6 +2,7 @@
 #define VIEWMEALDETAILS_H
 
 #include <QDialog>
+//#include <QListIterator>
 #include "mpdatabase.h"
 #include "iupdatable.h"
 
@@ -19,10 +20,14 @@ public:
     explicit ViewMealDetails(const QString &, MpDatabase *db, QWidget *parent = 0);
     ~ViewMealDetails();
 
-     QList<QString> recipeName;
+     QList<Recipe> recipeList;
 
 private slots:
      void on_MealsComboBox_activated(const QString &arg1);
+
+     void on_MealsComboBox_activated(int index);
+
+     void on_VMD_Okay_clicked();
 
 private:
     Ui::ViewMealDetails *ui;
@@ -36,9 +41,9 @@ private:
     Recipe* CurrentRecipe;
     QString currentlySelectedDate;
 
-    void updateIngredientListWidget(const QString &);
+    void updateIngredientListWidget(const Recipe &);
     void updateRecipeDirecetionTextBrowser(const QString&);
-    void updateRecipeComboBox(const QList<QString> &);
+    void updateRecipeComboBox(const QList<Recipe> &);
 
 };
 

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtSql>
 #include <QDebug>
+#include <QVectorIterator>
 
 #include "meal.h"
 #include "recipe.h"
@@ -45,7 +46,7 @@ public:
     Recipe getRecipeByName(QString);
     Recipe getRecipeByID(int);
 
-    QVector<QString> getRecipeByDate(const QString &); //gets the recipe by date
+    QVector<Recipe> getRecipeByDate(const QString &); //gets the recipe by date
 
     QVector<QString> getRecipeNames();
 

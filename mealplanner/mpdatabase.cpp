@@ -307,11 +307,12 @@ QVector<QString> MpDatabase::getIngredientsByRecipe(const QString &tempRecipeNam
 }
 
 //maybe consider returning an object of recipe
-QVector<QString> MpDatabase::getRecipeByDate(const QString &date)
+QVector<Recipe> MpDatabase::getRecipeByDate(const QString &date)
 {
    // QSqlQuery q = QSqlQuery(db);
 
-    QVector<QString>tempQueryResult;
+    QVector<QString> tempName;
+    QVector<Recipe> tempRecipe;
 
     q.prepare("select rname from recipes where recid in "
               "(select dnrrid from dateRecipeRelate where dnrmid in "
@@ -326,10 +327,17 @@ QVector<QString> MpDatabase::getRecipeByDate(const QString &date)
 
     while(q.next())
     {
-        tempQueryResult.append(q.value(0).toString());
+        tempName.append(q.value(0).toString());
+    }
+    QVectorIterator<QString> tempNameIterator(tempName);
+
+    while(tempNameIterator.hasNext())
+    {
+        tempRecipe.push_back(getRecipeByName(tempNameIterator.next()));
     }
 
-    return tempQueryResult;
+
+    return tempRecipe;
 
 }
 

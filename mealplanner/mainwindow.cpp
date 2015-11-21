@@ -88,7 +88,7 @@ void MainWindow::updateMealListWidget()
 
     //maybe use an object of recipe
 
-    QVector<QString> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate));
+    QVector<Recipe> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate));
 
     //update the listOfMeals widget with the name of the meals?? from the database based on the date
 
@@ -103,7 +103,10 @@ void MainWindow::updateMealListWidget()
 
     ui->listOfMeals->clear();
 
-    ui->listOfMeals->addItems(tempRecipeName.toList());
+    foreach(Recipe r, tempRecipeName)
+    {
+        ui->listOfMeals->addItem(r.getName());
+    }
 
     //ui->ListMealsTextBrowser->setText(currentlySelectedDate);
 }

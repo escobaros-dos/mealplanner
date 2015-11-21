@@ -98,17 +98,17 @@ QString Recipe::GetDirections() const
 
 int Recipe::GetCalories()
 {
-    return CalorieCount*Proportions;
+    return CalorieCount;
 }
 int Recipe::GetProtien()
 {
-    return TotalProtien*Proportions;
+    return TotalProtien;
 }
 int Recipe::GetFat()
 {
-    return TotalFatContent*Proportions;
+    return TotalFatContent;
 }
 int Recipe::GetCarbs()
 {
-    return TotalCarbs*Proportions;
+    return TotalCarbs;
 }

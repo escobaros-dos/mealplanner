@@ -56,8 +56,12 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     QString RecipeName = ui->RecipeNameEdit->text();
 
     Recipe NewRecipe(CurrentIngridients, steps, RecipeName);
+
+    //BUG
     NewRecipe.SetTotalNutrition(prt, cal, car, fat);
 
+
+    qDebug() << "ADDING RECIPE WITH VALUES: " << NewRecipe.GetProtien();
     RecipeDB->addRecipe(NewRecipe, currentDate);
 
 
