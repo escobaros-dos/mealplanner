@@ -39,7 +39,8 @@ private slots:
 
     void on_CreateRecipeButton_clicked();
 
-    void on_HelpButton_clicked();
+
+    void on_ExistingRecipeButton_clicked();
 
 private:
     MpDatabase* MainDB;

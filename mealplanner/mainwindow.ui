@@ -44,9 +44,9 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="HelpButton">
+            <widget class="QPushButton" name="ExistingRecipeButton">
              <property name="text">
-              <string>Help</string>
+              <string>Add a Recipe</string>
              </property>
             </widget>
            </item>

@@ -56,6 +56,8 @@ public:
 
     QVector<QString> getIngredientsByRecipe(const QString &);
 
+    QVector<Recipe> getAllRecipe();
+
     //QVector<QString> getNameFromDatabase(const QString &, const QString &);
 
 

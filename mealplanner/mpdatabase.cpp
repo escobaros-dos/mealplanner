@@ -104,12 +104,16 @@ Recipe MpDatabase::getRecipeByName(QString name)
 }
 
 QVector<QString> MpDatabase::getRecipeNames() {
+
   QVector<QString> names;
-  //QSqlQuery q = QSqlQuery(db);
+
   q.exec("SELECT rname FROM recipes;");
-  while(q.next()) {
+
+  while(q.next())
+  {
     names.append(q.value(0).toString());
   }
+
   return names;
 }
 
@@ -121,6 +125,22 @@ QVector<QString> MpDatabase::getIngredientNames() {
     names.append(q.value(0).toString());
   }
   return names;
+}
+
+QVector<Recipe> MpDatabase::getAllRecipe()
+{
+    QVector<QString> tempName(getRecipeNames());
+
+    QVectorIterator<QString> tempNameIterator(tempName);
+
+    QVector<Recipe> tempRecipe;
+
+    while(tempNameIterator.hasNext())
+    {
+        tempRecipe.append(getRecipeByName(tempNameIterator.next()));
+    }
+
+    return tempRecipe;
 }
 
 /*

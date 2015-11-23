@@ -5,6 +5,7 @@
 #include "viewmealdetails.h"
 #include "createrecipewindow.h"
 
+#include "existingrecipe.h"
 
 MainWindow::MainWindow(MpDatabase* db, QWidget *parent) :
     QMainWindow(parent),
@@ -111,7 +112,10 @@ void MainWindow::updateMealListWidget()
     //ui->ListMealsTextBrowser->setText(currentlySelectedDate);
 }
 
-void MainWindow::on_HelpButton_clicked()
+void MainWindow::on_ExistingRecipeButton_clicked()
 {
-
+    ExistingRecipe er(currentlySelectedDate, MainDB);
+    er.setModal(false);
+    er.exec();
+    updateMealListWidget();
 }
