@@ -98,7 +98,7 @@ Recipe MpDatabase::getRecipeByName(QString name)
 
     //BUG
     Recipe r(Ings, tempSteps, tempName);
-    qDebug() << "string q vualue 2...." << q.value(2);
+    //qDebug() << "string q vualue 2...." << q.value(2);
     //qDebug() << "to int q value 2...." << q.value(0).toInt();
     return r;
 }
