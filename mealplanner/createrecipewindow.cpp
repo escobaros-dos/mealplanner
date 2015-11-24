@@ -58,7 +58,7 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     Recipe NewRecipe(CurrentIngridients, steps, RecipeName);
 
     //BUG
-    NewRecipe.SetTotalNutrition(prt, cal, car, fat);
+    //NewRecipe.SetTotalNutrition(prt, cal, car, fat);
 
 
     qDebug() << "ADDING RECIPE WITH VALUES: " << NewRecipe.GetProtien();

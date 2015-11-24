@@ -12,6 +12,11 @@ ExistingRecipe::ExistingRecipe(const QString &tempDate, MpDatabase * tempDB, QWi
 
     eDatabase = tempDB;
 
+    ExistingWinLabels.push_back(ui->ProtienInputLabel);
+    ExistingWinLabels.push_back(ui->CaloriesInputLabel);
+    ExistingWinLabels.push_back(ui->CarbsInputLabel);
+    ExistingWinLabels.push_back(ui->FatInputLabel);
+
     populateList();
 }
 
@@ -22,11 +27,9 @@ ExistingRecipe::~ExistingRecipe()
 
 void ExistingRecipe::populateList()
 {
-    QList<Recipe> tempRecipe = eDatabase->getAllRecipe().toList();
+    tempRecipe = eDatabase->getAllRecipe();
 
-    QListIterator<Recipe> tempRecipeIterator(tempRecipe);
-
-    //QList<QString> tempName;
+    QVectorIterator<Recipe>tempRecipeIterator(tempRecipe);
 
     while(tempRecipeIterator.hasNext())
     {     
@@ -40,7 +43,6 @@ void ExistingRecipe::populateList()
 
 void ExistingRecipe::on_AddRecipeCurrentButton_clicked()
 {
-
 
     QListIterator<QListWidgetItem*> tempCurrentItemsIterator(ui->listWidget->selectedItems());
 
@@ -68,8 +70,14 @@ void ExistingRecipe::on_AddRecipeCurrentButton_clicked()
 void ExistingRecipe::UpdateMethod()
 {
 
-}
+    prt = CurrentRecipe->GetProtien();
+    cal = CurrentRecipe->GetCalories();
+    car = CurrentRecipe->GetCarbs();
+    fat = CurrentRecipe->GetFat();
 
+    return;
+
+}
 
 void ExistingRecipe::on_CloseWindowButton_clicked()
 {
@@ -78,5 +86,12 @@ void ExistingRecipe::on_CloseWindowButton_clicked()
 
 void ExistingRecipe::on_listWidget_clicked(const QModelIndex &index)
 {
+   // CurrentRecipe = &tempRecipe.at(index.row());
+   // UpdateNutrition(ExistingWinLabels);
+}
 
+void ExistingRecipe::on_listWidget_currentRowChanged(int currentRow)
+{
+    CurrentRecipe = &tempRecipe[currentRow];
+    UpdateNutrition(ExistingWinLabels);
 }

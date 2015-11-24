@@ -43,7 +43,6 @@ void ViewMealDetails::updateRecipeDirecetionTextBrowser(const QString& RecipeDir
     qDebug() << "directions:::" << RecipeDirections;
     ui->DirectionsTextBrowser->clear();
     ui->DirectionsTextBrowser->setText(RecipeDirections);
-    //ui->DirectionsTextBrowser->setText("need to work on recipe");
 }
 
 void ViewMealDetails::updateRecipeComboBox(const QList<Recipe> &tempRecipeList)

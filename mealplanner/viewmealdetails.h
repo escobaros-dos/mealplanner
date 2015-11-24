@@ -20,7 +20,7 @@ public:
     explicit ViewMealDetails(const QString &, MpDatabase *db, QWidget *parent = 0);
     ~ViewMealDetails();
 
-     QList<Recipe> recipeList;
+     //QList<Recipe> recipeList;
 
 private slots:
      void on_MealsComboBox_activated(const QString &arg1);
@@ -32,6 +32,7 @@ private slots:
 private:
     Ui::ViewMealDetails *ui;
 
+    QList<Recipe> recipeList;
 
     void UpdateMethod();
 

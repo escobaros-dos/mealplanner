@@ -16,11 +16,12 @@ CreateIngridientWindow::~CreateIngridientWindow()
 
 void CreateIngridientWindow::UpdateMethod()
 {
+    // no implementation
 }
 
 void CreateIngridientWindow::on_SaveIngtoDbButton_clicked()
 {
-    QString Name = ui->lineEdit->text();
+    QString Name = ui->IngNameInput->text();
     int protein = ui->protienEdit->text().toInt();
     int calories = ui->CalorieEdit->text().toInt();
     int carbs = ui->CarbEdit->text().toInt();
@@ -30,7 +31,7 @@ void CreateIngridientWindow::on_SaveIngtoDbButton_clicked()
 
     IngredientWinDB->addIngredient(NewIngredient);
 
-    ui->lineEdit->clear();
+    ui->IngNameInput->clear();
     ui->protienEdit->clear();
     ui->CalorieEdit->clear();
     ui->CarbEdit->clear();

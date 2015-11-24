@@ -29,15 +29,11 @@ public:
     int TotalCarbs;
     int TotalFatContent;
 
-    int Proportions;
-
     //for editing an existing recipe
 
     bool AddIngrediant(Ingredient);
     bool RemoveIngrediant(int index);
-    void ChangeDate(QString newDate);
     void ChangeName(QString newName);
-    void SetTotalNutrition(int, int, int, int);
 
 
     // for viewing
@@ -52,7 +48,7 @@ public:
 
 private:
 
-
+    void CalculateNutrition();
     void UpdateNutrition();
 
 //signals:

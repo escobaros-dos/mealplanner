@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Create New Recipe</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -262,29 +262,6 @@
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>100</y>
-     <width>71</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Proportions</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>670</x>
-     <y>100</y>
-     <width>41</width>
-     <height>20</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QLabel" name="RecipeStatusLabel">
    <property name="geometry">

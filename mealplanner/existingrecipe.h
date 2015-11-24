@@ -30,13 +30,19 @@ private slots:
 
     void on_listWidget_clicked(const QModelIndex &index);
 
+    void on_listWidget_currentRowChanged(int currentRow);
+
 private:
 
     void populateList();
 
     void UpdateMethod();
 
+   // QListIterator<Recipe> tempRecipeIterator;
+    QVector<Recipe> tempRecipe;
     MpDatabase *eDatabase;
+    Recipe* CurrentRecipe;
+    QVector<QLabel*> ExistingWinLabels;
 
     Ui::ExistingRecipe *ui;
 };

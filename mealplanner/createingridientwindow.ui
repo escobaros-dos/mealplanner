@@ -23,14 +23,14 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Create New Ingredient</string>
   </property>
   <widget class="QLabel" name="AddIngStatus">
    <property name="geometry">
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>31</width>
+     <width>251</width>
      <height>16</height>
     </rect>
    </property>
@@ -56,16 +56,6 @@
    </property>
    <property name="text">
     <string>Name:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>72</x>
-     <y>41</y>
-     <width>133</width>
-     <height>20</height>
-    </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="SaveIngtoDbButton">
@@ -166,27 +156,30 @@
     <string>Fat:</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>70</y>
+     <x>70</x>
+     <y>40</y>
      <width>135</width>
-     <height>100</height>
+     <height>126</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLineEdit" name="FatEdit"/>
+     <widget class="QLineEdit" name="IngNameInput"/>
     </item>
     <item>
-     <widget class="QLineEdit" name="CarbEdit"/>
+     <widget class="QLineEdit" name="protienEdit"/>
     </item>
     <item>
      <widget class="QLineEdit" name="CalorieEdit"/>
     </item>
     <item>
-     <widget class="QLineEdit" name="protienEdit"/>
+     <widget class="QLineEdit" name="CarbEdit"/>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="FatEdit"/>
     </item>
    </layout>
   </widget>
