@@ -2,92 +2,86 @@
 
 Recipe::Recipe()
 {
-    rname = " ";
-    CalorieCount = 0;
-    TotalCarbs = 0;
-    TotalFatContent = 0;
-    TotalProtien = 0;
+   rname = " ";
+   CalorieCount = 0;
+   TotalCarbs = 0;
+   TotalFatContent = 0;
+   TotalProtien = 0;
 }
 
 
 Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name)
 {
-    ingredients = ings;
-    catSteps = step;
-    rname = name;
+   ingredients = ings;
+   catSteps = step;
+   rname = name;
 
-    CalorieCount = 0;
-    TotalCarbs = 0;
-    TotalFatContent = 0;
-    TotalProtien = 0;
+   CalorieCount = 0;
+   TotalCarbs = 0;
+   TotalFatContent = 0;
+   TotalProtien = 0;
 
 
-    CalculateNutrition();
+   CalculateNutrition();
 
 }
 
 QString Recipe::getName() const
 {
-    return rname;
+   return rname;
 }
 
 void Recipe::CalculateNutrition()
 {
 
-    foreach(Ingredient I, ingredients.toList())
-    {
-        CalorieCount += I.calories;
-        TotalCarbs += I.carbs;
-        TotalFatContent += I.fat;
-        TotalProtien += I.protein;
-    }
-    return;
+   foreach(Ingredient I, ingredients.toList())
+   {
+      CalorieCount += I.calories;
+      TotalCarbs += I.carbs;
+      TotalFatContent += I.fat;
+      TotalProtien += I.protein;
+   }
+   return;
 }
 
 
 void Recipe::ChangeName(QString newName) // maybe change these names to update names
 {
-    rname = newName;
-    return;
+   rname = newName;
+   return;
 }
 
 bool Recipe::AddIngrediant(Ingredient NewIngrediant) // QString or class?
 {
-    //might want to add a check if already in the list, no duplicate ings???
-    ingredients.push_back(NewIngrediant);
-    //UpdateNutrition();
-    return true;
+   ingredients.push_back(NewIngrediant);
+   return true;
 }
 bool Recipe::RemoveIngrediant(int index) // this function might only need an index param
 {
-    if(index > ingredients.size()) return false;
+   if(index > ingredients.size()) return false;
 
-    ingredients.removeAt(index);
-    //UpdateNutrition();
-    return true;
+   ingredients.removeAt(index);
+   return true;
 }
-
-//for viewing
-
 
 QString Recipe::GetDirections() const
 {
-    return catSteps;
+   return catSteps;
 }
 
 int Recipe::GetCalories()
 {
-    return CalorieCount;
+   return CalorieCount;
 }
 int Recipe::GetProtien()
 {
-    return TotalProtien;
+   return TotalProtien;
 }
 int Recipe::GetFat()
 {
-    return TotalFatContent;
+   return TotalFatContent;
 }
 int Recipe::GetCarbs()
 {
-    return TotalCarbs;
+   return TotalCarbs;
 }

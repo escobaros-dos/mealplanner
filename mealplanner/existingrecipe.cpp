@@ -3,85 +3,73 @@
 
 
 ExistingRecipe::ExistingRecipe(const QString &tempDate, MpDatabase * tempDB, QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::ExistingRecipe)
+   QDialog(parent),
+   ui(new Ui::ExistingRecipe)
 {
-    ui->setupUi(this);
+   ui->setupUi(this);
 
-    currentDate = tempDate;
+   currentDate = tempDate;
 
-    eDatabase = tempDB;
+   eDatabase = tempDB;
 
-    ExistingWinLabels.push_back(ui->ProtienInputLabel);
-    ExistingWinLabels.push_back(ui->CaloriesInputLabel);
-    ExistingWinLabels.push_back(ui->CarbsInputLabel);
-    ExistingWinLabels.push_back(ui->FatInputLabel);
+   ExistingWinLabels.push_back(ui->ProtienInputLabel);
+   ExistingWinLabels.push_back(ui->CaloriesInputLabel);
+   ExistingWinLabels.push_back(ui->CarbsInputLabel);
+   ExistingWinLabels.push_back(ui->FatInputLabel);
 
-    populateList();
+   populateList();
 }
 
 ExistingRecipe::~ExistingRecipe()
 {
-    delete ui;
+   delete ui;
 }
 
 void ExistingRecipe::populateList()
 {
-    tempRecipe = eDatabase->getAllRecipe();
+   tempRecipe = eDatabase->getAllRecipe();
 
-    QVectorIterator<Recipe>tempRecipeIterator(tempRecipe);
+   QVectorIterator<Recipe>tempRecipeIterator(tempRecipe);
 
-    while(tempRecipeIterator.hasNext())
-    {     
-        //tempName.append(tempRecipeIterator.next().getName());
-        ui->listWidget->addItem(tempRecipeIterator.next().getName());
-    }
-
-    //ui->listWidget->addItems(tempName);
-
+   while(tempRecipeIterator.hasNext())
+   {     
+      ui->listWidget->addItem(tempRecipeIterator.next().getName());
+   }
 }
 
 void ExistingRecipe::on_AddRecipeCurrentButton_clicked()
 {
 
-    QListIterator<QListWidgetItem*> tempCurrentItemsIterator(ui->listWidget->selectedItems());
+   QListIterator<QListWidgetItem*> tempCurrentItemsIterator(ui->listWidget->selectedItems());
+   QList<Recipe> newSelectedRecipe;
+   while(tempCurrentItemsIterator.hasNext())
+   {
+      newSelectedRecipe.append(eDatabase->getRecipeByName(tempCurrentItemsIterator.next()->text()));
+   }
 
-    //QListIterator<Recipe> tempRecipeIterator(tempRecipe);
+   QListIterator<Recipe> newSelectedRecipeIterator(newSelectedRecipe);
 
-    QList<Recipe> newSelectedRecipe;
-
-    while(tempCurrentItemsIterator.hasNext())
-    {
-        newSelectedRecipe.append(eDatabase->getRecipeByName(tempCurrentItemsIterator.next()->text()));
-    }
-
-    QListIterator<Recipe> newSelectedRecipeIterator(newSelectedRecipe);
-
-    while(newSelectedRecipeIterator.hasNext())
-    {
-        //qDebug() << newSelectedRecipeIterator.next().getName();
-        eDatabase->addRecipe(newSelectedRecipeIterator.next(), currentDate);
-    }
-
-    // qDebug() << "add clicked";
-
+   while(newSelectedRecipeIterator.hasNext())
+   {
+      eDatabase->addRecipe(newSelectedRecipeIterator.next(), currentDate);
+   }
 }
 
 void ExistingRecipe::UpdateMethod()
 {
 
-    prt = CurrentRecipe->GetProtien();
-    cal = CurrentRecipe->GetCalories();
-    car = CurrentRecipe->GetCarbs();
-    fat = CurrentRecipe->GetFat();
+   prt = CurrentRecipe->GetProtien();
+   cal = CurrentRecipe->GetCalories();
+   car = CurrentRecipe->GetCarbs();
+   fat = CurrentRecipe->GetFat();
 
-    return;
+   return;
 
 }
 
 void ExistingRecipe::on_CloseWindowButton_clicked()
 {
-    CloseWindow(this);
+   CloseWindow(this);
 }
 
 void ExistingRecipe::on_listWidget_clicked(const QModelIndex &index)
@@ -92,6 +80,6 @@ void ExistingRecipe::on_listWidget_clicked(const QModelIndex &index)
 
 void ExistingRecipe::on_listWidget_currentRowChanged(int currentRow)
 {
-    CurrentRecipe = &tempRecipe[currentRow];
-    UpdateNutrition(ExistingWinLabels);
+   CurrentRecipe = &tempRecipe[currentRow];
+   UpdateNutrition(ExistingWinLabels);
 }

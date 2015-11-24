@@ -8,31 +8,31 @@
 #include "existingrecipe.h"
 
 MainWindow::MainWindow(MpDatabase* db, QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+   QMainWindow(parent),
+   ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    MainDB = db;
+   ui->setupUi(this);
+   MainDB = db;
 
-    currentlySelectedDate = ui->calendarWidget->selectedDate().toString();
+   currentlySelectedDate = ui->calendarWidget->selectedDate().toString();
 
-    updateMealListWidget();
+   updateMealListWidget();
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+   delete ui;
 }
 
 //-------------------------------------------------------------------
 void MainWindow::on_RecipeBookButton_clicked()//opens recipe book
 {
 
-    RecipeBook RB;
-    RB.setModal(false);
-    RB.exec();
-    //ui -> stackedWidget -> setCurrentIndex(2);
-    //qDebug("index change");//error check
+   RecipeBook RB;
+   RB.setModal(false);
+   RB.exec();
+   //ui -> stackedWidget -> setCurrentIndex(2);
+   //qDebug("index change");//error check
 
 
 }
@@ -40,89 +40,89 @@ void MainWindow::on_RecipeBookButton_clicked()//opens recipe book
 void MainWindow::on_ViewDetailsButton_clicked()
 {
 
-    //maybe have the ViewMealDetail take in a recipe object
+   //maybe have the ViewMealDetail take in a recipe object
 
-    ViewMealDetails MealDetailsWindow(currentlySelectedDate, MainDB);
-    MealDetailsWindow.setModal(false);
-    MealDetailsWindow.exec();
+   ViewMealDetails MealDetailsWindow(currentlySelectedDate, MainDB);
+   MealDetailsWindow.setModal(false);
+   MealDetailsWindow.exec();
    // ui -> stackedWidget -> setCurrentIndex(1);
-    //qDebug("index change");//error check
+   //qDebug("index change");//error check
 }
 
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
 {
 
-    //ISSUE: if the user clicks on the same date multiple times the list will keep adding items onto the widget
+   //ISSUE: if the user clicks on the same date multiple times the list will keep adding items onto the widget
 
-    currentlySelectedDate = date.toString();
+   currentlySelectedDate = date.toString();
 
-    updateMealListWidget();
+   updateMealListWidget();
 
-    //qDebug() << currentlySelectedDate;
+   //qDebug() << currentlySelectedDate;
 }
 
 //when the user selects a new date the mealListWidget is cleared
 void MainWindow::on_calendarWidget_selectionChanged()
 {
-    //ui->listMealName->clear();
-    ui->listOfMeals->clear();
+   //ui->listMealName->clear();
+   ui->listOfMeals->clear();
 }
 
 
 
 void MainWindow::on_CreateRecipeButton_clicked()
 {
-    QString testfornow = " ";
-    //CreateRecipeWindow RecipeWin(testfornow, MainDB);
-    //CreateRecipeWindow RecipeWin(testfornow, MainDB);
+   QString testfornow = " ";
+   //CreateRecipeWindow RecipeWin(testfornow, MainDB);
+   //CreateRecipeWindow RecipeWin(testfornow, MainDB);
 
-    CreateRecipeWindow RecipeWin(currentlySelectedDate, MainDB);
-    RecipeWin.setModal(false);
-    RecipeWin.exec();
+   CreateRecipeWindow RecipeWin(currentlySelectedDate, MainDB);
+   RecipeWin.setModal(false);
+   RecipeWin.exec();
 
-    updateMealListWidget();
+   updateMealListWidget();
 
 }
 
 void MainWindow::updateMealListWidget()
 {
 
-    //maybe use an object of recipe
+   //maybe use an object of recipe
 
-    QVector<Recipe> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate));
+   QVector<Recipe> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate));
 
-    //update the listOfMeals widget with the name of the meals?? from the database based on the date
+   //update the listOfMeals widget with the name of the meals?? from the database based on the date
 
-    /*
-    QVectorIterator<QString> tempRecipeNameIterator(tempRecipeName);
+   /*
+      QVectorIterator<QString> tempRecipeNameIterator(tempRecipeName);
 
-    while(tempRecipeNameIterator.hasNext())
-    {
-        qDebug() << "list of meals";
-    }
-    */
+      while(tempRecipeNameIterator.hasNext())
+      {
+      qDebug() << "list of meals";
+      }
+      */
 
-    ui->listOfMeals->clear();
+   ui->listOfMeals->clear();
 
-    foreach(Recipe r, tempRecipeName)
-    {
-        ui->listOfMeals->addItem(r.getName());
-    }
+   foreach(Recipe r, tempRecipeName)
+   {
+      ui->listOfMeals->addItem(r.getName());
+   }
 
-    //ui->ListMealsTextBrowser->setText(currentlySelectedDate);
+   //ui->ListMealsTextBrowser->setText(currentlySelectedDate);
 }
 
 void MainWindow::on_ExistingRecipeButton_clicked()
 {
-    ExistingRecipe er(currentlySelectedDate, MainDB);
-    er.setModal(false);
-    er.exec();
-    updateMealListWidget();
+   ExistingRecipe er(currentlySelectedDate, MainDB);
+   er.setModal(false);
+   er.exec();
+   updateMealListWidget();
 }
 
 void MainWindow::on_calcBMI_clicked()
 {
-    CalcBMI bmi;
-    bmi.setModal(false);
-    bmi.exec();
+   CalcBMI bmi;
+   bmi.setModal(false);
+   bmi.exec();
 }
