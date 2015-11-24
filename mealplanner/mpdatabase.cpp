@@ -303,7 +303,7 @@ QVector<QString> MpDatabase::getRecipesByIngredient(const QString &ing){
 
 
 //gets a list of ingredient name based on the recipe name
-QVector<QString> MpDatabase::getIngredientsByRecipe(const QString &tempRecipeName)
+QVector<QString> MpDatabase::getIngredientsByRecipe(const QString &tempRecipeName)  //changed the type to ingredients from string
 {
     QVector<QString> tempQueryResult;
 
