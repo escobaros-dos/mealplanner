@@ -30,7 +30,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_5">
+            <widget class="QPushButton" name="calcBMI">
              <property name="text">
               <string>Calculate BMI</string>
              </property>

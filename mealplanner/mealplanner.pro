@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     viewmealdetails.cpp \
     createingridientwindow.cpp \
     iupdatable.cpp \
-    existingrecipe.cpp
+    existingrecipe.cpp \
+    calcbmi.cpp
 
 HEADERS  += mainwindow.h \
     recipe.h \
@@ -36,7 +37,8 @@ HEADERS  += mainwindow.h \
     viewmealdetails.h \
     createingridientwindow.h \
     iupdatable.h \
-    existingrecipe.h
+    existingrecipe.h \
+    calcbmi.h
 
 FORMS    += \
     #createmealtest.ui \
@@ -45,4 +47,5 @@ FORMS    += \
     recipebook.ui \
     viewmealdetails.ui \
     createingridientwindow.ui \
-    existingrecipe.ui
+    existingrecipe.ui \
+    calcbmi.ui

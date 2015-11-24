@@ -42,6 +42,9 @@ private slots:
 
     void on_ExistingRecipeButton_clicked();
 
+
+    void on_calcBMI_clicked();
+
 private:
     MpDatabase* MainDB;
     Ui::MainWindow *ui;

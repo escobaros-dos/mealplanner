@@ -4,6 +4,7 @@
 #include "recipebook.h"
 #include "viewmealdetails.h"
 #include "createrecipewindow.h"
+#include "calcbmi.h"
 
 #include "existingrecipe.h"
 
@@ -118,4 +119,11 @@ void MainWindow::on_ExistingRecipeButton_clicked()
     er.setModal(false);
     er.exec();
     updateMealListWidget();
+}
+
+void MainWindow::on_calcBMI_clicked()
+{
+    CalcBMI bmi;
+    bmi.setModal(false);
+    bmi.exec();
 }
