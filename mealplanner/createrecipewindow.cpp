@@ -57,7 +57,6 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
 
    Recipe NewRecipe(CurrentIngridients, steps, RecipeName);
 
-<<<<<<< HEAD
 
     RecipeDB->addRecipe(NewRecipe, currentDate);
 
@@ -70,31 +69,10 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     ui->StepsEdit->clear();
 
     UpdateStatus(ui->RecipeStatusLabel, NewRecipe.getName(), DatabaseStatusMsg);
-=======
-   //BUG
-   //NewRecipe.SetTotalNutrition(prt, cal, car, fat);
-
-
-   qDebug() << "ADDING RECIPE WITH VALUES: " << NewRecipe.GetProtien();
-   RecipeDB->addRecipe(NewRecipe, currentDate);
-
-
-   SetLabels(RWinLabels, 0);
-   ui->RecipeNameEdit->clear();
-   RecipeSteps.clear();
-   CurrentIngridients.clear();
-   ui->listWidget_2->clear();
-   ui->StepsEdit->clear();
-   //*****
-
-   UpdateStatus(ui->RecipeStatusLabel, NewRecipe.getName());
->>>>>>> 0803ce7d742e06ec862880cebf998d19d105797d
-
 }
 
 void CreateRecipeWindow::on_RemoveFromSelected_clicked()
 {
-<<<<<<< HEAD
      foreach(QListWidgetItem *i, ui->listWidget_2->selectedItems())
      {
          Ingredient In = CurrentIngridients[ui->listWidget_2->currentRow()]; // think.....
@@ -107,25 +85,10 @@ void CreateRecipeWindow::on_RemoveFromSelected_clicked()
          //ChangedIngredient = &In;
          //UpdateNutrition(RWinLabels);
      }
-=======
-   foreach(QListWidgetItem *i, ui->listWidget_2->selectedItems())
-   {
-      Ingredient In = CurrentIngridients[ui->listWidget_2->currentRow()]; // think.....
-      CurrentIngridients.removeAt(ui->listWidget_2->currentRow());
-      ui->listWidget_2->removeItemWidget(i);
-      delete i;
-      //UpdateNutrition(-1, In);
-
-      UpdateSign = -1;
-      ChangedIngredient = &In;
-      UpdateNutrition(RWinLabels);
-   }
->>>>>>> 0803ce7d742e06ec862880cebf998d19d105797d
 }
 
 void CreateRecipeWindow::on_AddFromDatabase_clicked()
 {
-<<<<<<< HEAD
     foreach(QListWidgetItem *i, ui->listWidget->selectedItems())
     {
         ui->listWidget_2->addItem(i->text());
@@ -158,29 +121,6 @@ void CreateRecipeWindow::UpdateMethod()
     Value2 += ChangedIngredient->getCalories()*UpdateSign;
     Value3 += ChangedIngredient->getCarbs()*UpdateSign;
     Value4 += ChangedIngredient->getFat()*UpdateSign;
-=======
-   foreach(QListWidgetItem *i, ui->listWidget->selectedItems())
-   {
-      ui->listWidget_2->addItem(i->text());
-      Ingredient In = RecipeDB->getIngredientByName(i->text());
-      CurrentIngridients.push_back(In);
-      //UpdateNutrition(1, In);
-
-      UpdateSign = 1;
-      ChangedIngredient = &In;
-      UpdateNutrition(RWinLabels);
-   }
-}
-
-void CreateRecipeWindow::UpdateMethod()
-{
-
-   prt += ChangedIngredient->getProtein()*UpdateSign;
-   cal += ChangedIngredient->getCalories()*UpdateSign;
-   car += ChangedIngredient->getCarbs()*UpdateSign;
-   fat += ChangedIngredient->getFat()*UpdateSign;
->>>>>>> 0803ce7d742e06ec862880cebf998d19d105797d
-
 }
 
 void CreateRecipeWindow::on_RecipeBackButton_clicked()

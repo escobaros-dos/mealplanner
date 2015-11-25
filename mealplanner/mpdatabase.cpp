@@ -139,37 +139,26 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
 {
    QString tempRecipeId;
 
-<<<<<<< HEAD
     q.prepare("SELECT recid FROM recipes where rname = :name;");
     q.bindValue(":name",recipe.RecipeName);
     q.exec();
     q.next();
-=======
-   q.prepare("INSERT INTO recipes(rname, steps)"
-         "VALUES (:name, :steps)");
->>>>>>> 0803ce7d742e06ec862880cebf998d19d105797d
 
    q.bindValue(":name", recipe.getName()); //name is private
 
    q.bindValue(":steps", recipe.GetDirections());
 
-<<<<<<< HEAD
     updateMealRecipeRelation(Date, recipe.RecipeName);
 
     foreach(Ingredient i,recipe.IngredientsList.toList())
     {
         updateRecipeIngredientRelation(recipe.getName(),i.getName());
     }
-=======
-   q.exec();
-
-   //need to update the date and recipe relations
->>>>>>> 0803ce7d742e06ec862880cebf998d19d105797d
 
    //updateMealRecipeRelation();
 
    q.prepare("SELECT recid FROM recipes where rname = :name;");
-   q.bindValue(":name",recipe.rname);
+   q.bindValue(":name",recipe.RecipeName);
    q.exec();
    q.next();
 
@@ -177,9 +166,9 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
 
    addMeal(Date);
 
-   updateMealRecipeRelation(Date, recipe.rname);
+   updateMealRecipeRelation(Date, recipe.RecipeName);
 
-   foreach(Ingredient i,recipe.ingredients.toList())
+   foreach(Ingredient i,recipe.IngredientsList.toList())
    {
       updateRecipeIngredientRelation(recipe.getName(),i.getName());
    }
@@ -188,7 +177,6 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
 void MpDatabase::addIngredient(const Ingredient &ingredient)
 {
 
-<<<<<<< HEAD
     //unique constraint has been added to the name column of the ingredient, to prevent duplication
 
    // QSqlQuery q = QSqlQuery(db);
@@ -204,17 +192,6 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
     q.bindValue(":fat", ingredient.getFat());
     q.bindValue(":protein", ingredient.getProtein());
     q.exec();
-=======
-   q.prepare("INSERT INTO ingredients(iname, cal, carbs, fat, protein) "
-         "VALUES (:iname, :cal, :carbs, :fat, :protein)");
-   q.bindValue(":iname", ingredient.name);
-   q.bindValue(":cal", ingredient.getCalories());
-   q.bindValue(":carbs", ingredient.getCarbs());
-   q.bindValue(":fat", ingredient.getFat());
-   q.bindValue(":protein", ingredient.getProtein());
-   q.exec();
->>>>>>> 0803ce7d742e06ec862880cebf998d19d105797d
-
 }
 
 void MpDatabase::addMeal(const QString &date)
