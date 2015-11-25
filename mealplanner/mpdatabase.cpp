@@ -139,14 +139,17 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
 {
    QString tempRecipeId;
 
-    q.prepare("SELECT recid FROM recipes where rname = :name;");
-    q.bindValue(":name",recipe.RecipeName);
-    q.exec();
-    q.next();
+    q.prepare("INSERT INTO recipes(rname, steps)"
+              "VALUES (:name, :steps)");
 
-   q.bindValue(":name", recipe.getName()); //name is private
+    q.bindValue(":name", recipe.getName()); //name is private
 
-   q.bindValue(":steps", recipe.GetDirections());
+    q.bindValue(":steps", recipe.GetDirections());
+
+    if(!q.exec())
+    {
+        qDebug() << "addRecipe: " << q.lastError();
+    }
 
     updateMealRecipeRelation(Date, recipe.RecipeName);
 
