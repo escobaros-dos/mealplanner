@@ -6,6 +6,7 @@ CalcBMI::CalcBMI(QWidget *parent) :
    ui(new Ui::CalcBMI)
 {
    ui->setupUi(this);
+   qDebug() << "ignore this";
 }
 
 CalcBMI::~CalcBMI()
