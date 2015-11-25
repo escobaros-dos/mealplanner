@@ -57,11 +57,7 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
 
     Recipe NewRecipe(CurrentIngridients, steps, RecipeName);
 
-    //BUG
-    //NewRecipe.SetTotalNutrition(prt, cal, car, fat);
 
-
-    qDebug() << "ADDING RECIPE WITH VALUES: " << NewRecipe.GetProtien();
     RecipeDB->addRecipe(NewRecipe, currentDate);
 
 
@@ -71,9 +67,8 @@ void CreateRecipeWindow::on_RecipeSaveToDbButton_clicked()
     CurrentIngridients.clear();
     ui->listWidget_2->clear();
     ui->StepsEdit->clear();
-    //*****
 
-    UpdateStatus(ui->RecipeStatusLabel, NewRecipe.getName());
+    UpdateStatus(ui->RecipeStatusLabel, NewRecipe.getName(), DatabaseStatusMsg);
 
 }
 
@@ -85,11 +80,11 @@ void CreateRecipeWindow::on_RemoveFromSelected_clicked()
          CurrentIngridients.removeAt(ui->listWidget_2->currentRow());
          ui->listWidget_2->removeItemWidget(i);
          delete i;
-         //UpdateNutrition(-1, In);
 
-         UpdateSign = -1;
-         ChangedIngredient = &In;
-         UpdateNutrition(RWinLabels);
+         UpdateInterfaceValues(-1, In);
+         //UpdateSign = -1;
+         //ChangedIngredient = &In;
+         //UpdateNutrition(RWinLabels);
      }
 }
 
@@ -102,34 +97,31 @@ void CreateRecipeWindow::on_AddFromDatabase_clicked()
         CurrentIngridients.push_back(In);
         //UpdateNutrition(1, In);
 
-        UpdateSign = 1;
-        ChangedIngredient = &In;
-        UpdateNutrition(RWinLabels);
+        UpdateInterfaceValues(1, In);
+        //UpdateSign = 1;
+        //ChangedIngredient = &In;
+
+        //UpdateNutrition(RWinLabels);
     }
 }
 
+void CreateRecipeWindow::UpdateInterfaceValues(int sign, Ingredient in)
+{
+    UpdateSign = sign;
+    ChangedIngredient = &in;
+    UpdateNutrition(RWinLabels);
 
-//*****
-//void CreateRecipeWindow::UpdateNutrition(int s, Ingredient I)
-//{
-    //prt += I.protein*s;
-    //cal += I.calories*s;
-    //car += I.carbs*s;
-    //fat += I.fat*s;
+    return;
 
-//    ui->ProtienInputLabel->setText(QString::number(prt));
-//    ui->CaloriesInputLabel->setText(QString::number(cal));
-//    ui->CarbsInputLabel->setText(QString::number(car));
-//    ui->FatInputLabel->setText(QString::number(fat));
-//}
+}
 
 void CreateRecipeWindow::UpdateMethod()
 {
 
-    prt += ChangedIngredient->getProtein()*UpdateSign;
-    cal += ChangedIngredient->getCalories()*UpdateSign;
-    car += ChangedIngredient->getCarbs()*UpdateSign;
-    fat += ChangedIngredient->getFat()*UpdateSign;
+    Value1 += ChangedIngredient->getProtein()*UpdateSign;
+    Value2 += ChangedIngredient->getCalories()*UpdateSign;
+    Value3 += ChangedIngredient->getCarbs()*UpdateSign;
+    Value4 += ChangedIngredient->getFat()*UpdateSign;
 
 }
 

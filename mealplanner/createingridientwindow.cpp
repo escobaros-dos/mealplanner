@@ -37,9 +37,7 @@ void CreateIngridientWindow::on_SaveIngtoDbButton_clicked()
     ui->CarbEdit->clear();
     ui->FatEdit->clear();
 
-    UpdateStatus(ui->AddIngStatus, Name);
-    //ui->AddIngStatus->setText(NewIngredient.name + " was succesfully added to the database.");
-
+    UpdateStatus(ui->AddIngStatus, Name, DatabaseStatusMsg);
 }
 
 void CreateIngridientWindow::on_IngBackButton_clicked()

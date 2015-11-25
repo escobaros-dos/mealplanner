@@ -4,6 +4,10 @@
 Ingredient::Ingredient()
 {
     name="FOOBAR";
+    calories = 0;
+    carbs = 0;
+    fat = 0;
+    protein = 0;
 }
 
 Ingredient::Ingredient(int protn, int ft, int crbs, int cals, QString n)

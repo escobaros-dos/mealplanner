@@ -12,20 +12,18 @@ void IUpdatable::UpdateNutrition(const QVector<QLabel*>& Labels)
 
     UpdateMethod();
 
-    //Labels[0].setText();
-    Labels[0]->setText(QString::number(prt));
-    Labels[1]->setText(QString::number(cal));
-    Labels[2]->setText(QString::number(car));
-    Labels[3]->setText(QString::number(fat));
+    Labels[0]->setText(QString::number(Value1));
+    Labels[1]->setText(QString::number(Value2));
+    Labels[2]->setText(QString::number(Value3));
+    Labels[3]->setText(QString::number(Value4));
 
     return;
 
 }
 
-void IUpdatable::UpdateStatus(QLabel* L, const QString& S)
+void IUpdatable::UpdateStatus(QLabel* L, const QString& S, const QString& StatusMsg)
 {
-    // needs changing.....
-    L->setText(S + " has been succesfully added to the database.");
+    L->setText(S + StatusMsg);
     return;
 }
 

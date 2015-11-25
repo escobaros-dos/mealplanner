@@ -17,24 +17,13 @@ public:
     int getCalories() const;
 
 
+protected:
+
     QString name;
     int protein;
     int fat;
     int carbs;
     int calories;
-
-
-protected:
-
-
-
-
-signals:
-
-
-
-public slots:
-
 
 
 };

@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "mpdatabase.h"
-//class MpDatabase;
 
 namespace Ui {
 class MainWindow;

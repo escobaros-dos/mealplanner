@@ -1,3 +1,4 @@
+
 #include "existingrecipe.h"
 #include "ui_existingrecipe.h"
 
@@ -12,6 +13,7 @@ ExistingRecipe::ExistingRecipe(const QString &tempDate, MpDatabase * tempDB, QWi
 
     eDatabase = tempDB;
 
+    ui->CurrentDateLabel->setText(currentDate);
     ExistingWinLabels.push_back(ui->ProtienInputLabel);
     ExistingWinLabels.push_back(ui->CaloriesInputLabel);
     ExistingWinLabels.push_back(ui->CarbsInputLabel);
@@ -59,21 +61,20 @@ void ExistingRecipe::on_AddRecipeCurrentButton_clicked()
 
     while(newSelectedRecipeIterator.hasNext())
     {
-        //qDebug() << newSelectedRecipeIterator.next().getName();
         eDatabase->addRecipe(newSelectedRecipeIterator.next(), currentDate);
     }
 
-    // qDebug() << "add clicked";
+    UpdateStatus(ui->ExistingRecipeStatusLabel,CurrentRecipe->getName(), DateAddStatus);
 
 }
 
 void ExistingRecipe::UpdateMethod()
 {
 
-    prt = CurrentRecipe->GetProtien();
-    cal = CurrentRecipe->GetCalories();
-    car = CurrentRecipe->GetCarbs();
-    fat = CurrentRecipe->GetFat();
+    Value1 = CurrentRecipe->GetProtien();
+    Value2 = CurrentRecipe->GetCalories();
+    Value3 = CurrentRecipe->GetCarbs();
+    Value4 = CurrentRecipe->GetFat();
 
     return;
 
@@ -86,6 +87,7 @@ void ExistingRecipe::on_CloseWindowButton_clicked()
 
 void ExistingRecipe::on_listWidget_clicked(const QModelIndex &index)
 {
+    // dont need this function any more
    // CurrentRecipe = &tempRecipe.at(index.row());
    // UpdateNutrition(ExistingWinLabels);
 }

@@ -6,62 +6,46 @@
 #include "ingredient.h"
 
 
+//Programmer: Connor Jensen
+//Class Purpose:  Provides a basic container to hold and disaply data relevant to a recipe
+
 class Recipe
 {
 public:
     Recipe();
-    Recipe(QVector<Ingredient> ingredients, QString steps, QString name);
-    //for custom constructor this will have a date param cuz its going to serve as the meal now...
-    // Note: 11/19/2015 Think about a vector of ints for constructor....
+    Recipe(QVector<Ingredient> IngredientsList, QString steps, QString name);
 
-    QString getName() const;
+    QVector<Ingredient> IngredientsList;
+    QString RecipeName;
+    QString DirectionsText; //concatenated string for the diretions
 
-    //may need getters and setters?? although this violates encapsulations
-
-    QVector<Ingredient> ingredients; //should this be a vector of Ingredients.
-    //QVector<QString> steps; //do we need steps be a vector or could we have this as one long string?
-    QString rname;
-    QString catSteps; //concatenated string for the
-
-    //these values need to be stored in db
+    //total nutrition values of all the ingredients
     int CalorieCount;
     int TotalProtien;
     int TotalCarbs;
     int TotalFatContent;
 
     //for editing an existing recipe
+    //currently not in use.
 
     bool AddIngrediant(Ingredient);
     bool RemoveIngrediant(int index);
     void ChangeName(QString newName);
 
 
-    // for viewing
+    // for disapying to widgets and providing information for the database
     QString GetDirections() const;
-
+    QString getName() const;
     int GetCarbs();
     int GetFat();
     int GetProtien();
     int GetCalories();
 
 
-
 private:
 
     void CalculateNutrition();
     void UpdateNutrition();
-
-//signals:
-
-
-
-
-
-public slots:
-
-
-
-
 
 };
 

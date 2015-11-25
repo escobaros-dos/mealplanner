@@ -4,7 +4,6 @@
 #include <QLabel>
 #include <QWidget>
 #include <QObject>
-#include "ingredient.h"
 #include <QVector>
 
 //HOW TO USE:
@@ -26,27 +25,26 @@
 class IUpdatable
 {
 public:
-     //virtual Iupdatable();
-     //virtual ~Iupdatable();
+
 protected:
 
     void CloseWindow(QWidget*);
     void UpdateNutrition(const QVector<QLabel*>& Labels);
     void SetLabels(const QVector<QLabel*>& L, int value);
-    void UpdateStatus(QLabel*, const QString&);
+    void UpdateStatus(QLabel*, const QString& name, const QString& StatusMsg);
 
+    QString DatabaseStatusMsg = " has been succesfully added to the database.";
+    QString DateAddStatus = " has been added to the selected date: ";
 
-    int prt = 0;
-    int cal = 0;
-    int car = 0;
-    int fat = 0;
+    int Value1 = 0;
+    int Value2 = 0;
+    int Value3 = 0;
+    int Value4 = 0;
 
 private:
-    //virtual void RealTimeUpdate(int s, QVector<int>& Values);
-    //virtual void UpdateByCopy(QVector<int>& Values);
+
     virtual void UpdateMethod() = 0;
 
-        // want the recipe class to have access to these variables so can be assigned to itself
 };
 
 #define Updatable_iid "com.acme.Updatable"

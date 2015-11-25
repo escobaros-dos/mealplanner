@@ -2,19 +2,18 @@
 
 Recipe::Recipe()
 {
-    rname = " ";
+    RecipeName = " ";
     CalorieCount = 0;
     TotalCarbs = 0;
     TotalFatContent = 0;
     TotalProtien = 0;
 }
 
-
 Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name)
 {
-    ingredients = ings;
-    catSteps = step;
-    rname = name;
+    IngredientsList = ings;
+    DirectionsText = step;
+    RecipeName = name;
 
     CalorieCount = 0;
     TotalCarbs = 0;
@@ -28,42 +27,40 @@ Recipe::Recipe(QVector<Ingredient> ings, QString step, QString name)
 
 QString Recipe::getName() const
 {
-    return rname;
+    return RecipeName;
 }
 
 void Recipe::CalculateNutrition()
 {
 
-    foreach(Ingredient I, ingredients.toList())
+    foreach(Ingredient I, IngredientsList.toList())
     {
-        CalorieCount += I.calories;
-        TotalCarbs += I.carbs;
-        TotalFatContent += I.fat;
-        TotalProtien += I.protein;
+        CalorieCount += I.getCalories();
+        TotalCarbs += I.getCarbs();
+        TotalFatContent += I.getFat();
+        TotalProtien += I.getProtein();
     }
     return;
 }
 
 
-void Recipe::ChangeName(QString newName) // maybe change these names to update names
+void Recipe::ChangeName(QString newName)
 {
-    rname = newName;
+    RecipeName = newName;
     return;
 }
 
-bool Recipe::AddIngrediant(Ingredient NewIngrediant) // QString or class?
+bool Recipe::AddIngrediant(Ingredient NewIngrediant)
 {
     //might want to add a check if already in the list, no duplicate ings???
-    ingredients.push_back(NewIngrediant);
-    //UpdateNutrition();
+    IngredientsList.push_back(NewIngrediant);
     return true;
 }
 bool Recipe::RemoveIngrediant(int index) // this function might only need an index param
 {
-    if(index > ingredients.size()) return false;
+    if(index > IngredientsList.size()) return false;
 
-    ingredients.removeAt(index);
-    //UpdateNutrition();
+    IngredientsList.removeAt(index);
     return true;
 }
 
@@ -72,7 +69,7 @@ bool Recipe::RemoveIngrediant(int index) // this function might only need an ind
 
 QString Recipe::GetDirections() const
 {
-    return catSteps;
+    return DirectionsText;
 }
 
 int Recipe::GetCalories()

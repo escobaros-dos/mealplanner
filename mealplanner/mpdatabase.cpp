@@ -189,7 +189,7 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
     //updateMealRecipeRelation();
 
     q.prepare("SELECT recid FROM recipes where rname = :name;");
-    q.bindValue(":name",recipe.rname);
+    q.bindValue(":name",recipe.RecipeName);
     q.exec();
     q.next();
 
@@ -197,9 +197,9 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
 
     addMeal(Date);
 
-    updateMealRecipeRelation(Date, recipe.rname);
+    updateMealRecipeRelation(Date, recipe.RecipeName);
 
-    foreach(Ingredient i,recipe.ingredients.toList())
+    foreach(Ingredient i,recipe.IngredientsList.toList())
     {
         updateRecipeIngredientRelation(recipe.getName(),i.getName());
     }
@@ -236,8 +236,6 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
 
     //unique constraint has been added to the name column of the ingredient, to prevent duplication
 
-    qDebug() << "inserting: " << ingredient.name;
-
    // QSqlQuery q = QSqlQuery(db);
 
 
@@ -245,7 +243,7 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
               "VALUES (:iname, :cal, :carbs, :fat, :protein)");
 
     //q.bindValue(":ingid", ingredient.id);
-    q.bindValue(":iname", ingredient.name);
+    q.bindValue(":iname", ingredient.getName());
     q.bindValue(":cal", ingredient.getCalories());
     q.bindValue(":carbs", ingredient.getCarbs());
     q.bindValue(":fat", ingredient.getFat());
