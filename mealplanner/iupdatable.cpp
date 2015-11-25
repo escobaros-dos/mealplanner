@@ -1,4 +1,5 @@
 #include "iupdatable.h"
+ 
 
 
 void IUpdatable::CloseWindow(QWidget* W)

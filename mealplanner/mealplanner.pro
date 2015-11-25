@@ -49,3 +49,4 @@ FORMS    += \
     createingridientwindow.ui \
     existingrecipe.ui \
     calcbmi.ui
+CONFIG += c++11
