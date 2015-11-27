@@ -32,18 +32,18 @@ public:
      * data retrieval
      */
     //meal functions
-    Meal getMealByDate(QString);
+    Meal getMealByDate(const QString &);
     Meal getMealByID(int);
 
     //ingredient functions
-    Ingredient getIngredientByName(QString);
+    Ingredient getIngredientByName(const QString &);
     Ingredient getIngredientByID(int);
 
     QVector<QString> getIngredientNames();
     QVector<int> getIngredientIDs();
 
     //recipe functions
-    Recipe getRecipeByName(QString);
+    Recipe getRecipeByName(const QString &);
     Recipe getRecipeByID(int);
 
     QVector<Recipe> getRecipeByDate(const QString &); //gets the recipe by date
