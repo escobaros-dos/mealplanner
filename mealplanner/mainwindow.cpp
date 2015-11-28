@@ -87,29 +87,15 @@ void MainWindow::on_CreateRecipeButton_clicked()
 void MainWindow::updateMealListWidget()
 {
 
-   //maybe use an object of recipe
+   QVector<Recipe> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate)); //gets the recipes for the selected date
 
-   QVector<Recipe> tempRecipeName(MainDB->getRecipeByDate(currentlySelectedDate));
+   ui->listOfMeals->clear(); //clears the list of the old content
 
-   //update the listOfMeals widget with the name of the meals?? from the database based on the date
-
-   /*
-      QVectorIterator<QString> tempRecipeNameIterator(tempRecipeName);
-
-      while(tempRecipeNameIterator.hasNext())
-      {
-      qDebug() << "list of meals";
-      }
-      */
-
-   ui->listOfMeals->clear();
-
-   foreach(Recipe r, tempRecipeName)
+   foreach(Recipe r, tempRecipeName)  //foreach of the recipe that was retrieved, it is populated onto the list widget
    {
       ui->listOfMeals->addItem(r.getName());
    }
 
-   //ui->ListMealsTextBrowser->setText(currentlySelectedDate);
 }
 
 void MainWindow::on_ExistingRecipeButton_clicked()
