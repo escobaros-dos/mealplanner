@@ -21,6 +21,8 @@ public:
 private slots:
     void on_closeButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
 
     void UpdateMethod();

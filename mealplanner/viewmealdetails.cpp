@@ -29,7 +29,7 @@ ViewMealDetails::~ViewMealDetails()
 }
 
 void ViewMealDetails::updateIngredientListWidget(const Recipe& R)
-{
+{   
     foreach(Ingredient I, R.IngredientsList)
     {
         ui->listOfIngredients->addItem(I.getName());
@@ -66,11 +66,10 @@ void ViewMealDetails::UpdateMethod()
 void ViewMealDetails::on_MealsComboBox_activated(int index)
 {
 
-    // need to qdebug index values to make sure that vector is in sync with combo box index
-    qDebug() << "DISPLAYING: " << recipeList[index].getName();
-    qDebug() << "WITH VALUES: " << recipeList[index].GetProtien();
-    ui->listOfIngredients->clear();
-    ui->DirectionsTextBrowser->clear();
+   qDebug() << "DISPLAYING: " << recipeList[index].getName();
+   qDebug() << "WITH VALUES: " << recipeList[index].GetProtien();
+   ui->listOfIngredients->clear();
+   ui->DirectionsTextBrowser->clear();
 
    CurrentRecipe = &recipeList[index];
    updateRecipeDirecetionTextBrowser(recipeList[index].GetDirections());

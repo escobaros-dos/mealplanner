@@ -6,7 +6,6 @@ CalcBMI::CalcBMI(QWidget *parent) :
    ui(new Ui::CalcBMI)
 {
    ui->setupUi(this);
-   qDebug() << "ignore this";
 }
 
 CalcBMI::~CalcBMI()
@@ -22,4 +21,21 @@ void CalcBMI::UpdateMethod()
 void CalcBMI::on_closeButton_clicked()
 {
    CloseWindow(this);
+}
+
+void CalcBMI::on_pushButton_clicked()
+{
+    float bmi;
+    float height;
+    float feet = ui -> FeetLineEdit -> text().toInt();
+    float inches = ui -> InchesLineEdit -> text().toInt();
+    float weight = ui -> WeightLineEdit -> text().toInt();
+
+    height = feet * 12 +inches;
+    height = (height*height);
+    weight = (weight*703);
+
+    bmi = ((weight)/(height));
+    QString b = QString::number(bmi);
+    ui->BMILineEdit->setText(b);
 }
