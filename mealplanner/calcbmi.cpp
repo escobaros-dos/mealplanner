@@ -1,5 +1,6 @@
 #include "ui_calcbmi.h"
 #include "calcbmi.h"
+#include <QDebug>
 
 CalcBMI::CalcBMI(QWidget *parent) :
    QDialog(parent),

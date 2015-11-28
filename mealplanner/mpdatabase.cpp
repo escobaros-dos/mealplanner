@@ -137,6 +137,9 @@ QVector<QString> MpDatabase::getIngredientNames()
    return names;
 }
 
+//----------------------------------------
+// Pulls every recipe out of the database
+//---------------------------------------
 QVector<Recipe> MpDatabase::getAllRecipe()
 {
    //returns all the recipe objects from the database
@@ -190,6 +193,10 @@ void MpDatabase::addRecipe(const Recipe &recipe, const QString Date)
 
 }
 
+//----------------------------------------------------------
+// serializes an ingredient object and then loads it into
+// the database
+//----------------------------------------------------------
 void MpDatabase::addIngredient(const Ingredient &ingredient)
 {
 
@@ -209,6 +216,9 @@ void MpDatabase::addIngredient(const Ingredient &ingredient)
     q.exec();
 }
 
+//-------------------------------------------
+// Creates a meal entry in the database
+//-------------------------------------------
 void MpDatabase::addMeal(const QString &date)
 {
     //adds the date into the database
@@ -260,8 +270,9 @@ QVector<QString> MpDatabase::getRecipesByIngredient(const QString &ing)
 
 }
 
-
-
+//--------------------------------------------------------------------------------
+// Use a recipe's name to get a list of ingredient names used in that recipe
+// -------------------------------------------------------------------------------
 QVector<QString> MpDatabase::getIngredientsByRecipe(const QString &tempRecipeName)
 {
 
@@ -290,6 +301,10 @@ QVector<QString> MpDatabase::getIngredientsByRecipe(const QString &tempRecipeNam
    return tempQueryResult;
 }
 
+//--------------------------------------------------------------
+// Takes a date string and finds all the recipes used for meals
+// on that date
+//--------------------------------------------------------------
 QVector<Recipe> MpDatabase::getRecipeByDate(const QString &date)
 {
    //returns a vector of recipe objects based on the date
@@ -351,6 +366,10 @@ void MpDatabase::updateRecipeIngredientRelation(const QString &recipeName, const
 
 }
 
+//--------------------------------------------------------------
+//----Establishes a relationship between a recipe and a meal
+//----in the database
+//--------------------------------------------------------------
 void MpDatabase::updateMealRecipeRelation(const QString &date, const QString &recipeName)
 {
    int recid = getRecipeIDByName(recipeName);
@@ -390,6 +409,11 @@ int MpDatabase::getIngredientIDByName(const QString &ingredient)
    return q.value(0).toInt();
 }
 
+//------------------------------------------------------------------
+// Takes a recipe's name and returns the recipe's unique ID used by
+// the database. This ID is used to establish relations between 
+// recipes and other objects such as ingredients and meals
+//------------------------------------------------------------------
 int MpDatabase::getRecipeIDByName(const QString &recipe)
 {
    q.prepare("SELECT recid FROM recipes WHERE rname = :name;");
@@ -403,6 +427,10 @@ int MpDatabase::getRecipeIDByName(const QString &recipe)
    return q.value(0).toInt();
 }
 
+//-----------------------------------------------------------------
+// Uses a date string to find a meal's ID for use in relational
+// tables
+//-----------------------------------------------------------------
 int MpDatabase::getMealIDByDate(const QString &date)
 {
 
