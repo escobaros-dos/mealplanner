@@ -4,16 +4,10 @@
 int main(int argc, char *argv[])
 {
 
-   MpDatabase* DatabaseRef = &MpDatabase::GetDBInstance();
-
-
-
    QApplication a(argc, argv);
 
-
-   MainWindow w(DatabaseRef);
+   MainWindow w(&MpDatabase::GetDBInstance()); // passing a reference to the singleton db
    w.show();
-
 
    return a.exec();
 }

@@ -10,51 +10,39 @@
 #include "recipe.h"
 #include "ingredient.h"
 
-//NOTE: This might be a really good place for forward class declarations*********
-//That way we don't need to include all those .h's
-
 
 class MpDatabase
 {
 
 public:
-    //constructors
 
-    static MpDatabase& GetDBInstance();
-
+   static MpDatabase& GetDBInstance(); // returns an instance of the singleton
 
 
 
-     //MpDatabase();
-    //~MpDatabase();
-    
     /*
      * data retrieval
      */
     //meal functions
     Meal getMealByDate(const QString &);
+
     Meal getMealByID(int);
 
     //ingredient functions
     Ingredient getIngredientByName(const QString &);
+
     Ingredient getIngredientByID(int);
 
     QVector<QString> getIngredientNames();
-    QVector<int> getIngredientIDs();
 
     //recipe functions
     Recipe getRecipeByName(const QString &);
+
     Recipe getRecipeByID(int);
 
     QVector<Recipe> getRecipeByDate(const QString &); //gets the recipe by date
 
-    QVector<QString> getRecipeNames();
 
-    QVector<int> getRecipeIDs();
-
-    QVector<QString> getRecipesByIngredient(const QString &);
-
-    QVector<QString> getIngredientsByRecipe(const QString &);
 
     QVector<Recipe> getAllRecipe();
 
@@ -74,13 +62,6 @@ public:
     //recipe functions
     void addRecipe(const Recipe &, const QString);
 
-    void updateRecipeIngredientRelation(const QString &, const QString &s);
-
-    void updateMealRecipeRelation(const QString &, const QString &);
-
-
-
-
 protected:
     int getIngredientIDByName(const QString &);
     int getRecipeIDByName(const QString &);
@@ -90,7 +71,21 @@ private:
     //singleton
     MpDatabase();
     MpDatabase(MpDatabase const&); // dont implement
-    //void operator = (MpDatabase const&); // dont implement
+    void operator = (MpDatabase const&); // dont implement
+
+    void updateRecipeIngredientRelation(const QString &, const QString &s);
+
+    void updateMealRecipeRelation(const QString &, const QString &);
+
+    QVector<QString> getRecipeNames();
+
+    QVector<int> getRecipeIDs();
+
+    QVector<QString> getRecipesByIngredient(const QString &);
+
+    QVector<QString> getIngredientsByRecipe(const QString &);
+
+    QVector<int> getIngredientIDs();
 
 
     QSqlDatabase db;

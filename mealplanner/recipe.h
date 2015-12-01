@@ -5,8 +5,7 @@
 #include <QVector>
 #include "ingredient.h"
 
-//changed
-//Programmer: Connor Jensen
+
 //Class Purpose:  Provides a basic container to hold and disaply data relevant to a recipe
 
 class Recipe

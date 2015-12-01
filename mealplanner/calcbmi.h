@@ -19,9 +19,10 @@ public:
     ~CalcBMI();
 
 private slots:
-    void on_closeButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_BMIBackButton_clicked();
+
+    void on_BMIcalculateButton_clicked();
 
 private:
 

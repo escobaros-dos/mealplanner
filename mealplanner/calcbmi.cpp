@@ -19,12 +19,12 @@ void CalcBMI::UpdateMethod()
 
 }
 
-void CalcBMI::on_closeButton_clicked()
+void CalcBMI::on_BMIBackButton_clicked()
 {
-   CloseWindow(this);
+    CloseWindow(this);
 }
 
-void CalcBMI::on_pushButton_clicked()
+void CalcBMI::on_BMIcalculateButton_clicked()
 {
     float bmi;
     float height;
@@ -39,4 +39,5 @@ void CalcBMI::on_pushButton_clicked()
     bmi = ((weight)/(height));
     QString b = QString::number(bmi);
     ui->BMILineEdit->setText(b);
+
 }

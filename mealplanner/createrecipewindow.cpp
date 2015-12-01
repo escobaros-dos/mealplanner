@@ -33,7 +33,7 @@ void CreateRecipeWindow::UpdateRecipeList()
 }
 
 CreateRecipeWindow::~CreateRecipeWindow()
-{
+{ 
    delete ui;
 }
 

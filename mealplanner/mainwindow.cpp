@@ -39,14 +39,9 @@ void MainWindow::on_RecipeBookButton_clicked()//opens recipe book
 
 void MainWindow::on_ViewDetailsButton_clicked()
 {
-
-   //maybe have the ViewMealDetail take in a recipe object
-
    ViewMealDetails MealDetailsWindow(currentlySelectedDate, MainDB);
    MealDetailsWindow.setModal(false);
    MealDetailsWindow.exec();
-   // ui -> stackedWidget -> setCurrentIndex(1);
-   //qDebug("index change");//error check
 }
 
 void MainWindow::on_calendarWidget_clicked(const QDate &date)
@@ -64,7 +59,6 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
 //when the user selects a new date the mealListWidget is cleared
 void MainWindow::on_calendarWidget_selectionChanged()
 {
-   //ui->listMealName->clear();
    ui->listOfMeals->clear();
 }
 
@@ -72,10 +66,6 @@ void MainWindow::on_calendarWidget_selectionChanged()
 
 void MainWindow::on_CreateRecipeButton_clicked()
 {
-   QString testfornow = " ";
-   //CreateRecipeWindow RecipeWin(testfornow, MainDB);
-   //CreateRecipeWindow RecipeWin(testfornow, MainDB);
-
    CreateRecipeWindow RecipeWin(currentlySelectedDate, MainDB);
    RecipeWin.setModal(false);
    RecipeWin.exec();
